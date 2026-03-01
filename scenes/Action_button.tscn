@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://2c3ugybvi2cm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c1e1u"]
+bg_color = Color(0.88, 0.43032, 0.2376, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_obu6r"]
+bg_color = Color(0.88, 0.75856, 0.4752, 1)
+
+[node name="StatsButton" type="Button"]
+theme_override_font_sizes/font_size = 25
+theme_override_styles/focus = SubResource("StyleBoxFlat_c1e1u")
+theme_override_styles/normal = SubResource("StyleBoxFlat_obu6r")
+text = "(Info)"

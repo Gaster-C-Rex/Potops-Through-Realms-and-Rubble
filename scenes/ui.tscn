@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://duaeg2ihgdyie"]
+
+[ext_resource type="Texture2D" uid="uid://cd0acxg2g5teq" path="res://assets/sprites/Board.png" id="1_rddrp"]
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+offset_right = 640.0
+offset_bottom = 360.0
+texture = ExtResource("1_rddrp")
+
+[node name="Wheretheboardisdeletewhendone" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 6.0
+offset_right = 624.0
+offset_bottom = 294.0
