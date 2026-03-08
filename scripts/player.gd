@@ -30,7 +30,7 @@ func _physics_process(delta):
 	if moving:
 		# Move the character to target position
 		position = position.move_toward(target_position, speed * delta)
-		# Check to see if its close enought to stop and snap position
+		# Check to see if its close enough to stop and snap position
 		if position.distance_to(target_position) < speed * delta:
 			position = target_position
 			moving = false
