@@ -8,6 +8,7 @@ extends Node2D
 const TILE_SIZE:int = 32
 
 func _ready() -> void:
+	assert(Globals.load_maps("user://maps") == true, "Failed to load maps, program exiting")
 	var map:TileMapLayer = test_map.instantiate()
 	add_child(map)
 	Globals.active_map = map
