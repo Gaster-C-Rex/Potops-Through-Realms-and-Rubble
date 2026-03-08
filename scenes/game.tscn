@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://wtc55pngwhd0"]
 
 [ext_resource type="PackedScene" uid="uid://duaeg2ihgdyie" path="res://scenes/ui.tscn" id="1_555u1"]
-[ext_resource type="PackedScene" uid="uid://b1queastcser2" path="res://scenes/Player.tscn" id="1_iga8g"]
+[ext_resource type="PackedScene" uid="uid://b1queastcser2" path="res://scenes/Potop.tscn" id="1_iga8g"]
 [ext_resource type="PackedScene" uid="uid://d4lt0y3wgf233" path="res://assets/levels/test_map.tmx" id="2_lnu2h"]
 [ext_resource type="Script" uid="uid://dccfxbvx8jyqf" path="res://scenes/camera_controller.gd" id="4_lbhrr"]
 
@@ -21,9 +21,9 @@ visible = false
 [node name="World" parent="." unique_id=1632838553 instance=ExtResource("2_lnu2h")]
 unique_name_in_owner = true
 
-[node name="Player" parent="." unique_id=273897724 instance=ExtResource("1_iga8g")]
+[node name="Potop" parent="." unique_id=273897724 instance=ExtResource("1_iga8g")]
 position = Vector2(16, 16)
 
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=751529150]
+[node name="Camera2D" type="Camera2D" parent="Potop" unique_id=751529150]
 position_smoothing_enabled = true
 script = ExtResource("4_lbhrr")

@@ -63,7 +63,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="Node2D" unique_id=2044595361]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3li8b"]
+size = Vector2(32, 32)
+
+[node name="Potop" type="Node2D" unique_id=2044595361]
 script = ExtResource("1_8e51o")
 
 [node name="Pedestal" type="Sprite2D" parent="." unique_id=1675430155]
@@ -74,3 +77,10 @@ position = Vector2(-4, -8)
 sprite_frames = SubResource("SpriteFrames_rk5mn")
 autoplay = "default"
 frame_progress = 0.911423
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1941742630]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1587165421]
+shape = SubResource("RectangleShape2D_3li8b")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
