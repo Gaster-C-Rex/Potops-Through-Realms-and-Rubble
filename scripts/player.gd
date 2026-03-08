@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Node2D
 
 @export var speed = 100 # Speed of travel to the next tile
 @export var grid_size = 32 # the size of the tiles of the plane

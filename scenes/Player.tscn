@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b1queastcser2"]
+[gd_scene format=3 uid="uid://b1queastcser2"]
 
 [ext_resource type="Texture2D" uid="uid://f75cjr0vv78k" path="res://assets/sprites/Pedestals.png" id="1_0dtr0"]
 [ext_resource type="Script" uid="uid://cf3i8jut4l8n0" path="res://scripts/player.gd" id="1_8e51o"]
@@ -63,21 +63,14 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3li8b"]
-size = Vector2(26.5, 25)
-
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="Node2D" unique_id=2044595361]
 script = ExtResource("1_8e51o")
 
-[node name="Pedestal" type="Sprite2D" parent="."]
+[node name="Pedestal" type="Sprite2D" parent="." unique_id=1675430155]
 texture = SubResource("AtlasTexture_cyx2o")
 
-[node name="Potop" type="AnimatedSprite2D" parent="."]
+[node name="Potop" type="AnimatedSprite2D" parent="." unique_id=1360237061]
 position = Vector2(-4, -8)
 sprite_frames = SubResource("SpriteFrames_rk5mn")
 autoplay = "default"
 frame_progress = 0.911423
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2, -5)
-shape = SubResource("RectangleShape2D_3li8b")

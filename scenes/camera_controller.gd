@@ -1,3 +1,7 @@
+## The camera controller automatically calculates the bounds of the current map
+## to set scrolling limits. It currently follows around the player node. It will
+## need to be able to toggle a fixed and scrolling mode for combat sequences.
+
 extends Camera2D
 
 @onready var map:TileMapLayer = %World
@@ -12,6 +16,7 @@ func calculate_map_rect(map:TileMapLayer) -> Rect2:
 	var tile_size_rect:Rect2 = map.get_used_rect()
 	tile_size_rect.size *= TILE_SIZE
 	return tile_size_rect
+
 ## Sets the camera's limit variables to the given rectangle
 func apply_limits(limiting_rect: Rect2) -> void:
 	limit_left = limiting_rect.position.x
