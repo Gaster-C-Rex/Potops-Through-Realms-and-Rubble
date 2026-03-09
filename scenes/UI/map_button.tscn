@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://ce1yl82gmfppy"]
+
+[ext_resource type="Script" uid="uid://rr0djfsqbt5f" path="res://scenes/UI/map_button.gd" id="1_wx2ya"]
+
+[node name="MapButton" type="Button" unique_id=799918344]
+clip_contents = true
+custom_minimum_size = Vector2(92, 92)
+offset_right = 64.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 12
+text = "Custom Map"
+text_overrun_behavior = 5
+autowrap_mode = 3
+script = ExtResource("1_wx2ya")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

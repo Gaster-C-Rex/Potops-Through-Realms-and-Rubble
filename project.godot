@@ -26,6 +26,7 @@ SignalBus="*uid://dbyuxn3alwlb6"
 
 [debug]
 
+gdscript/warnings/unused_signal=0
 gdscript/warnings/integer_division=0
 gdscript/warnings/narrowing_conversion=0
 

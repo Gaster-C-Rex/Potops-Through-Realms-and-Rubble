@@ -7,12 +7,8 @@ const TILE_SIZE:int = 64
 var active_map_id:int # What index in the Globals.levels array it is
 
 func _ready() -> void:
-	Globals.log = %Log
-	if Globals.load_maps():
-		set_map(0)
-	else:
-		Globals.game_log("\nThere are no valid maps in " + OS.get_user_data_dir() + "!")
-		%NextMapButton.disabled = true
+	Globals.game_log = %Log
+	set_map(Globals.active_map_id)
 
 func _on_next_map_button_pressed() -> void:
 	next_map()
@@ -20,7 +16,7 @@ func _on_next_map_button_pressed() -> void:
 func set_map(id:int):
 	var map: Variant = Globals.levels[id]
 	if Globals.active_map:
-		remove_child(Globals.active_map) # Don't queue free them! All maps are always loaded!
+		remove_child(Globals.active_map) # Don't queue free them! Maps are always loaded.
 	add_child(map)
 	Globals.active_map = map
 	active_map_id = id

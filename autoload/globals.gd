@@ -6,7 +6,8 @@ const TILE_SIZE = 64
 const MAP_DIR = "user://maps"
 
 var active_map: Node2D
-var log: RichTextLabel
+var active_map_id: int
+var game_log: RichTextLabel
 
 var in_combat:bool = false
 
@@ -117,14 +118,17 @@ func calculate_map_pixel_rect(map: Node2D) -> Rect2:
 	var tile_rect := tilemaplayer.get_used_rect() # rect is in tile coords
 	return Rect2(tile_rect.position * TILE_SIZE, tile_rect.size * TILE_SIZE)
 
-func game_log(message):
-	if log:
-		log.append_text("\n" + message)
+func send_to_game_log(message):
+	if game_log:
+		game_log.append_text("\n" + message)
 	else:
 		push_warning("Race condition: Log not yet defined")
 
 func clear_game_log():
 	if log:
-		log.clear()
+		game_log.clear()
 	else:
 		push_warning("Race condition: Log not yet defined")
+
+func start_game() -> void:
+	get_tree().change_scene_to_file("res://scenes/world/game.tscn")

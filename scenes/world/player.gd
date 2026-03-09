@@ -159,7 +159,7 @@ func pathfind_to_space(target_tile_pos: Vector2i, ignore_obstacles: bool = false
 				came_from[neighbor] = current
 		if queue.is_empty():
 			print("Destination Unreachable")
-			Globals.game_log("Destination Unreachable")
+			Globals.send_to_game_log("Destination Unreachable")
 			return
 		current = queue.pop_front() # Maybe a little slow but trivial on small scale
 	# Arrived at target. Trace the path back, and add instructions to the queue.

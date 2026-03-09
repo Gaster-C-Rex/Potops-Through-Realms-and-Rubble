@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://i75ql5ait3me"]
+
+[ext_resource type="Texture2D" uid="uid://clqu8taeiktht" path="res://assets/sprites/potop_normal.webp" id="1_6vh04"]
+[ext_resource type="Texture2D" uid="uid://dcrsg21ao58gg" path="res://assets/sprites/orange_gem.webp" id="2_7bqif"]
+
+[node name="PanelContainer" type="PanelContainer" unique_id=460028910]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1518229500]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1229749771]
+layout_mode = 2
+
+[node name="CharacterSelectLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=335745480]
+layout_mode = 2
+text = "Character"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=594759971]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LeftArrow" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1578839990]
+custom_minimum_size = Vector2(32, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=252805446]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("1_6vh04")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="RightArrow" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=479942517]
+custom_minimum_size = Vector2(32, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EquipmentSelectLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=235135485]
+layout_mode = 2
+text = "Equipment"
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1776842683]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LeftArrow" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=252757563]
+custom_minimum_size = Vector2(32, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=738323802]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_7bqif")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="RightArrow" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=307389226]
+custom_minimum_size = Vector2(32, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+stretch_mode = 5
