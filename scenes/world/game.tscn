@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bcknmol43ump1" path="res://scenes/world/game.gd" id="1_3iwug"]
 [ext_resource type="PackedScene" uid="uid://b1queastcser2" path="res://scenes/world/Potop.tscn" id="2_r5nxa"]
 [ext_resource type="Script" uid="uid://dccfxbvx8jyqf" path="res://scenes/world/camera_controller.gd" id="3_h30v7"]
+[ext_resource type="PackedScene" uid="uid://bs5ijyud5m2xa" path="res://scenes/UI/tile_selector.tscn" id="4_r5nxa"]
 
 [node name="Game" type="Node2D" unique_id=798327649]
 y_sort_enabled = true
@@ -22,17 +23,21 @@ offset_bottom = 45.0
 grow_horizontal = 0
 text = "Next Map"
 
-[node name="Log" type="RichTextLabel" parent="UI" unique_id=1262255118]
+[node name="PanelContainer" type="PanelContainer" parent="UI" unique_id=238370643]
 unique_name_in_owner = true
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -59.0
+offset_top = -76.0
 grow_horizontal = 2
 grow_vertical = 0
-size_flags_vertical = 8
+
+[node name="Log" type="RichTextLabel" parent="UI/PanelContainer" unique_id=1262255118]
+unique_name_in_owner = true
+layout_mode = 2
 bbcode_enabled = true
+text = "Debug Log (press / to close)"
 scroll_following = true
 
 [node name="Potop" parent="." unique_id=273897724 instance=ExtResource("2_r5nxa")]
@@ -42,5 +47,9 @@ position = Vector2(32, 32)
 unique_name_in_owner = true
 position_smoothing_enabled = true
 script = ExtResource("3_h30v7")
+
+[node name="TileSelector" parent="." unique_id=717082672 instance=ExtResource("4_r5nxa")]
+unique_name_in_owner = true
+visible = false
 
 [connection signal="pressed" from="UI/NextMapButton" to="." method="_on_next_map_button_pressed"]

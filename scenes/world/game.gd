@@ -5,7 +5,6 @@ extends Node2D
 
 const TILE_SIZE:int = 64
 
-var active_map:TileMapLayer # Reference to the active map
 var active_map_id:int # What index in the maps array it is
 
 func _ready() -> void:
@@ -15,26 +14,19 @@ func _ready() -> void:
 		%Log.text += ("\nThere are no valid maps in " + OS.get_user_data_dir() + "!")
 		%NextMapButton.disabled = true
 
-## Calculates the given map's bounding rect in global coordinates
-func calculate_map_rect(map:TileMapLayer) -> Rect2:
-	var tile_size_rect:Rect2 = map.get_used_rect()
-	tile_size_rect.size *= TILE_SIZE
-	return tile_size_rect
-
-
 func _on_next_map_button_pressed() -> void:
 	next_map()
 
 func set_map(id:int):
 	var map:TileMapLayer = Globals.levels[id]
-	if active_map:
-		remove_child(active_map) # Don't queue free them! All maps are always loaded!
+	if Globals.active_map:
+		remove_child(Globals.active_map) # Don't queue free them! All maps are always loaded!
 	add_child(map)
-	active_map = map
+	Globals.active_map = map
 	active_map_id = id
 	if !map.is_node_ready():
 		await map.ready
-	%Camera2D.apply_limits(calculate_map_rect(map))
+	%Camera2D.apply_limits(Globals.calculate_map_pixel_rect(map))
 
 func next_map():
 	active_map_id += 1
@@ -42,3 +34,8 @@ func next_map():
 		active_map_id = 0
 	set_map(active_map_id)
 	%Log.text += "\nSwitched to map " + str(active_map_id)
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	# why do i do this to myself just use the action manager in project settings
+	if event is InputEventKey and event.pressed and event.keycode == 47:
+		%PanelContainer.visible = !%PanelContainer.visible

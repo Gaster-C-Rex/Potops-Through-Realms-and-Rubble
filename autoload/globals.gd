@@ -5,14 +5,16 @@ extends Node
 const TILE_SIZE = 64
 const MAP_DIR = "user://maps"
 
+var active_map:TileMapLayer
+
 var in_combat:bool = false
 
 # Array of TileMapLayer nodes containing level data
-var levels = []
+var levels := []
 
-var items = []
-var potops = []
-var enemies = []
+var items := []
+var potops := []
+var enemies := []
 
 func _ready() -> void:
 	ensure_user_folders()
@@ -44,8 +46,8 @@ func load_maps() -> bool:
 	# Create an instance of the YATI importer script
 	var tilemap_creator = preload("res://addons/YATI/TilemapCreator.gd").new()
 	
+	# Discover and load map files to levels array
 	while file_name != "":
-		print(file_name)
 		if !dir.current_is_dir() and file_name.ends_with(".tmx"):
 			var full_path = MAP_DIR + "/" + file_name
 			print("Found map file: ", full_path)
@@ -67,3 +69,38 @@ func load_maps() -> bool:
 		return false
 		
 	return true
+
+## Returns a position in global coordinates of the nearest tile's center
+func get_tile_center(coords: Vector2, system = "global") -> Vector2:
+	if system == "global":
+		return Vector2(
+			floor(coords.x / TILE_SIZE) * TILE_SIZE + TILE_SIZE / 2,
+			floor(coords.y / TILE_SIZE) * TILE_SIZE + TILE_SIZE / 2
+		)
+	elif system == "tile":
+		return Vector2(
+			coords.x * TILE_SIZE + TILE_SIZE / 2,
+			coords.y * TILE_SIZE + TILE_SIZE / 2
+		)
+
+	return coords
+
+## Returns a tile position from a position in global coordinates
+func get_tile_pos(coords: Vector2) -> Vector2:
+	return Vector2(
+		floor(coords.x / TILE_SIZE),
+		floor(coords.y / TILE_SIZE)
+	)
+
+func tile_in_bounds(tile_pos: Vector2) -> bool:
+	if active_map:
+		var map_rect := active_map.get_used_rect() # This is in tile coords
+		return map_rect.has_point(tile_pos)
+	else:
+		# If no map is loaded, allow all movement
+		return true
+
+## Calculates the given map's bounding rect in global coordinates
+func calculate_map_pixel_rect(map:TileMapLayer) -> Rect2:
+	var tile_rect := map.get_used_rect() # rect is in tile coords
+	return Rect2(tile_rect.position * TILE_SIZE, tile_rect.size * TILE_SIZE)

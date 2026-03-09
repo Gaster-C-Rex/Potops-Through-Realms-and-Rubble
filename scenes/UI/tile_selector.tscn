@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bs5ijyud5m2xa"]
+
+[ext_resource type="Texture2D" uid="uid://06yf7mkapb6u" path="res://assets/UI/movement_crosshair.webp" id="1_1bisd"]
+[ext_resource type="Script" uid="uid://btca6pjmuw076" path="res://scenes/UI/tile_selector.gd" id="2_5jje3"]
+
+[node name="TileSelector" type="Sprite2D" unique_id=717082672]
+texture = ExtResource("1_1bisd")
+script = ExtResource("2_5jje3")
