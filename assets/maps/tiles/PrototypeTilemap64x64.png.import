@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bom7b5vdnnhap"
-path="res://.godot/imported/movement_crosshair.webp-a89da48d0b0125843cd802c3388937d8.ctex"
+uid="uid://c7ixwdhwc53pc"
+path="res://.godot/imported/PrototypeTilemap64x64.png-0ab1e0c4b10837254d646e1e2070b4a1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/movement_crosshair.webp"
-dest_files=["res://.godot/imported/movement_crosshair.webp-a89da48d0b0125843cd802c3388937d8.ctex"]
+source_file="res://assets/maps/tiles/PrototypeTilemap64x64.png"
+dest_files=["res://.godot/imported/PrototypeTilemap64x64.png-0ab1e0c4b10837254d646e1e2070b4a1.ctex"]
 
 [params]
 

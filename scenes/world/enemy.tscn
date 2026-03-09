@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://76e7g1k8qnot"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qg4nl"]
+
+[node name="Enemy" type="Node2D" unique_id=50570562]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2093450687]
+sprite_frames = SubResource("SpriteFrames_qg4nl")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2146457289]

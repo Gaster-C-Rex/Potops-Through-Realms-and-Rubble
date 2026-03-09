@@ -64,7 +64,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3li8b"]
-size = Vector2(32, 32)
+size = Vector2(64, 64)
 
 [node name="Potop" type="Node2D" unique_id=2044595361]
 script = ExtResource("1_8e51o")

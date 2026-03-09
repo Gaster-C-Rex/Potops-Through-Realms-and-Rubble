@@ -5,7 +5,8 @@ extends Node
 const TILE_SIZE = 64
 const MAP_DIR = "user://maps"
 
-var active_map:TileMapLayer
+var active_map: Node2D
+var log: RichTextLabel
 
 var in_combat:bool = false
 
@@ -51,13 +52,13 @@ func load_maps() -> bool:
 		if !dir.current_is_dir() and file_name.ends_with(".tmx"):
 			var full_path = MAP_DIR + "/" + file_name
 			print("Found map file: ", full_path)
-			var map = tilemap_creator.create(full_path)
+			var map: Node2D = tilemap_creator.create(full_path)
 			
-			# Sometimes the tilemap_creator adds a base node like node2D
-			if map.get_parent():
-				var parent = map.get_parent()
-				parent.remove_child(map)
-				parent.queue_free()
+			# The entity layer is never shown, it only exists to be useful to
+			# the people making the maps in tiled. We extract the data and
+			# instantiate each entity at the corresponding place later.
+			if map.has_node("entities"):
+				map.get_node("entities").visible = false
 			levels.append(map)
 		
 		file_name = dir.get_next()
@@ -86,21 +87,44 @@ func get_tile_center(coords: Vector2, system = "global") -> Vector2:
 	return coords
 
 ## Returns a tile position from a position in global coordinates
-func get_tile_pos(coords: Vector2) -> Vector2:
-	return Vector2(
+func get_tile_pos(coords: Vector2) -> Vector2i:
+	return Vector2i(
 		floor(coords.x / TILE_SIZE),
 		floor(coords.y / TILE_SIZE)
 	)
 
 func tile_in_bounds(tile_pos: Vector2) -> bool:
 	if active_map:
-		var map_rect := active_map.get_used_rect() # This is in tile coords
+		var tilemaplayer: TileMapLayer = get_map_layer(active_map, "background")
+		var map_rect := tilemaplayer.get_used_rect() # This is in tile coords
 		return map_rect.has_point(tile_pos)
 	else:
 		# If no map is loaded, allow all movement
 		return true
 
+## Returns a refernce to the specified tilemap layer. Can either be background,
+## obstacles, or entities
+func get_map_layer(map: Node2D, layer: String):
+	if map.has_node(layer):
+		return map.get_node(layer)
+	else:
+		push_warning("Tilemap does not have a layer named \"", layer, "\"")
+		return null
+
 ## Calculates the given map's bounding rect in global coordinates
-func calculate_map_pixel_rect(map:TileMapLayer) -> Rect2:
-	var tile_rect := map.get_used_rect() # rect is in tile coords
+func calculate_map_pixel_rect(map: Node2D) -> Rect2:
+	var tilemaplayer: TileMapLayer = get_map_layer(map, "background")
+	var tile_rect := tilemaplayer.get_used_rect() # rect is in tile coords
 	return Rect2(tile_rect.position * TILE_SIZE, tile_rect.size * TILE_SIZE)
+
+func game_log(message):
+	if log:
+		log.append_text("\n" + message)
+	else:
+		push_warning("Race condition: Log not yet defined")
+
+func clear_game_log():
+	if log:
+		log.clear()
+	else:
+		push_warning("Race condition: Log not yet defined")

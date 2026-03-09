@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bom7b5vdnnhap"
-path="res://.godot/imported/movement_crosshair.webp-a89da48d0b0125843cd802c3388937d8.ctex"
+uid="uid://clnfey8v8deoh"
+path="res://.godot/imported/bad_guy.png-bfeb95a12d3c295dc42dbc188cdaff0b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/movement_crosshair.webp"
-dest_files=["res://.godot/imported/movement_crosshair.webp-a89da48d0b0125843cd802c3388937d8.ctex"]
+source_file="res://assets/sprites/bad_guy.png"
+dest_files=["res://.godot/imported/bad_guy.png-bfeb95a12d3c295dc42dbc188cdaff0b.ctex"]
 
 [params]
 
