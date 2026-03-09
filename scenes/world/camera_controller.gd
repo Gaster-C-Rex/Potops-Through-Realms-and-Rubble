@@ -4,8 +4,6 @@
 
 extends Camera2D
 
-@onready var map:TileMapLayer = Globals.active_map
-
 ## Sets the camera's limit variables to the given rectangle
 func apply_limits(limiting_rect: Rect2) -> void:
 	limit_left = limiting_rect.position.x

@@ -15,10 +15,9 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Pottery DonJon"
-run/main_scene="res://scenes/game.tscn"
+run/main_scene="uid://bn8a6ftivipmn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/bg_color=Color(0.576471, 0.466667, 0.305882, 1)
-config/icon="res://icon.svg"
 
 [autoload]
 

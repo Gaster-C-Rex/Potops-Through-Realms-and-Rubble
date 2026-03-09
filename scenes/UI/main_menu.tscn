@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://bn8a6ftivipmn"]
+
+[ext_resource type="Script" uid="uid://owe3ww1kxk80" path="res://scenes/UI/main_menu.gd" id="1_qwnig"]
+
+[node name="MainMenu" type="Control" unique_id=233305707]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qwnig")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=649473714]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartButton" type="Button" parent="VBoxContainer" unique_id=1502947368]
+layout_mode = 2
+text = "Start Game"
+
+[node name="MapDirectoryLabel" type="Label" parent="VBoxContainer" unique_id=1820716654]
+unique_name_in_owner = true
+layout_mode = 2
+text = "map dir"
+horizontal_alignment = 1
+
+[node name="MapButton" type="Button" parent="VBoxContainer" unique_id=933066283]
+layout_mode = 2
+text = "Open Map Folder"
+
+[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/MapButton" to="." method="_on_map_button_pressed"]

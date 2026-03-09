@@ -1,8 +1,7 @@
 extends Node2D
 
 @export var combat_speed = 4 # How many tiles the character is allowed to move in combat
-@export var slide_speed = 100 # Speed of travel to the next tile
-@export var grid_size = 32 # the size of the tiles of the plane
+@export var slide_speed = 500 # Speed of travel to the next tile
 @export var type = "default" # What potop variant the player is
 
 var target_position = Vector2.ZERO # Where the character heads
@@ -27,7 +26,7 @@ func _physics_process(delta):
 			
 		if direction != Vector2.ZERO:
 			# Updating target position based on direction + grid size
-			target_position += direction * grid_size
+			target_position += direction * Globals.TILE_SIZE
 			moving = true
 			
 	if moving:
