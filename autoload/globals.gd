@@ -35,6 +35,10 @@ func ensure_user_folders():
 
 ## Attempts to load maps from the user directory. Returns false if no maps were loaded.
 func load_maps() -> bool:
+	print("Scanning for map files...")
+	if !levels.is_empty():
+		levels.clear()
+	
 	var dir := DirAccess.open(MAP_DIR)
 	
 	if dir == null:
@@ -132,3 +136,6 @@ func clear_game_log():
 
 func start_game() -> void:
 	get_tree().change_scene_to_file("res://scenes/world/game.tscn")
+
+func exit_to_main_menu() -> void:
+	get_tree().change_scene_to_file("res://scenes/UI/main_menu.tscn")

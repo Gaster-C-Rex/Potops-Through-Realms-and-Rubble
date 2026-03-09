@@ -30,8 +30,3 @@ func next_map():
 		active_map_id = 0
 	set_map(active_map_id)
 	%Log.text += "\nSwitched to map " + str(active_map_id)
-
-func _unhandled_key_input(event: InputEvent) -> void:
-	# why do i do this to myself just use the action manager in project settings
-	if event is InputEventKey and event.pressed and event.keycode == 47: # / key
-		%PanelContainer.visible = !%PanelContainer.visible

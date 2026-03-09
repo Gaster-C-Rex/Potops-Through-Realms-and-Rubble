@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bcknmol43ump1" path="res://scenes/world/game.gd" id="1_3iwug"]
 [ext_resource type="PackedScene" uid="uid://b1queastcser2" path="res://scenes/world/Potop.tscn" id="2_r5nxa"]
+[ext_resource type="Script" uid="uid://ciiivo62g56y7" path="res://scenes/UI/in_game_ui.gd" id="2_sarsd"]
+[ext_resource type="Texture2D" uid="uid://783i2c5tj2cx" path="res://assets/sprites/Board.png" id="3_3gx7t"]
 [ext_resource type="Script" uid="uid://dccfxbvx8jyqf" path="res://scenes/world/camera_controller.gd" id="3_h30v7"]
 [ext_resource type="PackedScene" uid="uid://bs5ijyud5m2xa" path="res://scenes/UI/tile_selector.tscn" id="4_r5nxa"]
 
@@ -10,6 +12,7 @@ y_sort_enabled = true
 script = ExtResource("1_3iwug")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=2021350002]
+script = ExtResource("2_sarsd")
 
 [node name="NextMapButton" type="Button" parent="UI" unique_id=1594070851]
 unique_name_in_owner = true
@@ -23,7 +26,7 @@ offset_bottom = 45.0
 grow_horizontal = 0
 text = "Next Map"
 
-[node name="PanelContainer" type="PanelContainer" parent="UI" unique_id=238370643]
+[node name="LogPanel" type="PanelContainer" parent="UI" unique_id=238370643]
 unique_name_in_owner = true
 anchors_preset = 12
 anchor_top = 1.0
@@ -33,12 +36,115 @@ offset_top = -76.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Log" type="RichTextLabel" parent="UI/PanelContainer" unique_id=1262255118]
+[node name="Log" type="RichTextLabel" parent="UI/LogPanel" unique_id=1262255118]
 unique_name_in_owner = true
 layout_mode = 2
 bbcode_enabled = true
 text = "Debug Log (press / to close)"
 scroll_following = true
+
+[node name="PauseMenu" type="Control" parent="UI" unique_id=1630823583]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainMenuBG" type="TextureRect" parent="UI/PauseMenu" unique_id=1254228678]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_3gx7t")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/PauseMenu" unique_id=90774032]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PauseMenu/MarginContainer" unique_id=596924631]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PauseMenuLabel" type="Label" parent="UI/PauseMenu/MarginContainer/VBoxContainer" unique_id=1624853437]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Game Paused"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="UI/PauseMenu/MarginContainer/VBoxContainer" unique_id=1469261355]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Resume Game"
+
+[node name="SettingsButton" type="Button" parent="UI/PauseMenu/MarginContainer/VBoxContainer" unique_id=1157874229]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Settings"
+
+[node name="QuitButton" type="Button" parent="UI/PauseMenu/MarginContainer/VBoxContainer" unique_id=198988009]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Quit Game"
+
+[node name="SettingsMenu" type="Control" parent="UI" unique_id=1030036958]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainMenuBG" type="TextureRect" parent="UI/SettingsMenu" unique_id=968617983]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_3gx7t")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/SettingsMenu" unique_id=1633862855]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/SettingsMenu/MarginContainer" unique_id=1347533066]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SettingsMenuLabel" type="Label" parent="UI/SettingsMenu/MarginContainer/VBoxContainer" unique_id=653895719]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="SettingsBackButton" type="Button" parent="UI/SettingsMenu/MarginContainer/VBoxContainer" unique_id=953814285]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Back to Pause Menu"
 
 [node name="Potop" parent="." unique_id=273897724 instance=ExtResource("2_r5nxa")]
 position = Vector2(32, 32)
@@ -53,3 +159,7 @@ unique_name_in_owner = true
 visible = false
 
 [connection signal="pressed" from="UI/NextMapButton" to="." method="_on_next_map_button_pressed"]
+[connection signal="pressed" from="UI/PauseMenu/MarginContainer/VBoxContainer/ResumeButton" to="UI" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="UI/PauseMenu/MarginContainer/VBoxContainer/SettingsButton" to="UI" method="_on_settings_button_pressed"]
+[connection signal="pressed" from="UI/PauseMenu/MarginContainer/VBoxContainer/QuitButton" to="UI" method="_on_quit_button_pressed"]
+[connection signal="pressed" from="UI/SettingsMenu/MarginContainer/VBoxContainer/SettingsBackButton" to="UI" method="_on_settings_back_button_pressed"]

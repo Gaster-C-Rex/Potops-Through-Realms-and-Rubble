@@ -9,7 +9,7 @@ func _ready() -> void:
 	var active_hbox: HBoxContainer
 	if !Globals.load_maps():
 		Globals.send_to_game_log("\nThere are no valid maps in " + OS.get_user_data_dir() + "!")
-	for map:Node2D in Globals.levels:
+	for map: Node2D in Globals.levels:
 		if count % columns == 0:
 			active_hbox = HBoxContainer.new()
 			active_hbox.alignment = BoxContainer.ALIGNMENT_CENTER
