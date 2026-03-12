@@ -4,6 +4,7 @@ extends Node
 
 const TILE_SIZE = 64
 const MAP_DIR = "user://maps"
+const ENEMY_DIR = "user://enemies"
 
 var active_map: Node2D
 var active_map_id: int
@@ -16,17 +17,20 @@ var levels := []
 
 var items := []
 var potops := []
-var enemies := []
+var enemies := {} #dictionary of enemy data dicts
 
 func _ready() -> void:
 	ensure_user_folders()
+	load_enemies()
+	print(enemies)
 
 ## Makes sure that the following folders exist in the user directory each time
 ## the program is run
 func ensure_user_folders():
 	var folders = [
 		"user://maps",
-		"user://maps/tiles"
+		"user://maps/tiles",
+		"user://enemies"
 	]
 
 	for f in folders:
@@ -75,6 +79,48 @@ func load_maps() -> bool:
 		return false
 		
 	return true
+
+func load_enemies():
+	print("Scanning for enemy data...")
+	if !levels.is_empty():
+		levels.clear()
+		
+	var dir := DirAccess.open(ENEMY_DIR)
+	
+	if dir == null:
+		print("Failed to open directory: ", ENEMY_DIR)
+		print("No enemies detected! Add data to the json file at: ", OS.get_user_data_dir(), "/enemies")
+		return false
+	
+	dir.list_dir_begin()
+	var file_name = dir.get_next()
+	
+	while file_name != "":
+		if !dir.current_is_dir() and file_name.ends_with(".json"):
+			var full_path = ENEMY_DIR + "/" + file_name
+			var data = parse_data(FileAccess.get_file_as_string(full_path))
+			if data == null or (typeof(data) == TYPE_DICTIONARY && data.keys() == []): #if null or empty json, ask for data
+				print("Please add data!!!")
+				return
+			if typeof(data) != TYPE_DICTIONARY:
+				#if it's not a dictionary, something went wrong
+				#but won't error, instead it'll return empty
+				print("Enemy data is not a dictionary, please follow the instructions")
+				return
+			else: #if data exists in dictionary
+				enemies.get_or_add(file_name, data)
+		file_name = dir.get_next()
+	
+	dir.list_dir_end()
+
+func parse_data(data):
+	var json = JSON.new()
+	var error = json.parse(data)
+	if error == OK:
+		var data_received = json.data
+		return data_received
+	else:
+		print("JSON Parse Error: ", json.get_error_message(), " in ", data, " at line ", json.get_error_line())
 
 ## Returns a position in global coordinates of the nearest tile's center
 func get_tile_center(coords: Vector2, system = "global") -> Vector2:

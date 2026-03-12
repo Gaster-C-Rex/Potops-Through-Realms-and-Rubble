@@ -63,7 +63,7 @@ func process_keyboard_input():
 			return
 	
 	# Compute the tile the character would move to
-	var current_tile := Globals.get_tile_pos(position)
+	var current_tile := Globals.get_tile_pos(position) as Vector2i
 	var target_tile := current_tile + Vector2i(direction)
 
 	# Only move if the target tile is within bounds and walkable
@@ -139,7 +139,7 @@ func pathfind_to_space(target_tile_pos: Vector2i, ignore_obstacles: bool = false
 	else:
 		obstacles = null
 	
-	var start_tile_pos := Globals.get_tile_pos(position)
+	var start_tile_pos := Globals.get_tile_pos(position) as Vector2i
 	var current := start_tile_pos
 	var cardinal_directions = [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]
 	
@@ -200,7 +200,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		# Left click: designate space to move to
 		elif event.button_index == MOUSE_BUTTON_LEFT:
 			if move_state == MoveState.CLICK_TARGETING:
-				var target_tile_pos := Globals.get_tile_pos(get_global_mouse_position())
+				var target_tile_pos := Globals.get_tile_pos(get_global_mouse_position()) as Vector2i
 				if Globals.tile_in_bounds(target_tile_pos):
 					if !Globals.in_combat:
 						# Generate movement queue and switch state
