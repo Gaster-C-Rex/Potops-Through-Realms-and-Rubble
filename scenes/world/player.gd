@@ -1,23 +1,8 @@
-extends Node2D
+extends entity
 
 # Constants
-const combat_speed := 4 # How many tiles the character is allowed to move in combat
 const slide_speed := 300 # Speed of travel to the next tile
 const type := "default" # What potop variant the player is
-
-# Combat
-var health := 10
-var armor := 1 # Damage reduction per hit
-var speed := 4 # Number of tiles this unit can move per turn
-var has_melee := true
-var melee_hits_flying := false
-var melee_damage := Vector2i(1, 5) # 1-5 damage per hit
-var melee_range := Globals.Melee_Range_Type.ONE_SQUARE
-var has_ranged := false
-var ranged_hits_flying := false
-var attack_range := 4
-var ranged_damage: Vector2i
-var flying := false
 
 # Movement
 var target_position = Vector2.ZERO # Where the character heads
@@ -37,7 +22,8 @@ enum MoveState {
 	IDLE, # Unit standing still and selectable
 	KEYBOARD, # Unit being controlled by keyboard
 	CLICK_TARGETING, # Unit selected and waiting for click destination
-	CLICK_MOVING # Following movement queue
+	CLICK_MOVING, # Following movement queue
+	IN_MENU
 }
 
 # Current state
@@ -58,6 +44,8 @@ func _physics_process(delta):
 			pass # Waiting for mouse click
 		MoveState.CLICK_MOVING:
 			process_movement_queue()
+		MoveState.IN_MENU:
+			pass
 
 	process_sliding(delta)
 
@@ -225,8 +213,14 @@ func _unhandled_input(event: InputEvent) -> void:
 					else:
 						print("combat movement not implemented")
 
-func melee_attack_in_range(enemy_tile_pos: Vector2i, flying: bool) -> bool:
+func melee_attack_in_range(enemy_tile_pos: Vector2i, enemy_is_flying: bool) -> bool:
 	return true
 
-func ranged_attack_in_range(enemy_tile_pos: Vector2i, flying: bool) -> bool:
+func ranged_attack_in_range(enemy_tile_pos: Vector2i, enemy_is_flying: bool) -> bool:
 	return true
+
+func show_melee_attack_range():
+	pass
+
+func show_ranged_attack_range():
+	pass

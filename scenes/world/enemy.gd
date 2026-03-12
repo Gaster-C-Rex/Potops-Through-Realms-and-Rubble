@@ -1,17 +1,4 @@
-extends Node2D
-
-var health := 10
-var armor := 1 # Damage reduction per hit
-var speed := 4 # Number of tiles this unit can move per turn
-var has_melee := true
-var melee_hits_flying := false
-var melee_damage := Vector2i(1, 5) # 1-5 damage per hit
-var melee_range := Globals.Melee_Range_Type.ONE_SQUARE
-var has_ranged := false
-var ranged_hits_flying := false
-var attack_range := 4
-var ranged_damage: Vector2i
-var flying := false
+extends entity
 
 # For connecting the popup selected signal to the right function based on id
 var popup_dict := {}
@@ -19,7 +6,6 @@ var popup_dict := {}
 func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_RIGHT:
-			print("I am clicked")
 			open_interaction_menu(event.position)
 
 ## Attempts to open an interaction menu between the player and this instance.
@@ -37,7 +23,8 @@ func open_interaction_menu(pos) -> bool:
 		popup_dict[option_id] = {
 			"node": self,
 			"function": "take_melee_damage",
-			"args": [caller]
+			"args": [caller],
+			"player": caller
 		}
 	if caller.has_ranged and caller.ranged_attack_in_range(enemy_tile_pos, flying):
 		var option_id = Globals.Popup_Option.RANGED_ATTACK
@@ -45,11 +32,13 @@ func open_interaction_menu(pos) -> bool:
 		popup_dict[option_id] = {
 			"node": self,
 			"function": "take_ranged_damage",
-			"args": [caller]
+			"args": [caller],
+			"player": caller
 		}
 	if popup.item_count == 0:
 		return false
 	else:
+		caller.move_state = caller.MoveState.IN_MENU
 		popup.popup(Rect2(pos.x, pos.y, 100, 100))
 		return true
 
@@ -69,6 +58,8 @@ func remap_popup_id(id) -> void:
 	var function : String = popup_dict[id]["function"]
 	var vargs : Array = popup_dict[id]["args"]
 	node.callv(function, vargs)
+	var player = popup_dict[id]["player"]
+	player.move_state = player.MoveState.IDLE
 
 func take_melee_damage(attacker):
 	var damage_range : Vector2i = attacker.melee_damage
