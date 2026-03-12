@@ -7,6 +7,9 @@ extends CanvasLayer
 
 @onready var log_panel = %LogPanel
 
+func _ready() -> void:
+	Globals.active_canvas_layer = self
+
 func switch_menu(menu_name: String) -> void:
 	for menu in menues.keys():
 		menues[menu].visible = (menu == menu_name)

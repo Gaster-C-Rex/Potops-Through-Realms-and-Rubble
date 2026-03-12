@@ -23,6 +23,7 @@ func set_map(id:int):
 	if !map.is_node_ready():
 		await map.ready
 	%Camera2D.apply_limits(Globals.calculate_map_pixel_rect(map))
+	%EntityManager.spawn_entities()
 
 func next_map():
 	active_map_id += 1

@@ -6,12 +6,14 @@
 [ext_resource type="Texture2D" uid="uid://783i2c5tj2cx" path="res://assets/sprites/Board.png" id="3_3gx7t"]
 [ext_resource type="Script" uid="uid://dccfxbvx8jyqf" path="res://scenes/world/camera_controller.gd" id="3_h30v7"]
 [ext_resource type="PackedScene" uid="uid://bs5ijyud5m2xa" path="res://scenes/UI/tile_selector.tscn" id="4_r5nxa"]
+[ext_resource type="Script" uid="uid://b0d7who5nu8id" path="res://scenes/world/entity_manager.gd" id="7_3gx7t"]
 
 [node name="Game" type="Node2D" unique_id=798327649]
 y_sort_enabled = true
 script = ExtResource("1_3iwug")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=2021350002]
+unique_name_in_owner = true
 script = ExtResource("2_sarsd")
 
 [node name="NextMapButton" type="Button" parent="UI" unique_id=1594070851]
@@ -157,6 +159,10 @@ script = ExtResource("3_h30v7")
 [node name="TileSelector" parent="." unique_id=717082672 instance=ExtResource("4_r5nxa")]
 unique_name_in_owner = true
 visible = false
+
+[node name="EntityManager" type="Node" parent="." unique_id=2108963004]
+unique_name_in_owner = true
+script = ExtResource("7_3gx7t")
 
 [connection signal="pressed" from="UI/NextMapButton" to="." method="_on_next_map_button_pressed"]
 [connection signal="pressed" from="UI/PauseMenu/MarginContainer/VBoxContainer/ResumeButton" to="UI" method="_on_resume_button_pressed"]
