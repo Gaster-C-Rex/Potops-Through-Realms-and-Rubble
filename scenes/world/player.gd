@@ -5,6 +5,20 @@ const combat_speed := 4 # How many tiles the character is allowed to move in com
 const slide_speed := 300 # Speed of travel to the next tile
 const type := "default" # What potop variant the player is
 
+# Combat
+var health := 10
+var armor := 1 # Damage reduction per hit
+var speed := 4 # Number of tiles this unit can move per turn
+var has_melee := true
+var melee_hits_flying := false
+var melee_damage := Vector2i(1, 5) # 1-5 damage per hit
+var melee_range := Globals.Melee_Range_Type.ONE_SQUARE
+var has_ranged := false
+var ranged_hits_flying := false
+var attack_range := 4
+var ranged_damage: Vector2i
+var flying := false
+
 # Movement
 var target_position = Vector2.ZERO # Where the character heads
 var sliding := false # A Check to see if it's already moving
@@ -30,8 +44,9 @@ enum MoveState {
 var move_state := MoveState.IDLE
 
 func _ready():
-	# Starting Position of the target
-	target_position = position
+	target_position = position # Not moving
+	Globals.active_player = self # For now, when there are more this will be
+	# determined by spawning order in the characters select menu
 	
 func _physics_process(delta):
 	match move_state:
@@ -209,3 +224,9 @@ func _unhandled_input(event: InputEvent) -> void:
 						move_state = MoveState.CLICK_MOVING
 					else:
 						print("combat movement not implemented")
+
+func melee_attack_in_range(enemy_tile_pos: Vector2i, flying: bool) -> bool:
+	return true
+
+func ranged_attack_in_range(enemy_tile_pos: Vector2i, flying: bool) -> bool:
+	return true
