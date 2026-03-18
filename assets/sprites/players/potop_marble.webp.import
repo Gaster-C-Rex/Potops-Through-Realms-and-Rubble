@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://baax73qk8h0ci"
-path="res://.godot/imported/potop_marble.webp-3a30714ea3e0c53b4a1c98decc1a9ab4.ctex"
+path="res://.godot/imported/potop_marble.webp-d5ed389f88bab14a4dca6434763962aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/potop_marble.webp"
-dest_files=["res://.godot/imported/potop_marble.webp-3a30714ea3e0c53b4a1c98decc1a9ab4.ctex"]
+source_file="res://assets/sprites/players/potop_marble.webp"
+dest_files=["res://.godot/imported/potop_marble.webp-d5ed389f88bab14a4dca6434763962aa.ctex"]
 
 [params]
 

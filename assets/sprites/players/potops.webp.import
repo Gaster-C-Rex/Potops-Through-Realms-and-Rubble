@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://die0rfxwgvqfg"
-path="res://.godot/imported/potop_ice.webp-8803d0c4108312e31d74b7e6ce9526ac.ctex"
+uid="uid://dvw3fi5vlaqwn"
+path="res://.godot/imported/potops.webp-a23de5cb8019e2350b796d163f92b8b3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/potop_ice.webp"
-dest_files=["res://.godot/imported/potop_ice.webp-8803d0c4108312e31d74b7e6ce9526ac.ctex"]
+source_file="res://assets/sprites/players/potops.webp"
+dest_files=["res://.godot/imported/potops.webp-a23de5cb8019e2350b796d163f92b8b3.ctex"]
 
 [params]
 

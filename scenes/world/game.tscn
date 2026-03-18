@@ -28,6 +28,31 @@ offset_bottom = 45.0
 grow_horizontal = 0
 text = "Next Map"
 
+[node name="EndTurnButton" type="Button" parent="UI" unique_id=224258908]
+unique_name_in_owner = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -121.0
+offset_top = 48.0
+offset_right = -17.0
+offset_bottom = 82.0
+grow_horizontal = 0
+text = "End Turn"
+
+[node name="EnterCombatButton" type="Button" parent="UI" unique_id=1743636376]
+unique_name_in_owner = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -121.0
+offset_top = 85.0
+offset_right = -17.0
+offset_bottom = 119.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 9
+text = "Toggle Combat Mode"
+
 [node name="LogPanel" type="PanelContainer" parent="UI" unique_id=238370643]
 unique_name_in_owner = true
 anchors_preset = 12
@@ -148,6 +173,43 @@ layout_mode = 2
 size_flags_vertical = 8
 text = "Back to Pause Menu"
 
+[node name="ZoomInButton" type="Button" parent="UI" unique_id=1568628300]
+unique_name_in_owner = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -121.0
+offset_top = 122.0
+offset_right = -17.0
+offset_bottom = 156.0
+grow_horizontal = 0
+text = "Zoom In"
+
+[node name="ZoomOutButton" type="Button" parent="UI" unique_id=1853769095]
+unique_name_in_owner = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -121.0
+offset_top = 160.0
+offset_right = -17.0
+offset_bottom = 194.0
+grow_horizontal = 0
+text = "Zoom Out"
+
+[node name="CycleAttackButton" type="Button" parent="UI" unique_id=615771769]
+unique_name_in_owner = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -121.0
+offset_top = 199.0
+offset_right = -17.0
+offset_bottom = 233.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 10
+text = "Cycle Attack Type"
+
 [node name="Potop" parent="." unique_id=273897724 instance=ExtResource("2_r5nxa")]
 position = Vector2(32, 32)
 
@@ -165,7 +227,12 @@ unique_name_in_owner = true
 script = ExtResource("7_3gx7t")
 
 [connection signal="pressed" from="UI/NextMapButton" to="." method="_on_next_map_button_pressed"]
+[connection signal="pressed" from="UI/EndTurnButton" to="." method="_on_end_turn_button_pressed"]
+[connection signal="pressed" from="UI/EnterCombatButton" to="." method="_on_enter_combat_button_pressed"]
 [connection signal="pressed" from="UI/PauseMenu/MarginContainer/VBoxContainer/ResumeButton" to="UI" method="_on_resume_button_pressed"]
 [connection signal="pressed" from="UI/PauseMenu/MarginContainer/VBoxContainer/SettingsButton" to="UI" method="_on_settings_button_pressed"]
 [connection signal="pressed" from="UI/PauseMenu/MarginContainer/VBoxContainer/QuitButton" to="UI" method="_on_quit_button_pressed"]
 [connection signal="pressed" from="UI/SettingsMenu/MarginContainer/VBoxContainer/SettingsBackButton" to="UI" method="_on_settings_back_button_pressed"]
+[connection signal="pressed" from="UI/ZoomInButton" to="Potop/Camera2D" method="_on_zoom_in_button_pressed"]
+[connection signal="pressed" from="UI/ZoomOutButton" to="Potop/Camera2D" method="_on_zoom_out_button_pressed"]
+[connection signal="pressed" from="UI/CycleAttackButton" to="Potop" method="_on_cycle_attack_button_pressed"]

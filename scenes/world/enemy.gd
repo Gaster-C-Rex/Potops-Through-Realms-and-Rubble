@@ -3,6 +3,20 @@ extends entity
 # For connecting the popup selected signal to the right function based on id
 var popup_dict := {}
 
+func initialize(enemy_name: String) -> void:
+	match enemy_name:
+		"fireworm":
+			$Sprite2D.texture = preload("uid://dxhe8u0y4j7hm")
+		"crawler":
+			$Sprite2D.texture = preload("uid://bx5tx0ea00eif")
+		"glowcrushsheller":
+			$Sprite2D.texture = preload("uid://326o7hqogisv")
+		"ghost":
+			$Sprite2D.texture = preload("uid://dvhldadmvlu6")
+		"pepperjelly":
+			$Sprite2D.texture = preload("uid://bd7mhgqyerhy5")
+
+
 func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_RIGHT:
@@ -79,4 +93,5 @@ func take_ranged_damage(attacker):
 
 func die():
 	Globals.send_to_game_log("I am dead")
+	Globals.entity_manager.entities.erase(self)
 	queue_free()

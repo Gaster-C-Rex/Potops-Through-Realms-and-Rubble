@@ -29,14 +29,14 @@ SignalBus="*uid://dbyuxn3alwlb6"
 gdscript/warnings/unused_signal=0
 gdscript/warnings/integer_division=0
 gdscript/warnings/narrowing_conversion=0
+gdscript/warnings/int_as_enum_without_cast=0
 
 [display]
 
-window/size/viewport_width=640
-window/size/viewport_height=360
-window/stretch/mode="viewport"
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-window/stretch/scale_mode="integer"
 
 [editor]
 

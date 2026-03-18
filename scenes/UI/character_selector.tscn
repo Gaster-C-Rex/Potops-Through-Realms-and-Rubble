@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://i75ql5ait3me"]
 
-[ext_resource type="Texture2D" uid="uid://clqu8taeiktht" path="res://assets/sprites/potop_normal.webp" id="1_6vh04"]
+[ext_resource type="Texture2D" uid="uid://clqu8taeiktht" path="res://assets/sprites/players/potop_normal.webp" id="1_6vh04"]
 [ext_resource type="Texture2D" uid="uid://dcrsg21ao58gg" path="res://assets/sprites/orange_gem.webp" id="2_7bqif"]
 
 [node name="PanelContainer" type="PanelContainer" unique_id=460028910]

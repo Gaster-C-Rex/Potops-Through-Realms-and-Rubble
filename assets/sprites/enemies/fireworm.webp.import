@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvw3fi5vlaqwn"
-path="res://.godot/imported/potops.webp-0b8db681802cc1a5c2892d1161c79ff3.ctex"
+uid="uid://dxhe8u0y4j7hm"
+path="res://.godot/imported/fireworm.webp-481859234c42c1997d304a782d8004be.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/potops.webp"
-dest_files=["res://.godot/imported/potops.webp-0b8db681802cc1a5c2892d1161c79ff3.ctex"]
+source_file="res://assets/sprites/enemies/fireworm.webp"
+dest_files=["res://.godot/imported/fireworm.webp-481859234c42c1997d304a782d8004be.ctex"]
 
 [params]
 

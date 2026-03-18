@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clnfey8v8deoh"
-path="res://.godot/imported/bad_guy.png-bfeb95a12d3c295dc42dbc188cdaff0b.ctex"
+uid="uid://bd7mhgqyerhy5"
+path="res://.godot/imported/pepperjelly.webp-c68cfa21755de75ffebd6b834b9ed835.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/bad_guy.png"
-dest_files=["res://.godot/imported/bad_guy.png-bfeb95a12d3c295dc42dbc188cdaff0b.ctex"]
+source_file="res://assets/sprites/enemies/pepperjelly.webp"
+dest_files=["res://.godot/imported/pepperjelly.webp-c68cfa21755de75ffebd6b834b9ed835.ctex"]
 
 [params]
 

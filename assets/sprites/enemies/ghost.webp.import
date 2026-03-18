@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dje24npa7xusa"
-path="res://.godot/imported/potop_water.webp-0ebdf8b5f6ee0c797fc0d4281f4f6057.ctex"
+uid="uid://dvhldadmvlu6"
+path="res://.godot/imported/ghost.webp-3ecb3e5cff5eff8ed6824979c18fe8ba.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/potop_water.webp"
-dest_files=["res://.godot/imported/potop_water.webp-0ebdf8b5f6ee0c797fc0d4281f4f6057.ctex"]
+source_file="res://assets/sprites/enemies/ghost.webp"
+dest_files=["res://.godot/imported/ghost.webp-3ecb3e5cff5eff8ed6824979c18fe8ba.ctex"]
 
 [params]
 

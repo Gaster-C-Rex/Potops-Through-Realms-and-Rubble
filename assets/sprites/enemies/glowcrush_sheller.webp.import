@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rhr7d74b6r07"
-path="res://.godot/imported/potoSprites.png-ca1aa0fafdf69ad1fdd10ef74f8c38e2.ctex"
+uid="uid://326o7hqogisv"
+path="res://.godot/imported/glowcrush_sheller.webp-9ba19dd1c5131678788078254eefeda0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/potoSprites.png"
-dest_files=["res://.godot/imported/potoSprites.png-ca1aa0fafdf69ad1fdd10ef74f8c38e2.ctex"]
+source_file="res://assets/sprites/enemies/glowcrush_sheller.webp"
+dest_files=["res://.godot/imported/glowcrush_sheller.webp-9ba19dd1c5131678788078254eefeda0.ctex"]
 
 [params]
 

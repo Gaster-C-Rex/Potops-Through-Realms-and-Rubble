@@ -31,3 +31,9 @@ func next_map():
 		active_map_id = 0
 	set_map(active_map_id)
 	%Log.text += "\nSwitched to map " + str(active_map_id)
+
+func _on_end_turn_button_pressed() -> void:
+	Globals.active_player.reset_movement_for_turn()
+
+func _on_enter_combat_button_pressed() -> void:
+	Globals.in_combat = !Globals.in_combat

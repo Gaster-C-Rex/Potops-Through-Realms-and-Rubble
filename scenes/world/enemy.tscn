@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://76e7g1k8qnot"]
 
-[ext_resource type="Texture2D" uid="uid://bp4fw6ohog6pd" path="res://assets/sprites/potop_fire.webp" id="1_01swt"]
 [ext_resource type="Script" uid="uid://b0wmkn00raa3s" path="res://scenes/world/enemy.gd" id="1_xdryk"]
+[ext_resource type="Texture2D" uid="uid://bd7mhgqyerhy5" path="res://assets/sprites/enemies/pepperjelly.webp" id="2_xdryk"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qg4nl"]
 
@@ -15,7 +15,7 @@ script = ExtResource("1_xdryk")
 sprite_frames = SubResource("SpriteFrames_qg4nl")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2146457289]
-texture = ExtResource("1_01swt")
+texture = ExtResource("2_xdryk")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=865682178]
 

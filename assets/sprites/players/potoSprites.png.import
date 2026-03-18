@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clqu8taeiktht"
-path="res://.godot/imported/potop_normal.webp-0a4e94eb01848161538fac34d33db6ca.ctex"
+uid="uid://rhr7d74b6r07"
+path="res://.godot/imported/potoSprites.png-e6a221acf02acadedaca61fd2fc0aa36.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/potop_normal.webp"
-dest_files=["res://.godot/imported/potop_normal.webp-0a4e94eb01848161538fac34d33db6ca.ctex"]
+source_file="res://assets/sprites/players/potoSprites.png"
+dest_files=["res://.godot/imported/potoSprites.png-e6a221acf02acadedaca61fd2fc0aa36.ctex"]
 
 [params]
 

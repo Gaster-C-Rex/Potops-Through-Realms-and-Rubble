@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://f75cjr0vv78k" path="res://assets/sprites/Pedestals.png" id="1_0dtr0"]
 [ext_resource type="Script" uid="uid://cf3i8jut4l8n0" path="res://scenes/world/player.gd" id="1_8e51o"]
-[ext_resource type="Texture2D" uid="uid://rhr7d74b6r07" path="res://assets/sprites/potoSprites.png" id="1_s11o4"]
+[ext_resource type="Texture2D" uid="uid://rhr7d74b6r07" path="res://assets/sprites/players/potoSprites.png" id="1_s11o4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cyx2o"]
 atlas = ExtResource("1_0dtr0")

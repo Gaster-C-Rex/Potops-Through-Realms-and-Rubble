@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bod2uftbsp1a4"]
+
+[ext_resource type="Texture2D" uid="uid://by4j6g7s4p5cn" path="res://assets/UI/movement_options.webp" id="1_uyr7e"]
+[ext_resource type="Script" uid="uid://b41n5ig0iuvha" path="res://scenes/UI/tile_indicator.gd" id="2_wnl0y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6p323"]
+atlas = ExtResource("1_uyr7e")
+region = Rect2(128, 0, 64, 64)
+
+[node name="tile_indicator" type="Sprite2D" unique_id=1100760553]
+texture = SubResource("AtlasTexture_6p323")
+script = ExtResource("2_wnl0y")

@@ -15,6 +15,7 @@ var active_map: Node2D
 var active_map_id: int
 var active_player: Node
 var active_canvas_layer: CanvasLayer
+var entity_manager: Node
 var game_log: RichTextLabel
 
 var in_combat:bool = false
@@ -30,6 +31,7 @@ func _ready() -> void:
 	ensure_user_folders()
 	load_enemies()
 	print(enemies)
+	get_window().min_size = Vector2i(720, 480)
 
 ## Makes sure that the following folders exist in the user directory each time
 ## the program is run
