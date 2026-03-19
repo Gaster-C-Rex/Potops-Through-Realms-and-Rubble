@@ -25,6 +25,7 @@ func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int
 ## Attempts to open an interaction menu between the player and this instance.
 ## Returns false if no options are available.
 func open_interaction_menu(pos) -> bool:
+	return false
 	var popup := PopupMenu.new()
 	popup.position = pos
 	popup.id_pressed.connect(remap_popup_id)
