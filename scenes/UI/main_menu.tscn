@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://i75ql5ait3me" path="res://scenes/UI/character_selector.tscn" id="3_e2p27"]
 [ext_resource type="Script" uid="uid://d4fceu12g4n2h" path="res://scenes/UI/map_select_grid.gd" id="3_tfcbk"]
 
-[node name="CanvasLayer" type="Control" unique_id=56394777]
+[node name="MainMenu" type="Control" unique_id=56394777]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

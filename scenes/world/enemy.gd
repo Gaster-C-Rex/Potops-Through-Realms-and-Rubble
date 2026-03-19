@@ -25,7 +25,7 @@ func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int
 ## Attempts to open an interaction menu between the player and this instance.
 ## Returns false if no options are available.
 func open_interaction_menu(pos) -> bool:
-	return false
+	return false # Combat was reworked and this menu is currently unused
 	var popup := PopupMenu.new()
 	popup.position = pos
 	popup.id_pressed.connect(remap_popup_id)
@@ -56,17 +56,6 @@ func open_interaction_menu(pos) -> bool:
 		caller.move_state = caller.MoveState.IN_MENU
 		popup.popup(Rect2(pos.x, pos.y, 100, 100))
 		return true
-
-## Returns the distance between vectors a and b assuming you can't move diaganol
-func manhattan_distance(a: Vector2i, b: Vector2i) -> int:
-	return abs(a.x - b.x) + abs(a.y - b.y)
-
-## Returns the distance between vectors a and b rounded to tiles
-func tile_distance(a: Vector2i, b: Vector2i) -> int:
-	return int(round(Vector2(a).distance_to(Vector2(b))))
-
-func attack_in_range(a, b) -> bool:
-	return true
 
 func remap_popup_id(id) -> void:
 	var node : Node = popup_dict[id]["node"]

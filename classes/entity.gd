@@ -17,7 +17,6 @@ var melee_hits_flying := false
 var melee_damage := Vector2i(1, 5) # 1-5 damage per hit
 var melee_attack_type := AttackType.TILE
 var melee_attack_pierce := 0 # 0 is unlimited pierce
-var melee_attack_width := 0 # Only matters for line and boomerang
 
 var has_ranged := true
 var ranged_range := 4
@@ -25,13 +24,12 @@ var ranged_hits_flying := true
 var ranged_damage := Vector2i(1, 3)
 var ranged_attack_type := AttackType.LINE
 var ranged_attack_pierce := 1 # 1 means pierce only 1 enemy
-var ranged_attack_width := 1 # Only matters for line and boomerang
 
 enum AttackType {
 	TILE, # hits a single tile
-	LINE, # hits number of targets according to pierce along a line
-	LINE_REVERSE, # hits number of targets according to pierce, starting from end of range
-	BOOMERANG, # pierces targets to and from range
+	LINE, # hits targets along a line until blocked or pierce is used
+	LINE_REVERSE, # hits along a line starting from the far end
+	BOOMERANG, # hits on the way out and back
 	ARC_45, # all targets in 45 degree arc
 	ARC_90, # all targets in 90 degree arc
 	ARC_180, # all targets in semicircle
@@ -43,99 +41,102 @@ enum AttackType {
 ## tile_pos is the attacker tile.
 ## pierces: 0 = unlimited entity pierces. 1 = stop after first entity hit.
 ## 2+ = stop after that many entity hits
-## width: 1 (default) = normal line. 2+ = thick line.
 func get_attack_affected_tiles(
 		tile_pos: Vector2i,
 		cursor_tile_pos: Vector2i,
 		attack_name: String
 	) -> Array[Vector2i]:
-	
+
 	var attack_range: int
 	var attack_type: AttackType
 	var pierces: int
-	var width: int
-	
-	# Which set of variables to use
+
 	match attack_name:
 		"melee":
 			attack_range = melee_range
 			attack_type = melee_attack_type
 			pierces = melee_attack_pierce
-			width = melee_attack_width
 		"ranged":
 			attack_range = ranged_range
 			attack_type = ranged_attack_type
 			pierces = ranged_attack_pierce
-			width = ranged_attack_width
-	
+		_:
+			return []
+
 	# If the cursor is WAY out of range, snap our end tile to the closest tile in range
 	var end_tile := _get_clamped_line_endpoint(tile_pos, cursor_tile_pos, attack_range)
 	if end_tile == tile_pos:
 		return []
-	
+
 	# Our return array. It will be an array of tile positions that are attacked.
 	# If a tile appears more than once, it means it got hit more than once.
 	var result: Array[Vector2i] = []
 
 	match attack_type:
 		AttackType.TILE:
-			result.append(end_tile)
+			if Globals.tile_in_bounds(end_tile) and not _is_obstacle(end_tile):
+				result.append(end_tile)
 
 		AttackType.LINE:
 			result.append_array(_get_line_tiles(
 				tile_pos,
-				cursor_tile_pos,
 				end_tile,
 				pierces,
-				width,
 				false
 			))
 
 		AttackType.LINE_REVERSE:
 			result.append_array(_get_line_tiles(
 				tile_pos,
-				cursor_tile_pos,
 				end_tile,
 				pierces,
-				width,
 				true
 			))
 
 		AttackType.BOOMERANG:
 			result.append_array(_get_boomerang_tiles(
 				tile_pos,
-				cursor_tile_pos,
 				end_tile,
-				pierces,
-				width
+				pierces
 			))
 
 		AttackType.ARC_45:
-			var forward := (end_tile - tile_pos)
-			result.append_array(_get_arc_tiles(tile_pos, forward, attack_range, 45.0))
+			var forward_45 := end_tile - tile_pos
+			result.append_array(_filter_tiles_blocked_by_walls(
+				tile_pos,
+				_get_arc_tiles(tile_pos, forward_45, attack_range, 45.0)
+			))
 
 		AttackType.ARC_90:
-			var forward := (end_tile - tile_pos)
-			result.append_array(_get_arc_tiles(tile_pos, forward, attack_range, 90.0))
+			var forward_90 := end_tile - tile_pos
+			result.append_array(_filter_tiles_blocked_by_walls(
+				tile_pos,
+				_get_arc_tiles(tile_pos, forward_90, attack_range, 90.0)
+			))
 
 		AttackType.ARC_180:
-			var forward := (end_tile - tile_pos)
-			result.append_array(_get_arc_tiles(tile_pos, forward, attack_range, 180.0))
+			var forward_180 := end_tile - tile_pos
+			result.append_array(_filter_tiles_blocked_by_walls(
+				tile_pos,
+				_get_arc_tiles(tile_pos, forward_180, attack_range, 180.0)
+			))
 
 		AttackType.CIRCLE:
-			for x in range(-attack_range, attack_range + 1):
-				for y in range(-attack_range, attack_range + 1):
-					var offset := Vector2i(x, y)
-					if Vector2(offset).length() <= float(attack_range):
-						result.append(tile_pos + offset)
+			result.append_array(_filter_tiles_blocked_by_walls(
+				tile_pos,
+				_get_circle_tiles(tile_pos, attack_range)
+			))
 
 		AttackType.SQUARE:
-			for x in range(-attack_range, attack_range + 1):
-				for y in range(-attack_range, attack_range + 1):
-					result.append(tile_pos + Vector2i(x, y))
+			result.append_array(_filter_tiles_blocked_by_walls(
+				tile_pos,
+				_get_square_tiles(tile_pos, attack_range)
+			))
 
 	return result
 
+## Clamps a target tile to attack_range tiles away from from_tile.
+## If cursor_tile_pos is already in range, returns it unchanged.
 func _get_clamped_line_endpoint(from_tile: Vector2i, cursor_tile_pos: Vector2i, attack_range: int) -> Vector2i:
 	var delta := cursor_tile_pos - from_tile
 	if delta == Vector2i.ZERO:
@@ -149,6 +150,7 @@ func _get_clamped_line_endpoint(from_tile: Vector2i, cursor_tile_pos: Vector2i, 
 	var clamped := delta_v.normalized() * float(attack_range)
 	return from_tile + Vector2i(roundi(clamped.x), roundi(clamped.y))
 
+## Returns all tiles along a line from start_tile to end_tile, inclusive.
 func _get_line_path(start_tile: Vector2i, end_tile: Vector2i) -> Array[Vector2i]:
 	var out: Array[Vector2i] = []
 
@@ -178,72 +180,12 @@ func _get_line_path(start_tile: Vector2i, end_tile: Vector2i) -> Array[Vector2i]
 
 	return out
 
-func _get_path_tangent(path: Array[Vector2i], index: int) -> Vector2i:
-	if path.size() <= 1:
-		return Vector2i.RIGHT
-
-	if index == 0:
-		return path[1] - path[0]
-	elif index == path.size() - 1:
-		return path[index] - path[index - 1]
-
-	var a := path[index] - path[index - 1]
-	var b := path[index + 1] - path[index]
-
-	var sum := a + b
-	if sum == Vector2i.ZERO:
-		return b
-	return sum
-
-func _get_perpendicular_from_tangent(tangent: Vector2i) -> Vector2i:
-	var tx := sign(tangent.x) as int
-	var ty := sign(tangent.y) as int
-	return Vector2i(-ty, tx)
-
-func _get_row_tiles_for_path(
-		center: Vector2i,
-		tangent: Vector2i,
-		tile_pos: Vector2i,
-		cursor_tile_pos: Vector2i,
-		width: int
-	) -> Array[Vector2i]:
-	var row: Array[Vector2i] = []
-
-	if width <= 1:
-		row.append(center)
-		return row
-
-	var perp := _get_perpendicular_from_tangent(tangent)
-	if perp == Vector2i.ZERO:
-		row.append(center)
-		return row
-
-	if width % 2 == 1:
-		var half: int = width / 2
-		for o in range(-half, half + 1):
-			row.append(center + perp * o)
-		return row
-
-	var rel := cursor_tile_pos - tile_pos
-	var side := sign(rel.x * perp.x + rel.y * perp.y) as int
-	if side == 0:
-		side = 1
-
-	if side > 0:
-		for o in range(0, width):
-			row.append(center + perp * o)
-	else:
-		for o in range(-width + 1, 1):
-			row.append(center + perp * o)
-
-	return row
-
+## Returns the tiles hit by a line attack.
+## reverse = true means start checking from the far end.
 func _get_line_tiles(
 		tile_pos: Vector2i,
-		cursor_tile_pos: Vector2i,
 		end_tile: Vector2i,
 		pierces: int,
-		width: int,
 		reverse: bool
 	) -> Array[Vector2i]:
 	var out: Array[Vector2i] = []
@@ -258,76 +200,83 @@ func _get_line_tiles(
 	if reverse:
 		path.reverse()
 
-	for i in range(path.size()):
-		var center := path[i]
-		var tangent := _get_path_tangent(path, i)
-		var row := _get_row_tiles_for_path(center, tangent, tile_pos, cursor_tile_pos, width)
-
-		if _row_has_obstacle(row):
+	for tile in path:
+		if not Globals.tile_in_bounds(tile):
 			if reverse:
 				continue
 			break
 
-		out.append_array(row)
+		if _is_obstacle(tile):
+			if reverse:
+				continue
+			break
 
-		if pierces > 0:
-			hits_used += _row_entity_hits(row)
+		out.append(tile)
+
+		if pierces > 0 and _has_entity_at_tile(tile):
+			hits_used += 1
 			if hits_used >= pierces:
 				break
 
 	return out
 
+## Returns the tiles hit by a boomerang attack.
+## The attack travels outward until blocked, then comes back along the same path.
+## Returns the tiles hit by a boomerang attack.
+## The attack travels outward until blocked, then comes back along the same path.
+## If it hits a wall on the way out, it does NOT return.
 func _get_boomerang_tiles(
 		tile_pos: Vector2i,
-		cursor_tile_pos: Vector2i,
 		end_tile: Vector2i,
-		pierces: int,
-		width: int
+		pierces: int
 	) -> Array[Vector2i]:
 	var out: Array[Vector2i] = []
 	var hits_used := 0
+	var hit_wall := false
 
 	var path := _get_line_path(tile_pos, end_tile)
 	if path.size() <= 1:
 		return out
-
-	path.remove_at(0)
+	path.remove_at(0) # remove attacker tile
 
 	var reached_count := 0
 
+	# Outgoing phase
 	for i in range(path.size()):
-		var center := path[i]
-		var tangent := _get_path_tangent(path, i)
-		var row := _get_row_tiles_for_path(center, tangent, tile_pos, cursor_tile_pos, width)
-
-		if _row_has_obstacle(row):
+		var tile := path[i]
+		if not Globals.tile_in_bounds(tile):
+			hit_wall = true
 			break
-
-		out.append_array(row)
+		if _is_obstacle(tile):
+			hit_wall = true
+			break
+		out.append(tile)
 		reached_count += 1
-
-		if pierces > 0:
-			hits_used += _row_entity_hits(row)
+		if pierces > 0 and _has_entity_at_tile(tile):
+			hits_used += 1
 			if hits_used >= pierces:
 				return out
+	# If we hit a wall on the way out, do NOT return
+	if hit_wall:
+		return out
 
+	# Return phase
 	for i in range(reached_count - 2, -1, -1):
-		var center := path[i]
-		var tangent := _get_path_tangent(path, i)
-		var row := _get_row_tiles_for_path(center, tangent, tile_pos, cursor_tile_pos, width)
-
-		if _row_has_obstacle(row):
+		var tile := path[i]
+		if not Globals.tile_in_bounds(tile):
 			continue
-
-		out.append_array(row)
-
-		if pierces > 0:
-			hits_used += _row_entity_hits(row)
+		if _is_obstacle(tile):
+			continue
+		out.append(tile)
+		if pierces > 0 and _has_entity_at_tile(tile):
+			hits_used += 1
 			if hits_used >= pierces:
 				break
 
 	return out
 
+## Returns all tiles in an arc in front of tile_pos.
+## This only generates candidate tiles; wall blocking is applied separately.
 func _get_arc_tiles(tile_pos: Vector2i, forward: Vector2i, attack_range: int, arc_degrees: float) -> Array[Vector2i]:
 	var out: Array[Vector2i] = []
 	if forward == Vector2i.ZERO:
@@ -352,74 +301,77 @@ func _get_arc_tiles(tile_pos: Vector2i, forward: Vector2i, attack_range: int, ar
 				out.append(tile_pos + offset)
 
 	return out
-	
-func _get_step_direction(from_tile: Vector2i, to_tile: Vector2i) -> Vector2i:
-	var delta := to_tile - from_tile
-	return Vector2i(sign(delta.x), sign(delta.y))
 
+## Returns all tiles in a circle around tile_pos.
+## This only generates candidate tiles; wall blocking is applied separately.
+func _get_circle_tiles(tile_pos: Vector2i, attack_range: int) -> Array[Vector2i]:
+	var out: Array[Vector2i] = []
+
+	for x in range(-attack_range, attack_range + 1):
+		for y in range(-attack_range, attack_range + 1):
+			var offset := Vector2i(x, y)
+			if offset == Vector2i.ZERO:
+				continue
+			if Vector2(offset).length() <= float(attack_range):
+				out.append(tile_pos + offset)
+
+	return out
+
+## Returns all tiles in a square around tile_pos.
+## This only generates candidate tiles; wall blocking is applied separately.
+func _get_square_tiles(tile_pos: Vector2i, attack_range: int) -> Array[Vector2i]:
+	var out: Array[Vector2i] = []
+
+	for x in range(-attack_range, attack_range + 1):
+		for y in range(-attack_range, attack_range + 1):
+			var offset := Vector2i(x, y)
+			if offset == Vector2i.ZERO:
+				continue
+			out.append(tile_pos + offset)
+
+	return out
+
+## Filters a candidate tile list so only tiles with a clear path from origin_tile remain.
+## Obstacle tiles themselves are excluded.
+func _filter_tiles_blocked_by_walls(origin_tile: Vector2i, tiles: Array[Vector2i]) -> Array[Vector2i]:
+	var out: Array[Vector2i] = []
+
+	for tile in tiles:
+		if not Globals.tile_in_bounds(tile):
+			continue
+		if _is_obstacle(tile):
+			continue
+		if _has_clear_attack_path(origin_tile, tile):
+			out.append(tile)
+
+	return out
+
+## Returns true if there is a clear line from from_tile to to_tile with no wall in the way.
+## The destination tile must also be non-obstructed.
+func _has_clear_attack_path(from_tile: Vector2i, to_tile: Vector2i) -> bool:
+	var path := _get_line_path(from_tile, to_tile)
+	if path.is_empty():
+		return false
+
+	# Skip the starting tile.
+	for i in range(1, path.size()):
+		if _is_obstacle(path[i]):
+			return false
+
+	return true
+
+## Returns true if any entity other than self is standing on tile.
 func _has_entity_at_tile(tile: Vector2i) -> bool:
 	for ent in Globals.entity_manager.entities:
+		if ent == self:
+			continue
 		if Globals.get_tile_pos(ent.position) == tile:
 			return true
 	return false
 
+## Returns true if tile contains an obstacle.
 func _is_obstacle(tile: Vector2i) -> bool:
 	var obstacles = Globals.get_map_layer(Globals.active_map, "obstacles")
 	if obstacles == null:
 		return false
 	return obstacles.get_cell_source_id(tile) != -1
-
-func _get_row_tiles(center: Vector2i, step: Vector2i, tile_pos: Vector2i, cursor_tile_pos: Vector2i, width: int) -> Array[Vector2i]:
-	var row: Array[Vector2i] = []
-	if width <= 1:
-		row.append(center)
-		return row
-	var perp := _get_perpendicular(step)
-
-	if width % 2 == 1:
-		var half := width / 2
-		for o in range(-half, half + 1):
-			row.append(center + perp * o)
-		return row
-	# Even width: bias to one side using cursor position.
-	# Example width 2 => offsets [0, 1] or [-1, 0]
-	# Example width 4 => offsets [0, 1, 2, 3] shifted to one side
-	var rel := cursor_tile_pos - tile_pos
-	var side := sign(rel.x * perp.x + rel.y * perp.y) as int
-	if side == 0:
-		side = 1
-	if side > 0:
-		for o in range(0, width):
-			row.append(center + perp * o)
-	else:
-		for o in range(-width + 1, 1):
-			row.append(center + perp * o)
-	return row
-	
-func _row_has_obstacle(row: Array[Vector2i]) -> bool:
-	for tile in row:
-		if _is_obstacle(tile):
-			return true
-	return false
-
-func _row_entity_hits(row: Array[Vector2i]) -> int:
-	var hits := 0
-	for tile in row:
-		if _has_entity_at_tile(tile):
-			hits += 1
-	return hits
-
-func _get_perpendicular(step: Vector2i) -> Vector2i:
-	return Vector2i(-step.y, step.x)
-
-func _get_clamped_target_tile(from_tile: Vector2i, cursor_tile_pos: Vector2i, attack_range: int) -> Vector2i:
-	var delta := cursor_tile_pos - from_tile
-	var distance := maxi(abs(delta.x), abs(delta.y))
-	if distance == 0:
-		return from_tile
-
-	if distance <= attack_range:
-		return cursor_tile_pos
-
-	var step := _get_step_direction(from_tile, cursor_tile_pos)
-	return from_tile + step * attack_range

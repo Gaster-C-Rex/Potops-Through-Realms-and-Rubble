@@ -211,11 +211,11 @@ func walkable(tile_pos: Vector2i, obstacles: TileMapLayer) -> bool:
 func _unhandled_input(event: InputEvent) -> void:
 	if not (event is InputEventMouseButton and event.pressed):
 		return
-
 	var mouse_tile_pos := Globals.get_tile_pos(get_global_mouse_position()) as Vector2i
 	var my_tile_pos := Globals.get_tile_pos(position) as Vector2i
 
 	if event.button_index == MOUSE_BUTTON_RIGHT:
+		print(move_state)
 		match move_state:
 			MoveState.CLICK_TARGETING:
 				hide_spaces()
@@ -267,7 +267,7 @@ func show_ranged_attack_range() -> void:
 ## Displays attack indicators on targeted tiles.
 func _show_targeted_tiles() -> void:
 	for tile in targeted_tiles:
-		var tile_indicator = preload("res://scenes/UI/tile_indicator.tscn").instantiate()
+		var tile_indicator = TILE_INDICATOR_SCENE.instantiate()
 		tile_indicator.set_type("red")
 		tile_indicator.position = Globals.get_tile_center(tile, "tile")
 		Globals.active_map.add_child(tile_indicator)
@@ -398,7 +398,6 @@ func _get_combat_movement_data() -> Dictionary:
 ## Used for previewing movement range regardless of obstacles.
 func _get_tiles_in_movement_radius(center: Vector2i, move_range: int) -> Array[Vector2i]:
 	var tiles: Array[Vector2i] = []
-
 	for x in range(-move_range, move_range + 1):
 		for y in range(-move_range, move_range + 1):
 			var offset := Vector2i(x, y)
@@ -521,3 +520,20 @@ func _build_path_from_came_from(
 		current = previous
 	path.reverse()
 	return path
+
+
+func _on_change_attack_button_pressed() -> void:
+	if current_attack_mode == "ranged":
+		current_attack_mode = "melee"
+	else:
+		current_attack_mode = "ranged"
+	Globals.send_to_game_log("Switched attack mode to " + current_attack_mode)
+
+func _on_pierce_spin_box_value_changed(value: float) -> void:
+	melee_attack_pierce = value
+	ranged_attack_pierce = value
+
+
+func _on_width_spin_box_value_changed(value: float) -> void:
+	ranged_range = value
+	melee_range = value

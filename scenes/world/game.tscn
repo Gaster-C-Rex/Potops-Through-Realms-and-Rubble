@@ -16,54 +16,144 @@ script = ExtResource("1_3iwug")
 unique_name_in_owner = true
 script = ExtResource("2_sarsd")
 
-[node name="NextMapButton" type="Button" parent="UI" unique_id=1594070851]
+[node name="DebugMenu" type="Control" parent="UI" unique_id=341288224]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="NextMapButton" type="Button" parent="UI/DebugMenu" unique_id=1594070851]
 unique_name_in_owner = true
+layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -121.0
-offset_top = 11.0
-offset_right = -17.0
-offset_bottom = 45.0
+offset_left = -126.0
+offset_top = 25.0
+offset_right = -22.0
+offset_bottom = 59.0
 grow_horizontal = 0
 text = "Next Map"
 
-[node name="EndTurnButton" type="Button" parent="UI" unique_id=224258908]
+[node name="EndTurnButton" type="Button" parent="UI/DebugMenu" unique_id=224258908]
 unique_name_in_owner = true
+layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -121.0
-offset_top = 48.0
-offset_right = -17.0
-offset_bottom = 82.0
+offset_left = -126.0
+offset_top = 62.0
+offset_right = -22.0
+offset_bottom = 96.0
 grow_horizontal = 0
 text = "End Turn"
 
-[node name="EnterCombatButton" type="Button" parent="UI" unique_id=1743636376]
+[node name="EnterCombatButton" type="Button" parent="UI/DebugMenu" unique_id=1743636376]
 unique_name_in_owner = true
+layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -121.0
-offset_top = 85.0
-offset_right = -17.0
-offset_bottom = 119.0
+offset_left = -126.0
+offset_top = 99.0
+offset_right = -22.0
+offset_bottom = 133.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 9
 text = "Toggle Combat Mode"
 
-[node name="LogPanel" type="PanelContainer" parent="UI" unique_id=238370643]
+[node name="ZoomInButton" type="Button" parent="UI/DebugMenu" unique_id=1568628300]
 unique_name_in_owner = true
-anchors_preset = 12
-anchor_top = 1.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -126.0
+offset_top = 136.0
+offset_right = -22.0
+offset_bottom = 170.0
+grow_horizontal = 0
+text = "Zoom In"
+
+[node name="ZoomOutButton" type="Button" parent="UI/DebugMenu" unique_id=1853769095]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -126.0
+offset_top = 174.0
+offset_right = -22.0
+offset_bottom = 208.0
+grow_horizontal = 0
+text = "Zoom Out"
+
+[node name="CycleAttackButton" type="Button" parent="UI/DebugMenu" unique_id=615771769]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -126.0
+offset_top = 213.0
+offset_right = -22.0
+offset_bottom = 247.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 10
+text = "Cycle Attack Type"
+
+[node name="ChangeAttackButton" type="Button" parent="UI/DebugMenu" unique_id=2137212267]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -126.0
+offset_top = 252.0
+offset_right = -22.0
+offset_bottom = 286.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 9
+text = "Switch Melee/Ranged"
+
+[node name="PierceSpinBox" type="SpinBox" parent="UI/DebugMenu" unique_id=1171135298]
+layout_mode = 0
+offset_left = 1154.0
+offset_top = 293.0
+offset_right = 1259.0
+offset_bottom = 324.0
+max_value = 10.0
+value = 1.0
+rounded = true
+prefix = "Pierce:"
+
+[node name="WidthSpinBox" type="SpinBox" parent="UI/DebugMenu" unique_id=517980982]
+layout_mode = 0
+offset_left = 1154.0
+offset_top = 331.0
+offset_right = 1259.0
+offset_bottom = 362.0
+min_value = 1.0
+max_value = 20.0
+value = 4.0
+rounded = true
+prefix = "Range:"
+
+[node name="LogPanel" type="PanelContainer" parent="UI/DebugMenu" unique_id=238370643]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.86700004
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -76.0
+offset_top = -0.24005127
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Log" type="RichTextLabel" parent="UI/LogPanel" unique_id=1262255118]
+[node name="Log" type="RichTextLabel" parent="UI/DebugMenu/LogPanel" unique_id=1262255118]
 unique_name_in_owner = true
 layout_mode = 2
 bbcode_enabled = true
@@ -173,43 +263,6 @@ layout_mode = 2
 size_flags_vertical = 8
 text = "Back to Pause Menu"
 
-[node name="ZoomInButton" type="Button" parent="UI" unique_id=1568628300]
-unique_name_in_owner = true
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -121.0
-offset_top = 122.0
-offset_right = -17.0
-offset_bottom = 156.0
-grow_horizontal = 0
-text = "Zoom In"
-
-[node name="ZoomOutButton" type="Button" parent="UI" unique_id=1853769095]
-unique_name_in_owner = true
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -121.0
-offset_top = 160.0
-offset_right = -17.0
-offset_bottom = 194.0
-grow_horizontal = 0
-text = "Zoom Out"
-
-[node name="CycleAttackButton" type="Button" parent="UI" unique_id=615771769]
-unique_name_in_owner = true
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -121.0
-offset_top = 199.0
-offset_right = -17.0
-offset_bottom = 233.0
-grow_horizontal = 0
-theme_override_font_sizes/font_size = 10
-text = "Cycle Attack Type"
-
 [node name="Potop" parent="." unique_id=273897724 instance=ExtResource("2_r5nxa")]
 position = Vector2(32, 32)
 
@@ -226,13 +279,16 @@ visible = false
 unique_name_in_owner = true
 script = ExtResource("7_3gx7t")
 
-[connection signal="pressed" from="UI/NextMapButton" to="." method="_on_next_map_button_pressed"]
-[connection signal="pressed" from="UI/EndTurnButton" to="." method="_on_end_turn_button_pressed"]
-[connection signal="pressed" from="UI/EnterCombatButton" to="." method="_on_enter_combat_button_pressed"]
+[connection signal="pressed" from="UI/DebugMenu/NextMapButton" to="." method="_on_next_map_button_pressed"]
+[connection signal="pressed" from="UI/DebugMenu/EndTurnButton" to="." method="_on_end_turn_button_pressed"]
+[connection signal="pressed" from="UI/DebugMenu/EnterCombatButton" to="." method="_on_enter_combat_button_pressed"]
+[connection signal="pressed" from="UI/DebugMenu/ZoomInButton" to="Potop/Camera2D" method="_on_zoom_in_button_pressed"]
+[connection signal="pressed" from="UI/DebugMenu/ZoomOutButton" to="Potop/Camera2D" method="_on_zoom_out_button_pressed"]
+[connection signal="pressed" from="UI/DebugMenu/CycleAttackButton" to="Potop" method="_on_cycle_attack_button_pressed"]
+[connection signal="pressed" from="UI/DebugMenu/ChangeAttackButton" to="Potop" method="_on_change_attack_button_pressed"]
+[connection signal="value_changed" from="UI/DebugMenu/PierceSpinBox" to="Potop" method="_on_pierce_spin_box_value_changed"]
+[connection signal="value_changed" from="UI/DebugMenu/WidthSpinBox" to="Potop" method="_on_width_spin_box_value_changed"]
 [connection signal="pressed" from="UI/PauseMenu/MarginContainer/VBoxContainer/ResumeButton" to="UI" method="_on_resume_button_pressed"]
 [connection signal="pressed" from="UI/PauseMenu/MarginContainer/VBoxContainer/SettingsButton" to="UI" method="_on_settings_button_pressed"]
 [connection signal="pressed" from="UI/PauseMenu/MarginContainer/VBoxContainer/QuitButton" to="UI" method="_on_quit_button_pressed"]
 [connection signal="pressed" from="UI/SettingsMenu/MarginContainer/VBoxContainer/SettingsBackButton" to="UI" method="_on_settings_back_button_pressed"]
-[connection signal="pressed" from="UI/ZoomInButton" to="Potop/Camera2D" method="_on_zoom_in_button_pressed"]
-[connection signal="pressed" from="UI/ZoomOutButton" to="Potop/Camera2D" method="_on_zoom_out_button_pressed"]
-[connection signal="pressed" from="UI/CycleAttackButton" to="Potop" method="_on_cycle_attack_button_pressed"]
