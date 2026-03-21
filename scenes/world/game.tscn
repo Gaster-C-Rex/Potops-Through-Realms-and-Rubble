@@ -1,12 +1,103 @@
 [gd_scene format=3 uid="uid://wtc55pngwhd0"]
 
 [ext_resource type="Script" uid="uid://bcknmol43ump1" path="res://scenes/world/game.gd" id="1_3iwug"]
-[ext_resource type="PackedScene" uid="uid://b1queastcser2" path="res://scenes/world/Potop.tscn" id="2_r5nxa"]
 [ext_resource type="Script" uid="uid://ciiivo62g56y7" path="res://scenes/UI/in_game_ui.gd" id="2_sarsd"]
 [ext_resource type="Texture2D" uid="uid://783i2c5tj2cx" path="res://assets/sprites/Board.png" id="3_3gx7t"]
 [ext_resource type="Script" uid="uid://dccfxbvx8jyqf" path="res://scenes/world/camera_controller.gd" id="3_h30v7"]
 [ext_resource type="PackedScene" uid="uid://bs5ijyud5m2xa" path="res://scenes/UI/tile_selector.tscn" id="4_r5nxa"]
+[ext_resource type="Theme" uid="uid://q8gaqt1o66eb" path="res://assets/resources/default_theme.tres" id="4_wgl2g"]
+[ext_resource type="Texture2D" uid="uid://clqu8taeiktht" path="res://assets/sprites/players/potop_normal.webp" id="5_wmpba"]
+[ext_resource type="Texture2D" uid="uid://db46p1w6pych8" path="res://assets/UI/texture-button-melee.webp" id="6_wmpba"]
 [ext_resource type="Script" uid="uid://b0d7who5nu8id" path="res://scenes/world/entity_manager.gd" id="7_3gx7t"]
+[ext_resource type="Texture2D" uid="uid://dv2bwq5yh5y1q" path="res://assets/UI/texture-button-range.webp" id="7_6xs6q"]
+[ext_resource type="Texture2D" uid="uid://dult75braurl3" path="res://assets/UI/texture-button-movement.webp" id="8_6xs6q"]
+[ext_resource type="Texture2D" uid="uid://cdoxcfstsl243" path="res://assets/UI/texture-button-defense.webp" id="9_ngoy0"]
+[ext_resource type="Texture2D" uid="uid://cm0ht7rlplfj0" path="res://assets/UI/texture-button-heal.webp" id="10_rxlek"]
+[ext_resource type="Texture2D" uid="uid://bibhvkm3v2c6p" path="res://assets/UI/texture-button-special.webp" id="11_isy5x"]
+
+[sub_resource type="Gradient" id="Gradient_a7xm8"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6xs6q"]
+gradient = SubResource("Gradient_a7xm8")
+
+[sub_resource type="Gradient" id="Gradient_2ojsr"]
+colors = PackedColorArray(0, 1, 0, 1, 0, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_taqjv"]
+gradient = SubResource("Gradient_2ojsr")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6xs6q"]
+atlas = ExtResource("6_wmpba")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_taqjv"]
+atlas = ExtResource("6_wmpba")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ngoy0"]
+atlas = ExtResource("6_wmpba")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmpba"]
+atlas = ExtResource("7_6xs6q")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxlek"]
+atlas = ExtResource("7_6xs6q")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_isy5x"]
+atlas = ExtResource("7_6xs6q")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vahl5"]
+atlas = ExtResource("8_6xs6q")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4s7b6"]
+atlas = ExtResource("8_6xs6q")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbvxc"]
+atlas = ExtResource("8_6xs6q")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7wnx1"]
+atlas = ExtResource("9_ngoy0")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xrx25"]
+atlas = ExtResource("9_ngoy0")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5i6h"]
+atlas = ExtResource("9_ngoy0")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lgd01"]
+atlas = ExtResource("10_rxlek")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hwlp6"]
+atlas = ExtResource("10_rxlek")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mdoo3"]
+atlas = ExtResource("10_rxlek")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dl66j"]
+atlas = ExtResource("11_isy5x")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_db7vu"]
+atlas = ExtResource("11_isy5x")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_db17m"]
+atlas = ExtResource("11_isy5x")
+region = Rect2(128, 0, 128, 128)
 
 [node name="Game" type="Node2D" unique_id=798327649]
 y_sort_enabled = true
@@ -17,6 +108,7 @@ unique_name_in_owner = true
 script = ExtResource("2_sarsd")
 
 [node name="DebugMenu" type="Control" parent="UI" unique_id=341288224]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -263,13 +355,392 @@ layout_mode = 2
 size_flags_vertical = 8
 text = "Back to Pause Menu"
 
-[node name="Potop" parent="." unique_id=273897724 instance=ExtResource("2_r5nxa")]
-position = Vector2(32, 32)
-
-[node name="Camera2D" type="Camera2D" parent="Potop" unique_id=751529150]
+[node name="CombatUI" type="Control" parent="UI" unique_id=542077784]
 unique_name_in_owner = true
-position_smoothing_enabled = true
-script = ExtResource("3_h30v7")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/CombatUI" unique_id=1034346678]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.79200006
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -28.240051
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+theme = ExtResource("4_wgl2g")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/CombatUI/PanelContainer" unique_id=487908043]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/CombatUI/PanelContainer/MarginContainer" unique_id=734745391]
+layout_mode = 2
+vertical_scroll_mode = 0
+
+[node name="ButtonHBox" type="HBoxContainer" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer" unique_id=1613495553]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="PortraitVBox" type="VBoxContainer" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox" unique_id=1076407715]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 2
+alignment = 1
+
+[node name="SelectedCharacter" type="TextureRect" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/PortraitVBox" unique_id=61831374]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+texture = ExtResource("5_wmpba")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="UIHealthBar" type="TextureProgressBar" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/PortraitVBox" unique_id=908686387]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+value = 50.0
+nine_patch_stretch = true
+texture_under = SubResource("GradientTexture2D_6xs6q")
+texture_progress = SubResource("GradientTexture2D_taqjv")
+
+[node name="MeleeVBox" type="VBoxContainer" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox" unique_id=258395277]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MeleeButton" type="TextureButton" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/MeleeVBox" unique_id=1861681510]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = SubResource("AtlasTexture_6xs6q")
+texture_pressed = SubResource("AtlasTexture_taqjv")
+texture_hover = SubResource("AtlasTexture_ngoy0")
+stretch_mode = 5
+
+[node name="MeleeLabel" type="Label" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/MeleeVBox" unique_id=1697778262]
+layout_mode = 2
+mouse_filter = 1
+text = "Melee Attack"
+horizontal_alignment = 1
+
+[node name="MeleeSpacer" type="Control" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/MeleeVBox" unique_id=1363223646]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="MeleeAttackCount" type="RichTextLabel" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/MeleeVBox/MeleeSpacer" unique_id=1806249041]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -65.5
+offset_top = -168.0
+offset_right = 62.5
+offset_bottom = -31.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[outline_size=6][outline_color=black][color=green]2
+[/color][/outline_color][/outline_size]"
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RangedVBox" type="VBoxContainer" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox" unique_id=87476472]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RangedButton" type="TextureButton" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/RangedVBox" unique_id=1493154727]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = SubResource("AtlasTexture_wmpba")
+texture_pressed = SubResource("AtlasTexture_rxlek")
+texture_hover = SubResource("AtlasTexture_isy5x")
+stretch_mode = 5
+
+[node name="RangedLabel" type="Label" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/RangedVBox" unique_id=793482443]
+layout_mode = 2
+mouse_filter = 1
+text = "Ranged Attack"
+horizontal_alignment = 1
+
+[node name="RangedSpacer" type="Control" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/RangedVBox" unique_id=956042773]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="RangedAttackCount" type="RichTextLabel" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/RangedVBox/RangedSpacer" unique_id=720724903]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -65.5
+offset_top = -168.0
+offset_right = 62.5
+offset_bottom = -31.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "2"
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MoveVBox" type="VBoxContainer" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox" unique_id=1482782019]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MoveButton" type="TextureButton" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/MoveVBox" unique_id=1121615473]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = SubResource("AtlasTexture_vahl5")
+texture_pressed = SubResource("AtlasTexture_4s7b6")
+texture_hover = SubResource("AtlasTexture_cbvxc")
+stretch_mode = 5
+
+[node name="MoveLabel" type="Label" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/MoveVBox" unique_id=1818336038]
+layout_mode = 2
+mouse_filter = 1
+text = "Move"
+horizontal_alignment = 1
+
+[node name="MoveSpacer" type="Control" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/MoveVBox" unique_id=1579961695]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="MoveCount" type="RichTextLabel" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/MoveVBox/MoveSpacer" unique_id=146933372]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -65.5
+offset_top = -168.0
+offset_right = 62.5
+offset_bottom = -31.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "4"
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DefendVBox" type="VBoxContainer" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox" unique_id=2116490236]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DefendButton" type="TextureButton" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/DefendVBox" unique_id=123497427]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = SubResource("AtlasTexture_7wnx1")
+texture_pressed = SubResource("AtlasTexture_xrx25")
+texture_hover = SubResource("AtlasTexture_b5i6h")
+stretch_mode = 5
+
+[node name="DefendLabel" type="Label" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/DefendVBox" unique_id=1651707208]
+layout_mode = 2
+mouse_filter = 1
+text = "Defend"
+horizontal_alignment = 1
+
+[node name="DefendSpacer" type="Control" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/DefendVBox" unique_id=89864144]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="DefendCount" type="RichTextLabel" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/DefendVBox/DefendSpacer" unique_id=1977473596]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -65.5
+offset_top = -168.0
+offset_right = 62.5
+offset_bottom = -31.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "2"
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealVBox" type="VBoxContainer" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox" unique_id=22005622]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HealButton" type="TextureButton" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/HealVBox" unique_id=495187377]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = SubResource("AtlasTexture_lgd01")
+texture_pressed = SubResource("AtlasTexture_hwlp6")
+texture_hover = SubResource("AtlasTexture_mdoo3")
+stretch_mode = 5
+
+[node name="HealLabel" type="Label" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/HealVBox" unique_id=1320259216]
+layout_mode = 2
+mouse_filter = 1
+text = "Heal"
+horizontal_alignment = 1
+
+[node name="HealSpacer" type="Control" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/HealVBox" unique_id=523038805]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="HealCount" type="RichTextLabel" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/HealVBox/HealSpacer" unique_id=1271280177]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -65.5
+offset_top = -168.0
+offset_right = 62.5
+offset_bottom = -31.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "2"
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpecialVBox" type="VBoxContainer" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox" unique_id=1265756949]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SpecialButton" type="TextureButton" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/SpecialVBox" unique_id=28116650]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = SubResource("AtlasTexture_dl66j")
+texture_pressed = SubResource("AtlasTexture_db7vu")
+texture_hover = SubResource("AtlasTexture_db17m")
+stretch_mode = 5
+
+[node name="SpecialLabel" type="Label" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/SpecialVBox" unique_id=911302057]
+layout_mode = 2
+mouse_filter = 1
+text = "Special"
+horizontal_alignment = 1
+
+[node name="SpecialSpacer" type="Control" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/SpecialVBox" unique_id=1095305352]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="SpecialCount" type="RichTextLabel" parent="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/SpecialVBox/SpecialSpacer" unique_id=1813365857]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -65.5
+offset_top = -168.0
+offset_right = 62.5
+offset_bottom = -31.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "1"
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/CombatUI" unique_id=1840940797]
+layout_mode = 0
+offset_left = 1053.0
+offset_top = 361.0
+offset_right = 1270.0
+offset_bottom = 528.0
+
+[node name="EndTurnButton" type="Button" parent="UI/CombatUI/VBoxContainer" unique_id=362875221]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+text = "End Turn"
+
+[node name="NextPlayerButton" type="Button" parent="UI/CombatUI/VBoxContainer" unique_id=1015656602]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+text = "Next Player"
+
+[node name="GameOverMenu" type="Control" parent="UI" unique_id=382677614]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/GameOverMenu" unique_id=253694996]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/GameOverMenu/PanelContainer" unique_id=162248469]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/GameOverMenu/PanelContainer/VBoxContainer" unique_id=1687308746]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 128
+bbcode_enabled = true
+text = "[color=red]Game Over[/color]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartButton" type="Button" parent="UI/GameOverMenu/PanelContainer/VBoxContainer" unique_id=191445546]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Return to Main Menu"
+
+[node name="RespawnButton" type="Button" parent="UI/GameOverMenu/PanelContainer/VBoxContainer" unique_id=2070628148]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "GET REVENGE"
+
+[node name="ToggleUIButton" type="Button" parent="UI" unique_id=1693095234]
+unique_name_in_owner = true
+visible = false
+offset_left = 1019.0
+offset_top = 6.0
+offset_right = 1274.0
+offset_bottom = 59.0
+theme_override_font_sizes/font_size = 32
+text = "Hide/Show HUD"
 
 [node name="TileSelector" parent="." unique_id=717082672 instance=ExtResource("4_r5nxa")]
 unique_name_in_owner = true
@@ -279,16 +750,25 @@ visible = false
 unique_name_in_owner = true
 script = ExtResource("7_3gx7t")
 
+[node name="PlayerCamera" type="Camera2D" parent="." unique_id=679661940]
+unique_name_in_owner = true
+script = ExtResource("3_h30v7")
+
 [connection signal="pressed" from="UI/DebugMenu/NextMapButton" to="." method="_on_next_map_button_pressed"]
 [connection signal="pressed" from="UI/DebugMenu/EndTurnButton" to="." method="_on_end_turn_button_pressed"]
 [connection signal="pressed" from="UI/DebugMenu/EnterCombatButton" to="." method="_on_enter_combat_button_pressed"]
-[connection signal="pressed" from="UI/DebugMenu/ZoomInButton" to="Potop/Camera2D" method="_on_zoom_in_button_pressed"]
-[connection signal="pressed" from="UI/DebugMenu/ZoomOutButton" to="Potop/Camera2D" method="_on_zoom_out_button_pressed"]
-[connection signal="pressed" from="UI/DebugMenu/CycleAttackButton" to="Potop" method="_on_cycle_attack_button_pressed"]
-[connection signal="pressed" from="UI/DebugMenu/ChangeAttackButton" to="Potop" method="_on_change_attack_button_pressed"]
-[connection signal="value_changed" from="UI/DebugMenu/PierceSpinBox" to="Potop" method="_on_pierce_spin_box_value_changed"]
-[connection signal="value_changed" from="UI/DebugMenu/WidthSpinBox" to="Potop" method="_on_width_spin_box_value_changed"]
 [connection signal="pressed" from="UI/PauseMenu/MarginContainer/VBoxContainer/ResumeButton" to="UI" method="_on_resume_button_pressed"]
 [connection signal="pressed" from="UI/PauseMenu/MarginContainer/VBoxContainer/SettingsButton" to="UI" method="_on_settings_button_pressed"]
 [connection signal="pressed" from="UI/PauseMenu/MarginContainer/VBoxContainer/QuitButton" to="UI" method="_on_quit_button_pressed"]
 [connection signal="pressed" from="UI/SettingsMenu/MarginContainer/VBoxContainer/SettingsBackButton" to="UI" method="_on_settings_back_button_pressed"]
+[connection signal="pressed" from="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/MeleeVBox/MeleeButton" to="EntityManager" method="_on_melee_button_pressed"]
+[connection signal="pressed" from="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/RangedVBox/RangedButton" to="EntityManager" method="_on_ranged_button_pressed"]
+[connection signal="pressed" from="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/MoveVBox/MoveButton" to="EntityManager" method="_on_move_button_pressed"]
+[connection signal="pressed" from="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/DefendVBox/DefendButton" to="EntityManager" method="_on_defend_button_pressed"]
+[connection signal="pressed" from="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/HealVBox/HealButton" to="EntityManager" method="_on_heal_button_pressed"]
+[connection signal="pressed" from="UI/CombatUI/PanelContainer/MarginContainer/ScrollContainer/ButtonHBox/SpecialVBox/SpecialButton" to="EntityManager" method="_on_special_button_pressed"]
+[connection signal="pressed" from="UI/CombatUI/VBoxContainer/EndTurnButton" to="EntityManager" method="_on_end_turn_button_pressed"]
+[connection signal="pressed" from="UI/CombatUI/VBoxContainer/NextPlayerButton" to="EntityManager" method="_on_next_player_button_pressed"]
+[connection signal="pressed" from="UI/GameOverMenu/PanelContainer/VBoxContainer/RestartButton" to="UI" method="_on_restart_button_pressed"]
+[connection signal="pressed" from="UI/GameOverMenu/PanelContainer/VBoxContainer/RespawnButton" to="EntityManager" method="_on_respawn_button_pressed"]
+[connection signal="pressed" from="UI/ToggleUIButton" to="EntityManager" method="_on_toggle_ui_pressed"]

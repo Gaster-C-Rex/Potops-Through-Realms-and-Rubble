@@ -7,8 +7,10 @@ const columns = 6 # The godot grid container leaves a lot to be desired
 func _ready() -> void:
 	var count = 0
 	var active_hbox: HBoxContainer
-	if !Globals.load_maps():
-		Globals.send_to_game_log("\nThere are no valid maps in " + OS.get_user_data_dir() + "!")
+	if !Globals.load_maps(Globals.USER_MAP_DIR):
+		Globals.send_to_game_log("There are no valid maps in " + OS.get_user_data_dir() + "!")
+	if !Globals.load_maps(Globals.RES_MAP_DIR):
+		Globals.send_to_game_log("There are no default maps!! This is not good!!")
 	for map: Node2D in Globals.levels:
 		if count % columns == 0:
 			active_hbox = HBoxContainer.new()

@@ -8,12 +8,25 @@ var active_map_id:int # What index in the Globals.levels array it is
 
 func _ready() -> void:
 	Globals.game_log = %Log
+	Globals.combat_ui = %CombatUI # This is so stupid, scenes should be able to
+	Globals.melee_attack_count = %MeleeAttackCount
+	Globals.ranged_attack_count = %RangedAttackCount
+	Globals.move_count = %MoveCount
+	Globals.defend_count = %DefendCount
+	Globals.heal_count = %HealCount
+	Globals.special_count = %SpecialCount
+	Globals.player_health_bar = %UIHealthBar
+	Globals.active_camera = %PlayerCamera
+	Globals.tile_selector = %TileSelector
 	set_map(Globals.active_map_id)
 
 func _on_next_map_button_pressed() -> void:
 	next_map()
 
 func set_map(id:int):
+	for ent in Globals.entity_manager.entities:
+		ent.queue_free()
+	Globals.entity_manager.entities.clear()
 	var map: Variant = Globals.levels[id]
 	if Globals.active_map:
 		remove_child(Globals.active_map) # Don't queue free them! Maps are always loaded.
@@ -22,7 +35,7 @@ func set_map(id:int):
 	active_map_id = id
 	if !map.is_node_ready():
 		await map.ready
-	%Camera2D.apply_limits(Globals.calculate_map_pixel_rect(map))
+	%PlayerCamera.apply_limits(Globals.calculate_map_pixel_rect(map))
 	%EntityManager.spawn_entities()
 
 func next_map():
