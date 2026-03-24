@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvhldadmvlu6"
-path="res://.godot/imported/ghost.webp-3ecb3e5cff5eff8ed6824979c18fe8ba.ctex"
+uid="uid://cxs3p31w4gbd1"
+path="res://.godot/imported/skuttershot.webp-e4b34a29b84c4395eaa1445a00564278.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemies/ghost.webp"
-dest_files=["res://.godot/imported/ghost.webp-3ecb3e5cff5eff8ed6824979c18fe8ba.ctex"]
+source_file="res://assets/sprites/enemies/skuttershot.webp"
+dest_files=["res://.godot/imported/skuttershot.webp-e4b34a29b84c4395eaa1445a00564278.ctex"]
 
 [params]
 

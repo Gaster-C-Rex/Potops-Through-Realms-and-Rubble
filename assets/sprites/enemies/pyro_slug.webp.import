@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7qj318o01son"
-path="res://.godot/imported/pepperjelly.webp-0d4e75f9301db21ab3bb10cbf11c4c3b.ctex"
+uid="uid://dxhe8u0y4j7hm"
+path="res://.godot/imported/pyro_slug.webp-da81196625d475a3c61d2ba248a859b4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/maps/tiles/pepperjelly.webp"
-dest_files=["res://.godot/imported/pepperjelly.webp-0d4e75f9301db21ab3bb10cbf11c4c3b.ctex"]
+source_file="res://assets/sprites/enemies/pyro_slug.webp"
+dest_files=["res://.godot/imported/pyro_slug.webp-da81196625d475a3c61d2ba248a859b4.ctex"]
 
 [params]
 

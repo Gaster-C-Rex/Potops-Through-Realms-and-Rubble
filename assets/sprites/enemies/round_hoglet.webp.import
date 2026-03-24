@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c450oywdlv0ya"
-path="res://.godot/imported/glowcrush_sheller.webp-fc2c8967d8ef50c81ef4c969dfa80a09.ctex"
+uid="uid://bx5tx0ea00eif"
+path="res://.godot/imported/round_hoglet.webp-39d1d1de0134fa136237bb976fa1e30f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/maps/tiles/glowcrush_sheller.webp"
-dest_files=["res://.godot/imported/glowcrush_sheller.webp-fc2c8967d8ef50c81ef4c969dfa80a09.ctex"]
+source_file="res://assets/sprites/enemies/round_hoglet.webp"
+dest_files=["res://.godot/imported/round_hoglet.webp-39d1d1de0134fa136237bb976fa1e30f.ctex"]
 
 [params]
 

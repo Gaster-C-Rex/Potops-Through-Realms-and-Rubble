@@ -8,30 +8,35 @@ func initialize(enemy_name: String) -> void:
 	name = enemy_name
 
 	match enemy_name:
-		"fireworm":
+		"pyroslug":
 			$Sprite2D.texture = preload("uid://dxhe8u0y4j7hm")
 			load_melee_archetype()
 			sight_range = 6
 
-		"crawler":
+		"round_hoglet":
 			$Sprite2D.texture = preload("uid://bx5tx0ea00eif")
 			load_melee_archetype()
-			sight_range = 7
+			sight_range = 6
 
-		"glowcrushsheller":
+		"glowcrush_sheller":
 			$Sprite2D.texture = preload("uid://326o7hqogisv")
 			load_defender_archetype()
 			sight_range = 6
 
-		"ghost":
+		"drafty_wizor":
 			$Sprite2D.texture = preload("uid://dvhldadmvlu6")
 			load_ranged_archetype()
-			sight_range = 10
+			sight_range = 6
 
 		"pepperjelly":
 			$Sprite2D.texture = preload("uid://bd7mhgqyerhy5")
 			load_healer_archetype()
-			sight_range = 8
+			sight_range = 6
+		
+		"skuttershot":
+			$Sprite2D.texture = preload("uid://cxs3p31w4gbd1")
+			load_ranged_archetype()
+			sight_range = 6
 
 ## Advances queued movement and sliding for the enemy each physics frame.
 func _physics_process(delta: float) -> void:
