@@ -32,5 +32,10 @@ func play_bg_music(path: String):
 	background_music.stream = load_music_data(path)
 	background_music.play()
 
+##Stops background music
 func stop_bg_music() -> void:
 	background_music.stop()
+
+##Loops background music
+func _on_background_music_finished() -> void:
+	background_music.play()
