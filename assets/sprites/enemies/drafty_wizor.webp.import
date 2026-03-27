@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bx5tx0ea00eif"
-path="res://.godot/imported/crawler.webp-aaff10adec6dbc92a379d94fe10c9742.ctex"
+uid="uid://dvhldadmvlu6"
+path="res://.godot/imported/drafty_wizor.webp-110d4b41fdd9bb510280d3b78ae0312d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemies/crawler.webp"
-dest_files=["res://.godot/imported/crawler.webp-aaff10adec6dbc92a379d94fe10c9742.ctex"]
+source_file="res://assets/sprites/enemies/drafty_wizor.webp"
+dest_files=["res://.godot/imported/drafty_wizor.webp-110d4b41fdd9bb510280d3b78ae0312d.ctex"]
 
 [params]
 

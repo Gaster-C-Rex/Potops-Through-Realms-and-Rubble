@@ -4,13 +4,14 @@ extends Node
 #region Data
 
 var entity_lookup = {
-	1: [preload("res://scenes/world/enemy.tscn"), ["fireworm"], "fireworm"],
-	2: [preload("res://scenes/world/enemy.tscn"), ["crawler"], "crawler"],
-	3: [preload("res://scenes/world/enemy.tscn"), ["glowcrushsheller"], "glowcrushsheller"],
-	4: [preload("res://scenes/world/enemy.tscn"), ["ghost"], "ghost"],
+	1: [preload("res://scenes/world/enemy.tscn"), ["pyroslug"], "pyroslug"],
+	2: [preload("res://scenes/world/enemy.tscn"), ["round_hoglet"], "round_hoglet"],
+	3: [preload("res://scenes/world/enemy.tscn"), ["glowcrush_sheller"], "glowcrush_sheller"],
+	4: [preload("res://scenes/world/enemy.tscn"), ["drafty_wizor"], "drafty_wizor"],
 	5: [preload("res://scenes/world/enemy.tscn"), ["pepperjelly"], "pepperjelly"],
-	9: [preload("res://scenes/world/item.tscn"), ["item"], "item"],
-	10: [preload("res://scenes/world/shop.tscn"), ["shop"], "shop"],
+	6: [preload("res://scenes/world/enemy.tscn"), ["skuttershot"], "skuttershot"],
+	99: [preload("res://scenes/world/item.tscn"), ["item"], "item"], # If you implement these,
+	100: [preload("res://scenes/world/shop.tscn"), ["shop"], "shop"], # Change the numbers to be correct!!!
 }
 
 var entities := []
