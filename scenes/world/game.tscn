@@ -754,6 +754,8 @@ script = ExtResource("7_3gx7t")
 unique_name_in_owner = true
 script = ExtResource("3_h30v7")
 
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=642072797]
+
 [connection signal="pressed" from="UI/DebugMenu/NextMapButton" to="." method="_on_next_map_button_pressed"]
 [connection signal="pressed" from="UI/DebugMenu/EndTurnButton" to="." method="_on_end_turn_button_pressed"]
 [connection signal="pressed" from="UI/DebugMenu/EnterCombatButton" to="." method="_on_enter_combat_button_pressed"]

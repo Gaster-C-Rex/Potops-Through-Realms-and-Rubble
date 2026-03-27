@@ -5,6 +5,13 @@ const TILE_SIZE = 64
 const USER_MAP_DIR = "user://maps"
 const RES_MAP_DIR = "res://assets/maps"
 const ENEMY_DIR = "user://enemies"
+const AUDIO_DIR = "user://audio"
+
+const SONG_BATTLE := "Battle (Loop).wav"
+const SONG_CHAR_SELECT := "Character_Select(Loop).wav"
+const SONG_CONSTRUCT_SITE := "Construction-Site.wav"
+const SONG_EXPLORE := "Explorationv2 (Loop).wav"
+
 
 enum Popup_Option {
 	MELEE_ATTACK,
@@ -35,12 +42,15 @@ var levels := []
 var items := []
 var potops := []
 var enemies := {}
+var audio := {}
 
 ## Initializes user folders, loads enemy data, and sets the minimum window size.
 func _ready() -> void:
 	ensure_user_folders()
 	load_enemies()
 	print(enemies)
+	load_audio()
+	print(audio)
 	get_window().min_size = Vector2i(720, 480)
 
 ## Ensures required user data folders exist.
@@ -48,7 +58,8 @@ func ensure_user_folders() -> void:
 	var folders = [
 		"user://maps",
 		"user://maps/tiles",
-		"user://enemies"
+		"user://enemies",
+		"user://audio"
 	]
 
 	for folder in folders:
@@ -123,7 +134,7 @@ func load_enemies() -> bool:
 			var data = parse_data(FileAccess.get_file_as_string(full_path))
 
 			if data == null:
-				print("Please add data!!!")
+				print("Please add data to ", file_name)
 				return false
 
 			if typeof(data) != TYPE_DICTIONARY:
@@ -131,10 +142,35 @@ func load_enemies() -> bool:
 				return false
 
 			if data.keys().is_empty():
-				print("Please add data!!!")
+				print("Please add data to ", file_name)
 				return false
 
 			enemies[file_name] = data
+
+		file_name = dir.get_next()
+
+	dir.list_dir_end()
+	return true
+
+## Loads audio files from the audio directory.
+func load_audio() -> bool:
+	print("Scanning for audio files...")
+
+	var dir := DirAccess.open(AUDIO_DIR)
+
+	if dir == null:
+		print("Failed to open directory: ", AUDIO_DIR)
+		print("No audio detected! Add audio files at: ", OS.get_user_data_dir(), "/audio")
+		return false
+
+	dir.list_dir_begin()
+	var file_name := dir.get_next()
+
+	while file_name != "":
+		if not dir.current_is_dir() and (file_name.to_lower().ends_with(".ogg")
+		or file_name.to_lower().ends_with(".mp3") or file_name.to_lower().ends_with(".wav")):
+				var full_path := AUDIO_DIR + "/" + file_name
+				audio[file_name] = full_path
 
 		file_name = dir.get_next()
 
@@ -221,3 +257,7 @@ func start_game() -> void:
 ## Returns to the main menu scene.
 func exit_to_main_menu() -> void:
 	get_tree().change_scene_to_file("res://scenes/UI/main_menu.tscn")
+
+##
+func get_audio(audio_name: StringName):
+	return audio[audio_name]

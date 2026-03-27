@@ -20,6 +20,7 @@ func _on_map_button_pressed() -> void:
 func _on_map_chosen(id):
 	Globals.active_map_id = id
 	switch_menu("char")
+	AudioController.play_bg_music(Globals.get_audio(Globals.SONG_CHAR_SELECT))
 
 func switch_menu(menu_name: String) -> void:
 	for menu in menues.keys():
@@ -33,6 +34,7 @@ func _on_start_game_button_pressed() -> void:
 
 func _on_character_back_button_pressed() -> void:
 	switch_menu("map")
+	AudioController.stop_bg_music()
 
 func _on_map_back_button_pressed() -> void:
 	switch_menu("main")
