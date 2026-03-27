@@ -1,9 +1,7 @@
 [gd_scene format=3 uid="uid://bn8a6ftivipmn"]
 
 [ext_resource type="Script" uid="uid://owe3ww1kxk80" path="res://scenes/UI/main_menu.gd" id="1_qwnig"]
-[ext_resource type="Texture2D" uid="uid://783i2c5tj2cx" path="res://assets/sprites/Board.png" id="2_5jstl"]
-[ext_resource type="PackedScene" uid="uid://i75ql5ait3me" path="res://scenes/UI/character_selector.tscn" id="3_e2p27"]
-[ext_resource type="Script" uid="uid://d4fceu12g4n2h" path="res://scenes/UI/map_select_grid.gd" id="3_tfcbk"]
+[ext_resource type="Texture2D" uid="uid://783i2c5tj2cx" path="res://assets/sprites/Backgrounds/Board.png" id="2_5jstl"]
 
 [node name="MainMenu" type="Control" unique_id=56394777]
 layout_mode = 3
@@ -95,153 +93,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Exit Game"
 
-[node name="CharacterSelectMenu" type="Control" parent="." unique_id=566345827]
-unique_name_in_owner = true
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="CharacterSelectMenu" unique_id=9562852]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CharacterSelectMenu/MarginContainer" unique_id=1053405809]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="CharacterSelectLabel" type="RichTextLabel" parent="CharacterSelectMenu/MarginContainer/VBoxContainer" unique_id=1751133993]
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 32
-theme_override_font_sizes/bold_font_size = 32
-theme_override_font_sizes/bold_italics_font_size = 32
-theme_override_font_sizes/italics_font_size = 32
-theme_override_font_sizes/mono_font_size = 32
-bbcode_enabled = true
-text = "Character Select"
-fit_content = true
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CharacterSelectHBox" type="HBoxContainer" parent="CharacterSelectMenu/MarginContainer/VBoxContainer" unique_id=114441174]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 10
-
-[node name="PanelContainer" parent="CharacterSelectMenu/MarginContainer/VBoxContainer/CharacterSelectHBox" unique_id=460028910 instance=ExtResource("3_e2p27")]
-layout_mode = 2
-
-[node name="PanelContainer2" parent="CharacterSelectMenu/MarginContainer/VBoxContainer/CharacterSelectHBox" unique_id=414514687 instance=ExtResource("3_e2p27")]
-layout_mode = 2
-
-[node name="PanelContainer3" parent="CharacterSelectMenu/MarginContainer/VBoxContainer/CharacterSelectHBox" unique_id=261030565 instance=ExtResource("3_e2p27")]
-layout_mode = 2
-
-[node name="ButtonHBox" type="HBoxContainer" parent="CharacterSelectMenu/MarginContainer/VBoxContainer" unique_id=986259685]
-layout_mode = 2
-
-[node name="StartGameButton" type="Button" parent="CharacterSelectMenu/MarginContainer/VBoxContainer/ButtonHBox" unique_id=2122730287]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Start Game"
-
-[node name="CharacterBackButton" type="Button" parent="CharacterSelectMenu/MarginContainer/VBoxContainer/ButtonHBox" unique_id=1701558584]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Back to Map Select"
-
-[node name="MapSelectMenu" type="Control" parent="." unique_id=690989308]
-unique_name_in_owner = true
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxMargins" type="MarginContainer" parent="MapSelectMenu" unique_id=59572119]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="MapSelectMenuVBox" type="VBoxContainer" parent="MapSelectMenu/VBoxMargins" unique_id=1316832255]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="MapSelectLabel" type="RichTextLabel" parent="MapSelectMenu/VBoxMargins/MapSelectMenuVBox" unique_id=1001886552]
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 32
-theme_override_font_sizes/bold_font_size = 32
-theme_override_font_sizes/bold_italics_font_size = 32
-theme_override_font_sizes/italics_font_size = 32
-theme_override_font_sizes/mono_font_size = 32
-bbcode_enabled = true
-text = "Map Select"
-fit_content = true
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MapSelectPanel" type="PanelContainer" parent="MapSelectMenu/VBoxMargins/MapSelectMenuVBox" unique_id=590315693]
-custom_minimum_size = Vector2(512, 200)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="MapSelectScroll" type="ScrollContainer" parent="MapSelectMenu/VBoxMargins/MapSelectMenuVBox/MapSelectPanel" unique_id=467591258]
-layout_mode = 2
-scroll_hint_mode = 1
-
-[node name="MapSelectMargins" type="MarginContainer" parent="MapSelectMenu/VBoxMargins/MapSelectMenuVBox/MapSelectPanel/MapSelectScroll" unique_id=604394071]
-layout_mode = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
-
-[node name="MapSelectGrid" type="VBoxContainer" parent="MapSelectMenu/VBoxMargins/MapSelectMenuVBox/MapSelectPanel/MapSelectScroll/MapSelectMargins" unique_id=1720472440]
-layout_mode = 2
-script = ExtResource("3_tfcbk")
-
-[node name="ButtonHBox" type="HBoxContainer" parent="MapSelectMenu/VBoxMargins/MapSelectMenuVBox" unique_id=1780426663]
-layout_mode = 2
-
-[node name="MapDirectoryLabel" type="Label" parent="MapSelectMenu/VBoxMargins/MapSelectMenuVBox/ButtonHBox" unique_id=1820716654]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-text = "map dir"
-horizontal_alignment = 1
-
-[node name="OpenMapsFolderButton" type="Button" parent="MapSelectMenu/VBoxMargins/MapSelectMenuVBox/ButtonHBox" unique_id=653744408]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Open Map Folder"
-
-[node name="MapBackButton" type="Button" parent="MapSelectMenu/VBoxMargins/MapSelectMenuVBox/ButtonHBox" unique_id=757294565]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Back to Main Menu"
-
 [node name="SettingsMenu" type="Control" parent="." unique_id=1641731527]
 unique_name_in_owner = true
 visible = false
@@ -308,8 +159,4 @@ text = "Back to Main Menu"
 [connection signal="pressed" from="GameStartMenu/ButtonMargins/ButtonsHBox/ModsButton" to="." method="_on_map_button_pressed"]
 [connection signal="pressed" from="GameStartMenu/ButtonMargins/ButtonsHBox/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="GameStartMenu/ButtonMargins/ButtonsHBox/ExitButton" to="." method="_on_exit_button_pressed"]
-[connection signal="pressed" from="CharacterSelectMenu/MarginContainer/VBoxContainer/ButtonHBox/StartGameButton" to="." method="_on_start_game_button_pressed"]
-[connection signal="pressed" from="CharacterSelectMenu/MarginContainer/VBoxContainer/ButtonHBox/CharacterBackButton" to="." method="_on_character_back_button_pressed"]
-[connection signal="pressed" from="MapSelectMenu/VBoxMargins/MapSelectMenuVBox/ButtonHBox/OpenMapsFolderButton" to="." method="_on_map_button_pressed"]
-[connection signal="pressed" from="MapSelectMenu/VBoxMargins/MapSelectMenuVBox/ButtonHBox/MapBackButton" to="." method="_on_map_back_button_pressed"]
 [connection signal="pressed" from="SettingsMenu/MarginContainer/VBoxContainer/HBoxContainer/SettingsBackButton" to="." method="_on_settings_back_button_pressed"]

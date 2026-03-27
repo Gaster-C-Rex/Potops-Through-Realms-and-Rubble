@@ -1,0 +1,432 @@
+[gd_scene format=3 uid="uid://dmvvu32ul2y6a"]
+
+[ext_resource type="Texture2D" uid="uid://bg1o3rntggicr" path="res://assets/sprites/Backgrounds/potops_hubworld-bg.png" id="1_qjmvy"]
+[ext_resource type="Script" uid="uid://ww1iemjdlmmv" path="res://scenes/UI/hub_world.gd" id="1_s7r8u"]
+[ext_resource type="Texture2D" uid="uid://yi7j8o3kmfst" path="res://assets/UI/adventure-gates.png" id="3_kqx6o"]
+[ext_resource type="Script" uid="uid://d4fceu12g4n2h" path="res://scenes/UI/map_select_grid.gd" id="3_touiq"]
+[ext_resource type="Texture2D" uid="uid://cg36wu2y0q1gc" path="res://assets/UI/smithing-site.png" id="4_gyri2"]
+[ext_resource type="StyleBox" uid="uid://djqu8pai7jcpq" path="res://assets/resources/paper_style_box.tres" id="4_pbbkd"]
+[ext_resource type="PackedScene" uid="uid://i75ql5ait3me" path="res://scenes/UI/character_selector.tscn" id="4_tjb2i"]
+[ext_resource type="Texture2D" uid="uid://di68xraw0hhmr" path="res://assets/sprites/backgrounds/hubworld-gates-bg.png" id="5_7vw7p"]
+[ext_resource type="Texture2D" uid="uid://dufgyxrq4vbxi" path="res://assets/sprites/Backgrounds/BulletinBoard.png" id="5_pbbkd"]
+[ext_resource type="Texture2D" uid="uid://rwyftmeple1r" path="res://assets/UI/bullets-board.png" id="5_ts8j2"]
+[ext_resource type="Texture2D" uid="uid://dwyjl5ekwmwsx" path="res://assets/UI/stats-tent.png" id="6_shf2g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lql25"]
+atlas = ExtResource("3_kqx6o")
+region = Rect2(0, 0, 93, 290)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_otbc8"]
+atlas = ExtResource("3_kqx6o")
+region = Rect2(93, 0, 93, 290)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2h4vs"]
+atlas = ExtResource("4_gyri2")
+region = Rect2(0, 0, 163, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s74x6"]
+atlas = ExtResource("4_gyri2")
+region = Rect2(163, 0, 163, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qd6pd"]
+atlas = ExtResource("5_ts8j2")
+region = Rect2(0, 0, 140, 143)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_on65f"]
+atlas = ExtResource("5_ts8j2")
+region = Rect2(140, 0, 140, 143)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g04e5"]
+atlas = ExtResource("6_shf2g")
+region = Rect2(0, 0, 136, 226)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1l1pl"]
+atlas = ExtResource("6_shf2g")
+region = Rect2(136, 0, 136, 226)
+
+[node name="Hubworld" type="Control" unique_id=705988047]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s7r8u")
+
+[node name="HubWorldBackground" type="TextureRect" parent="." unique_id=187979626]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("1_qjmvy")
+
+[node name="HubWorldMenu" type="Control" parent="." unique_id=1245412172]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="HubMapsButton" type="TextureButton" parent="HubWorldMenu" unique_id=1776215640]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.855
+anchor_top = 0.128
+anchor_right = 1.0
+anchor_bottom = 0.933
+offset_left = -0.4000244
+offset_top = -0.16000366
+offset_bottom = 0.23999023
+texture_normal = SubResource("AtlasTexture_lql25")
+texture_hover = SubResource("AtlasTexture_otbc8")
+stretch_mode = 4
+
+[node name="HubShopButton" type="TextureButton" parent="HubWorldMenu" unique_id=705770635]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.586
+anchor_top = 0.20300001
+anchor_right = 0.841
+anchor_bottom = 0.63600004
+offset_left = -0.08001709
+offset_top = -0.16000366
+offset_right = -0.47998047
+offset_bottom = 0.07998657
+texture_normal = SubResource("AtlasTexture_2h4vs")
+texture_hover = SubResource("AtlasTexture_s74x6")
+stretch_mode = 4
+
+[node name="HubGuideButton" type="TextureButton" parent="HubWorldMenu" unique_id=1782392851]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.305
+anchor_top = 0.29200003
+anchor_right = 0.523
+anchor_bottom = 0.689
+offset_left = -0.4000244
+offset_top = -0.24002075
+offset_right = 0.55999756
+offset_bottom = -0.08001709
+texture_normal = SubResource("AtlasTexture_qd6pd")
+texture_hover = SubResource("AtlasTexture_on65f")
+stretch_mode = 4
+
+[node name="HubStatsButton" type="TextureButton" parent="HubWorldMenu" unique_id=759913086]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.294
+anchor_right = 0.21200001
+anchor_bottom = 0.92200005
+offset_top = 0.32000732
+offset_right = 0.63998413
+offset_bottom = 0.15997314
+grow_vertical = 2
+texture_normal = SubResource("AtlasTexture_g04e5")
+texture_hover = SubResource("AtlasTexture_1l1pl")
+stretch_mode = 4
+
+[node name="CharacterStatsMenu" type="Control" parent="." unique_id=201573528]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="InfoGuideMenu" type="Control" parent="." unique_id=1586662596]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ControlGuideBackground" type="TextureRect" parent="InfoGuideMenu" unique_id=1148481429]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("5_pbbkd")
+
+[node name="ControlGuideVBox" type="VBoxContainer" parent="InfoGuideMenu" unique_id=2145868376]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -487.0
+offset_top = -322.0
+offset_right = 488.0
+offset_bottom = 301.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 13
+
+[node name="MarginContainer" type="MarginContainer" parent="InfoGuideMenu/ControlGuideVBox" unique_id=323445389]
+custom_minimum_size = Vector2(0, 110)
+layout_mode = 2
+theme_override_constants/margin_left = 345
+theme_override_constants/margin_top = 13
+theme_override_constants/margin_right = 345
+theme_override_constants/margin_bottom = 13
+
+[node name="PanelContainer" type="PanelContainer" parent="InfoGuideMenu/ControlGuideVBox/MarginContainer" unique_id=518848729]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_pbbkd")
+
+[node name="ControlGuideBackButton" type="Button" parent="InfoGuideMenu/ControlGuideVBox/MarginContainer/PanelContainer" unique_id=1724139512]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5176471, 0.49411765, 0.5294118, 1)
+theme_override_colors/font_focus_color = Color(0.29803923, 0.28627452, 0.34509805, 1)
+theme_override_font_sizes/font_size = 30
+text = "Back to Hub"
+flat = true
+
+[node name="ControlGuideHBox" type="HBoxContainer" parent="InfoGuideMenu/ControlGuideVBox" unique_id=1944403366]
+custom_minimum_size = Vector2(975, 500)
+layout_mode = 2
+
+[node name="ControlGuideInfo1" type="PanelContainer" parent="InfoGuideMenu/ControlGuideVBox/ControlGuideHBox" unique_id=766931920]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("4_pbbkd")
+
+[node name="ControlMarginContainer" type="MarginContainer" parent="InfoGuideMenu/ControlGuideVBox/ControlGuideHBox/ControlGuideInfo1" unique_id=587902721]
+layout_mode = 2
+
+[node name="RichTextLabel1" type="RichTextLabel" parent="InfoGuideMenu/ControlGuideVBox/ControlGuideHBox/ControlGuideInfo1/ControlMarginContainer" unique_id=388052418]
+custom_minimum_size = Vector2(120, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0.5176471, 0.49411765, 0.5294118, 1)
+text = "Tutorial Info 1"
+
+[node name="ControlGuideInfo2" type="PanelContainer" parent="InfoGuideMenu/ControlGuideVBox/ControlGuideHBox" unique_id=17794698]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("4_pbbkd")
+
+[node name="ControlMarginContainer2" type="MarginContainer" parent="InfoGuideMenu/ControlGuideVBox/ControlGuideHBox/ControlGuideInfo2" unique_id=1705009036]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="InfoGuideMenu/ControlGuideVBox/ControlGuideHBox/ControlGuideInfo2/ControlMarginContainer2" unique_id=329224425]
+custom_minimum_size = Vector2(120, 25)
+layout_mode = 2
+theme_override_colors/default_color = Color(0.5176471, 0.49411765, 0.5294118, 1)
+text = "Tutorial Info 2
+"
+
+[node name="ControlGuideInfo3" type="PanelContainer" parent="InfoGuideMenu/ControlGuideVBox/ControlGuideHBox" unique_id=505601749]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("4_pbbkd")
+
+[node name="ControlMarginContainer2" type="MarginContainer" parent="InfoGuideMenu/ControlGuideVBox/ControlGuideHBox/ControlGuideInfo3" unique_id=298928422]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="InfoGuideMenu/ControlGuideVBox/ControlGuideHBox/ControlGuideInfo3/ControlMarginContainer2" unique_id=2145479257]
+custom_minimum_size = Vector2(120, 25)
+layout_mode = 2
+theme_override_colors/default_color = Color(0.5176471, 0.49411765, 0.5294118, 1)
+text = "Tutorial Info 3"
+
+[node name="ShopMenu" type="Control" parent="." unique_id=967975062]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MapSelectMenu" type="Control" parent="." unique_id=1134245962]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GatesBackground" type="TextureRect" parent="MapSelectMenu" unique_id=639104933]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_7vw7p")
+
+[node name="VBoxMargins" type="MarginContainer" parent="MapSelectMenu" unique_id=1701594454]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="MapSelectMenuVBox" type="VBoxContainer" parent="MapSelectMenu/VBoxMargins" unique_id=780929036]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="MarginContainer" type="MarginContainer" parent="MapSelectMenu/VBoxMargins/MapSelectMenuVBox" unique_id=2056620351]
+layout_mode = 2
+theme_override_constants/margin_left = 400
+theme_override_constants/margin_right = 400
+
+[node name="MapSelectTitle" type="PanelContainer" parent="MapSelectMenu/VBoxMargins/MapSelectMenuVBox/MarginContainer" unique_id=1417091647]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_pbbkd")
+
+[node name="MapSelectLabel" type="RichTextLabel" parent="MapSelectMenu/VBoxMargins/MapSelectMenuVBox/MarginContainer/MapSelectTitle" unique_id=583240760]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.5176471, 0.49411765, 0.5294118, 1)
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+bbcode_enabled = true
+text = "Map Select"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MapSelectPanel" type="PanelContainer" parent="MapSelectMenu/VBoxMargins/MapSelectMenuVBox" unique_id=1550269956]
+custom_minimum_size = Vector2(512, 200)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MapSelectScroll" type="ScrollContainer" parent="MapSelectMenu/VBoxMargins/MapSelectMenuVBox/MapSelectPanel" unique_id=1085934272]
+layout_mode = 2
+scroll_hint_mode = 1
+
+[node name="MapSelectMargins" type="MarginContainer" parent="MapSelectMenu/VBoxMargins/MapSelectMenuVBox/MapSelectPanel/MapSelectScroll" unique_id=665249141]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="MapSelectGrid" type="VBoxContainer" parent="MapSelectMenu/VBoxMargins/MapSelectMenuVBox/MapSelectPanel/MapSelectScroll/MapSelectMargins" unique_id=358137181]
+layout_mode = 2
+script = ExtResource("3_touiq")
+
+[node name="ButtonHBox" type="HBoxContainer" parent="MapSelectMenu/VBoxMargins/MapSelectMenuVBox" unique_id=140337057]
+layout_mode = 2
+
+[node name="MapDirectoryLabel" type="Label" parent="MapSelectMenu/VBoxMargins/MapSelectMenuVBox/ButtonHBox" unique_id=2139973188]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "map dir"
+horizontal_alignment = 1
+
+[node name="OpenMapsFolderButton" type="Button" parent="MapSelectMenu/VBoxMargins/MapSelectMenuVBox/ButtonHBox" unique_id=252040074]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Open Map Folder"
+
+[node name="MapBackButton" type="Button" parent="MapSelectMenu/VBoxMargins/MapSelectMenuVBox/ButtonHBox" unique_id=1415836377]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.5176471, 0.49411765, 0.5294118, 1)
+theme_override_colors/font_focus_color = Color(0.29803923, 0.28627452, 0.34509805, 1)
+text = "Back to Hub"
+
+[node name="CharacterSelectMenu" type="Control" parent="." unique_id=1531027102]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GatesBackground" type="TextureRect" parent="CharacterSelectMenu" unique_id=523465346]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_7vw7p")
+
+[node name="MarginContainer" type="MarginContainer" parent="CharacterSelectMenu" unique_id=353459371]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CharacterSelectMenu/MarginContainer" unique_id=1042587804]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="CharacterSelectLabel" type="RichTextLabel" parent="CharacterSelectMenu/MarginContainer/VBoxContainer" unique_id=1824340222]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+bbcode_enabled = true
+text = "Character Select"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CharacterSelectHBox" type="HBoxContainer" parent="CharacterSelectMenu/MarginContainer/VBoxContainer" unique_id=73632888]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="PanelContainer" parent="CharacterSelectMenu/MarginContainer/VBoxContainer/CharacterSelectHBox" unique_id=460028910 instance=ExtResource("4_tjb2i")]
+layout_mode = 2
+
+[node name="PanelContainer2" parent="CharacterSelectMenu/MarginContainer/VBoxContainer/CharacterSelectHBox" unique_id=1831781069 instance=ExtResource("4_tjb2i")]
+layout_mode = 2
+
+[node name="PanelContainer3" parent="CharacterSelectMenu/MarginContainer/VBoxContainer/CharacterSelectHBox" unique_id=878630893 instance=ExtResource("4_tjb2i")]
+layout_mode = 2
+
+[node name="ButtonHBox" type="HBoxContainer" parent="CharacterSelectMenu/MarginContainer/VBoxContainer" unique_id=732303754]
+layout_mode = 2
+
+[node name="StartGameButton" type="Button" parent="CharacterSelectMenu/MarginContainer/VBoxContainer/ButtonHBox" unique_id=1412715980]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Start Game"
+
+[node name="CharacterBackButton" type="Button" parent="CharacterSelectMenu/MarginContainer/VBoxContainer/ButtonHBox" unique_id=1842576848]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Back to Map Select"
+
+[connection signal="pressed" from="HubWorldMenu/HubMapsButton" to="." method="_on_hub_maps_button_pressed"]
+[connection signal="pressed" from="HubWorldMenu/HubShopButton" to="." method="_on_hub_shop_button_pressed"]
+[connection signal="pressed" from="HubWorldMenu/HubGuideButton" to="." method="_on_hub_guide_button_pressed"]
+[connection signal="pressed" from="HubWorldMenu/HubStatsButton" to="." method="_on_hub_stats_button_pressed"]
+[connection signal="pressed" from="InfoGuideMenu/ControlGuideVBox/MarginContainer/PanelContainer/ControlGuideBackButton" to="." method="_on_control_guide_back_button_pressed"]
+[connection signal="pressed" from="MapSelectMenu/VBoxMargins/MapSelectMenuVBox/ButtonHBox/MapBackButton" to="." method="_on_map_back_button_pressed"]
+[connection signal="pressed" from="CharacterSelectMenu/MarginContainer/VBoxContainer/ButtonHBox/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="CharacterSelectMenu/MarginContainer/VBoxContainer/ButtonHBox/CharacterBackButton" to="." method="_on_character_back_button_pressed"]
