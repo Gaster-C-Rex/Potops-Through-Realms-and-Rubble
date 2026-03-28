@@ -392,6 +392,8 @@ func enter_combat(trigger_enemy: entity = null) -> void:
 	if Globals.active_player:
 		Globals.active_player._update_combat_ui()
 
+	AudioController.play_bg_music(Globals.get_audio(Globals.SONG_BATTLE)) #when entering battle, play battle music
+
 	Globals.send_to_game_log("Combat started")
 
 ## Exits combat, resets player resources, and reforms the party line.
@@ -416,6 +418,8 @@ func exit_combat() -> void:
 
 	if Globals.active_player:
 		Globals.active_player._update_combat_ui()
+
+	AudioController.play_bg_music(Globals.get_audio(Globals.SONG_EXPLORE)) #goes back to exploring after combat
 
 	Globals.send_to_game_log("Combat ended")
 

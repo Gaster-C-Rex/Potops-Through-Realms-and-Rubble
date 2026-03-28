@@ -20,6 +20,8 @@ func _ready() -> void:
 	Globals.tile_selector = %TileSelector
 	set_map(Globals.active_map_id)
 
+	AudioController.play_bg_music(Globals.get_audio(Globals.SONG_EXPLORE)) #when start playing game, play explore music
+
 func _on_next_map_button_pressed() -> void:
 	next_map()
 

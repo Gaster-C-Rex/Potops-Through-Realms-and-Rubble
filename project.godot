@@ -23,6 +23,7 @@ boot_splash/bg_color=Color(0.576471, 0.466667, 0.305882, 1)
 
 Globals="*uid://fma0y3anlr5u"
 SignalBus="*uid://dbyuxn3alwlb6"
+AudioController="*uid://xsrv8un24huh"
 
 [debug]
 
