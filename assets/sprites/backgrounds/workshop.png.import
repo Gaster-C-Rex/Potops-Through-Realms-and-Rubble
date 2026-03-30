@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://f75cjr0vv78k"
-path="res://.godot/imported/Pedestals.png-6db13fbd3a2d5f375f7cc872fb4d565b.ctex"
+uid="uid://6suwr2gi0y3p"
+path="res://.godot/imported/workshop.png-1c67e0b6643aa966fbcb938c8f45e453.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Pedestals.png"
-dest_files=["res://.godot/imported/Pedestals.png-6db13fbd3a2d5f375f7cc872fb4d565b.ctex"]
+source_file="res://assets/sprites/backgrounds/workshop.png"
+dest_files=["res://.godot/imported/workshop.png-1c67e0b6643aa966fbcb938c8f45e453.ctex"]
 
 [params]
 

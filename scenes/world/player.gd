@@ -1,6 +1,8 @@
 # player.gd
 extends entity
 
+@onready var potop_anim: AnimatedSprite2D = $PotopAnimated2D
+
 const TILE_INDICATOR_SCENE := preload("res://scenes/UI/tile_indicator.tscn")
 
 enum MoveState {
@@ -32,6 +34,8 @@ var move_state := MoveState.IDLE
 func _ready() -> void:
 	target_position = position
 
+	potop_anim.play("default")
+
 	load_ranged_archetype()
 	has_heal = true
 	has_defend = true
@@ -43,7 +47,16 @@ func _ready() -> void:
 
 	if Globals.combat_ui:
 		Globals.combat_ui.visible = false
-
+		
+func change_state(_s: MoveState):
+	if move_state == MoveState.IDLE:
+		potop_anim.play("default")
+	
+	if move_state == MoveState.KEYBOARD:
+		potop_anim.play("walks")
+		
+	if move_state == MoveState.CLICK_MOVING:
+		potop_anim.play("walks")
 ## Updates movement, input, attack preview, and combat trigger behavior each physics frame.
 func _physics_process(delta: float) -> void:
 	if Globals.in_combat:
@@ -73,12 +86,15 @@ func _physics_process(delta: float) -> void:
 	match move_state:
 		MoveState.IDLE:
 			process_keyboard_input()
+			change_state(0)
 		MoveState.KEYBOARD:
 			process_keyboard_input()
+			change_state(1)
 		MoveState.CLICK_TARGETING:
 			pass
 		MoveState.CLICK_MOVING:
 			_process_click_move_queue()
+			change_state(1)
 		MoveState.ATTACK_TARGETING:
 			update_attack_preview()
 		MoveState.IN_MENU:
@@ -88,6 +104,7 @@ func _physics_process(delta: float) -> void:
 
 	if not Globals.entity_manager.enemy_turn_running:
 		Globals.entity_manager.check_for_combat_trigger()
+
 
 ## Finalizes movement state after a slide completes and checks for combat triggers when needed.
 func _on_slide_finished() -> void:
@@ -102,6 +119,7 @@ func _on_slide_finished() -> void:
 
 	if self == Globals.active_player and not Globals.in_combat:
 		Globals.entity_manager.check_for_combat_trigger()
+
 
 #endregion
 
@@ -255,6 +273,7 @@ func on_step_started(previous_tile: Vector2i, _next_tile: Vector2i) -> void:
 
 	Globals.entity_manager.queue_party_follow_step(previous_tile)
 
+
 ## Advances queued follower movement for inactive party members outside combat.
 func process_follow_movement() -> void:
 	if Globals.in_combat:
@@ -274,21 +293,25 @@ func process_follow_movement() -> void:
 
 	if target_tile == my_tile:
 		follow_targets.pop_front()
+		change_state(1)
 		return
 
 	var path := pathfind_to_space(target_tile)
 
 	if path.is_empty():
 		follow_targets.pop_front()
+		change_state(1)
 		return
 
 	follow_targets.pop_front()
 	follow_path(path)
 	process_movement_queue()
-
+	change_state(1)
+	
 ## Clears all pending follower target tiles for this player.
 func clear_follow_targets() -> void:
 	follow_targets.clear()
+	change_state(0)
 
 ## Resets movement and targeting state when combat begins.
 func reset_movement_state_for_combat() -> void:

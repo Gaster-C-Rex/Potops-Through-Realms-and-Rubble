@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://bsxlx4b8mhf23"]
+
+[ext_resource type="Script" uid="uid://cdyi0xgiqvm3w" path="res://scenes/world/teleboxer.gd" id="1_enxid"]
+[ext_resource type="Texture2D" uid="uid://ys4yciugkf8l" path="res://assets/sprites/boxed-teleportal.png" id="1_gexow"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_enxid"]
+atlas = ExtResource("1_gexow")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2m85r"]
+atlas = ExtResource("1_gexow")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cey3u"]
+atlas = ExtResource("1_gexow")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ktogh"]
+atlas = ExtResource("1_gexow")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n3evs"]
+atlas = ExtResource("1_gexow")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c0agj"]
+atlas = ExtResource("1_gexow")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hfhhb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_enxid")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2m85r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cey3u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ktogh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n3evs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c0agj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ga8a"]
+size = Vector2(128, 128)
+
+[node name="Teleboxer" type="Area2D" unique_id=597053333]
+script = ExtResource("1_enxid")
+
+[node name="TeleboxerAnimated2D" type="AnimatedSprite2D" parent="." unique_id=1900257118]
+sprite_frames = SubResource("SpriteFrames_hfhhb")
+autoplay = "default"
+frame = 3
+frame_progress = 0.1321423
+
+[node name="TeleboxerCollision" type="CollisionShape2D" parent="." unique_id=1875877977]
+shape = SubResource("RectangleShape2D_2ga8a")
+
+[node name="TeleboxerDestination" type="Marker2D" parent="." unique_id=664977762]
+unique_name_in_owner = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

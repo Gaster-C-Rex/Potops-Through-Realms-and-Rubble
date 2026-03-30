@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rhr7d74b6r07"
-path="res://.godot/imported/potoSprites.png-e6a221acf02acadedaca61fd2fc0aa36.ctex"
+uid="uid://b0085wfb84w5y"
+path="res://.godot/imported/Potop-Idles.png-58f7207c10a921829f9b92bd0f7e1a7d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/players/potoSprites.png"
-dest_files=["res://.godot/imported/potoSprites.png-e6a221acf02acadedaca61fd2fc0aa36.ctex"]
+source_file="res://assets/sprites/players/Potop-Idles.png"
+dest_files=["res://.godot/imported/Potop-Idles.png-58f7207c10a921829f9b92bd0f7e1a7d.ctex"]
 
 [params]
 

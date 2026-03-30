@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dmvvu32ul2y6a"]
 
-[ext_resource type="Texture2D" uid="uid://bg1o3rntggicr" path="res://assets/sprites/Backgrounds/potops_hubworld-bg.png" id="1_qjmvy"]
+[ext_resource type="Texture2D" uid="uid://bg1o3rntggicr" path="res://assets/sprites/backgrounds/potops_hubworld-bg.png" id="1_qjmvy"]
 [ext_resource type="Script" uid="uid://ww1iemjdlmmv" path="res://scenes/UI/hub_world.gd" id="1_s7r8u"]
 [ext_resource type="Texture2D" uid="uid://yi7j8o3kmfst" path="res://assets/UI/adventure-gates.png" id="3_kqx6o"]
 [ext_resource type="Script" uid="uid://d4fceu12g4n2h" path="res://scenes/UI/map_select_grid.gd" id="3_touiq"]
@@ -8,9 +8,10 @@
 [ext_resource type="StyleBox" uid="uid://djqu8pai7jcpq" path="res://assets/resources/paper_style_box.tres" id="4_pbbkd"]
 [ext_resource type="PackedScene" uid="uid://i75ql5ait3me" path="res://scenes/UI/character_selector.tscn" id="4_tjb2i"]
 [ext_resource type="Texture2D" uid="uid://di68xraw0hhmr" path="res://assets/sprites/backgrounds/hubworld-gates-bg.png" id="5_7vw7p"]
-[ext_resource type="Texture2D" uid="uid://dufgyxrq4vbxi" path="res://assets/sprites/Backgrounds/BulletinBoard.png" id="5_pbbkd"]
+[ext_resource type="Texture2D" uid="uid://dufgyxrq4vbxi" path="res://assets/sprites/backgrounds/BulletinBoard.png" id="5_pbbkd"]
 [ext_resource type="Texture2D" uid="uid://rwyftmeple1r" path="res://assets/UI/bullets-board.png" id="5_ts8j2"]
 [ext_resource type="Texture2D" uid="uid://dwyjl5ekwmwsx" path="res://assets/UI/stats-tent.png" id="6_shf2g"]
+[ext_resource type="Texture2D" uid="uid://6suwr2gi0y3p" path="res://assets/sprites/backgrounds/workshop.png" id="9_gyri2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lql25"]
 atlas = ExtResource("3_kqx6o")
@@ -126,9 +127,12 @@ stretch_mode = 4
 [node name="CharacterStatsMenu" type="Control" parent="." unique_id=201573528]
 unique_name_in_owner = true
 visible = false
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="InfoGuideMenu" type="Control" parent="." unique_id=1586662596]
 unique_name_in_owner = true
@@ -241,9 +245,44 @@ text = "Tutorial Info 3"
 [node name="ShopMenu" type="Control" parent="." unique_id=967975062]
 unique_name_in_owner = true
 visible = false
-anchors_preset = 0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="ShopMenu" unique_id=1461266462]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+texture = ExtResource("9_gyri2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ShopMenu" unique_id=906620827]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.721
+anchor_top = 0.45200002
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 27.119995
+offset_top = 174.56
+offset_right = -99.0
+offset_bottom = 344.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="ShopBackButton" type="Button" parent="ShopMenu/VBoxContainer" unique_id=8414941]
+custom_minimum_size = Vector2(50, 100)
+layout_mode = 2
+text = "Back to Hub"
+
+[node name="ShopItemsButton" type="Button" parent="ShopMenu/VBoxContainer" unique_id=2043086390]
+custom_minimum_size = Vector2(50, 100)
+layout_mode = 2
+text = "Look at Wares
+"
 
 [node name="MapSelectMenu" type="Control" parent="." unique_id=1134245962]
 unique_name_in_owner = true
@@ -427,6 +466,8 @@ text = "Back to Map Select"
 [connection signal="pressed" from="HubWorldMenu/HubGuideButton" to="." method="_on_hub_guide_button_pressed"]
 [connection signal="pressed" from="HubWorldMenu/HubStatsButton" to="." method="_on_hub_stats_button_pressed"]
 [connection signal="pressed" from="InfoGuideMenu/ControlGuideVBox/MarginContainer/PanelContainer/ControlGuideBackButton" to="." method="_on_control_guide_back_button_pressed"]
+[connection signal="pressed" from="ShopMenu/VBoxContainer/ShopBackButton" to="." method="_on_shop_back_button_pressed"]
+[connection signal="pressed" from="ShopMenu/VBoxContainer/ShopItemsButton" to="." method="_on_shop_items_button_pressed"]
 [connection signal="pressed" from="MapSelectMenu/VBoxMargins/MapSelectMenuVBox/ButtonHBox/MapBackButton" to="." method="_on_map_back_button_pressed"]
 [connection signal="pressed" from="CharacterSelectMenu/MarginContainer/VBoxContainer/ButtonHBox/StartGameButton" to="." method="_on_start_game_button_pressed"]
 [connection signal="pressed" from="CharacterSelectMenu/MarginContainer/VBoxContainer/ButtonHBox/CharacterBackButton" to="." method="_on_character_back_button_pressed"]

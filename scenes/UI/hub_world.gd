@@ -45,3 +45,9 @@ func _on_hub_stats_button_pressed() -> void:
 	
 func _on_control_guide_back_button_pressed() -> void:
 	switch_menu("hub")
+	
+func _on_shop_back_button_pressed() -> void:
+	switch_menu("hub")
+	
+func _on_shop_items_button_pressed() -> void:
+	pass # Replace with function body.
