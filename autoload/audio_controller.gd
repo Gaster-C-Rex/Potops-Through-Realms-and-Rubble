@@ -20,9 +20,7 @@ func load_music_data(path: String) -> AudioStream:
 
 ##Plays background music
 func play_bg_music(path: String):
-	print("Attempting to play music??")
 	background_music.stream = load_music_data(path)
-	
 	background_music.play()
 
 ##Stops background music

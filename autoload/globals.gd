@@ -25,7 +25,6 @@ enum AttackType { # HACK: this should only be declared in one place
 	SQUARE,
 }
 
-
 # In the future, load this from a JSON
 const PLAYER_OPTIONS = {
 	"Default": {
@@ -60,7 +59,8 @@ const PLAYER_OPTIONS = {
 			"special_attack_pierce": 0, # unlimited
 		},
 		"texture_path": "res://assets/sprites/players/Potop-Idles.png",
-		"type": "Default"
+		"type": "Default",
+		"readable_name": "Potop",
 	},
 	"Marble": {
 		"properties": {
@@ -90,6 +90,7 @@ const PLAYER_OPTIONS = {
 		},
 		"texture_path": "res://assets/sprites/players/Marble-Idles.png",
 		"type": "Marble",
+		"readable_name": "Marble Potop",
 	},
 	"Fire": {
 		"properties": {
@@ -124,6 +125,7 @@ const PLAYER_OPTIONS = {
 		},
 		"texture_path": "res://assets/sprites/players/Fiery-Idles.png",
 		"type": "Fire",
+		"readable_name": "Fiery Potop",
 	},
 	"Flying": {
 		"properties": {
@@ -153,6 +155,7 @@ const PLAYER_OPTIONS = {
 		},
 		"texture_path": "res://assets/sprites/players/Flutter-Idles.png",
 		"type": "Flying",
+		"readable_name": "Flutter Potop",
 	},
 }
 
@@ -196,6 +199,9 @@ var items := []
 var potops := []
 var enemies := {}
 var audio := {}
+
+var inventory := {} # Simple "item": count
+var gems := ["orange gem", "red gem", "green gem"]
 
 ## Initializes user folders, loads enemy data, and sets the minimum window size.
 func _ready() -> void:

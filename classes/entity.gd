@@ -53,7 +53,7 @@ var specials_per_combat := 1
 
 
 #region Utility / AI
-
+var readable_name = "unnamed"
 
 var ai_type := "melee"
 var sight_range := 6
@@ -648,7 +648,7 @@ func take_damage(attacker: entity, attack_name: String) -> void:
 
 	update_health_bar()
 	Globals.send_to_game_log("%s took %s %s damage and now has %s health" % [
-		name,
+		readable_name,
 		damage_taken,
 		attack_name,
 		health
@@ -677,7 +677,7 @@ func defend() -> bool:
 		return false
 
 	temp_armor += 1
-	Globals.send_to_game_log("%s defends and gains +1 armor until their next turn" % name)
+	Globals.send_to_game_log("%s defends and gains +1 armor until their next turn" % readable_name)
 	return true
 
 ## Uses heal if available and restores health.
@@ -691,7 +691,7 @@ func heal_self() -> bool:
 	health += 3
 	health = mini(health, max_health)
 	update_health_bar()
-	Globals.send_to_game_log("%s heals and now has %s health" % [name, health])
+	Globals.send_to_game_log("%s heals and now has %s health" % [readable_name, health])
 	return true
 
 ## Spends and logs the use of a special ability.
@@ -699,7 +699,7 @@ func use_special() -> bool:
 	if not spend_special():
 		return false
 
-	Globals.send_to_game_log("%s used special" % name)
+	Globals.send_to_game_log("%s used special" % readable_name)
 	return true
 
 #endregion

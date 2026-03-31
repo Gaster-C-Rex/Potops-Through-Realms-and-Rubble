@@ -1,42 +1,53 @@
 # enemy.gd
 extends entity
 
+var drops := {} #{"item": count,}
+
 #region Setup
 
 ## Initializes this enemy's visuals and archetype data based on its name.
-func initialize(enemy_name: String) -> void:
-	name = enemy_name
+func initialize(enemy_name: String, human_readable_name: String) -> void:
+	readable_name = human_readable_name
 
 	match enemy_name:
 		"pyroslug":
 			$Sprite2D.texture = preload("uid://dxhe8u0y4j7hm")
 			load_melee_archetype()
 			sight_range = 6
+			drops = {Globals.gems.pick_random(): 1}
 
 		"round_hoglet":
 			$Sprite2D.texture = preload("uid://bx5tx0ea00eif")
 			load_melee_archetype()
 			sight_range = 6
+			drops = {"stick": randi_range(1, 4)}
 
 		"glowcrush_sheller":
 			$Sprite2D.texture = preload("uid://326o7hqogisv")
 			load_defender_archetype()
 			sight_range = 6
+			drops = {"clay": randi_range(1, 2)}
+			drops = {Globals.gems.pick_random(): 1}
 
 		"drafty_wizor":
 			$Sprite2D.texture = preload("uid://dvhldadmvlu6")
 			load_ranged_archetype()
 			sight_range = 6
+			drops = {"clay": randi_range(1, 2)}
+			drops = {"stick": randi_range(1, 2)}
 
 		"pepperjelly":
 			$Sprite2D.texture = preload("uid://bd7mhgqyerhy5")
 			load_healer_archetype()
 			sight_range = 6
+			drops = {"stick": randi_range(1, 2)}
+			drops = {Globals.gems.pick_random(): 1}
 		
 		"skuttershot":
 			$Sprite2D.texture = preload("uid://cxs3p31w4gbd1")
 			load_ranged_archetype()
 			sight_range = 6
+			drops = {"clay": randi_range(1, 4)}
 
 ## Advances queued movement and sliding for the enemy each physics frame.
 func _physics_process(delta: float) -> void:
@@ -139,7 +150,7 @@ func perform_attack_on_player(player_node: entity) -> bool:
 		if player_tile in ranged_tiles:
 			spend_attack()
 			player_node.take_damage(self, "ranged")
-			Globals.send_to_game_log("%s used ranged attack" % name)
+			Globals.send_to_game_log("%s used ranged attack" % readable_name)
 			return true
 
 	if has_melee and can_use_attack("melee"):
@@ -148,7 +159,7 @@ func perform_attack_on_player(player_node: entity) -> bool:
 		if player_tile in melee_tiles:
 			spend_attack()
 			player_node.take_damage(self, "melee")
-			Globals.send_to_game_log("%s used melee attack" % name)
+			Globals.send_to_game_log("%s used melee attack" % readable_name)
 			return true
 
 	return false

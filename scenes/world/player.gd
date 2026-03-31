@@ -39,6 +39,7 @@ func initialize(idx: int):
 		push_warning("Player didn't get assigned data, using Default!")
 		data = Globals.PLAYER_OPTIONS["Default"]
 	player_type = data["type"]
+	readable_name = data.get("readable_name", player_type.capitalize())
 	for stat in data["properties"]:
 		if stat in self:
 			set(stat, data["properties"][stat])
