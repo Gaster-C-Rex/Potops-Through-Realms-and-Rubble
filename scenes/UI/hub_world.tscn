@@ -41,6 +41,8 @@ region = Rect2(140, 0, 140, 143)
 atlas = ExtResource("6_shf2g")
 region = Rect2(0, 0, 136, 226)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_gyri2"]
+
 [node name="Hubworld" type="Control" unique_id=705988047]
 layout_mode = 3
 anchors_preset = 15
@@ -455,6 +457,25 @@ text = "Start Game"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Back to Map Select"
+
+[node name="ItemPurchaseMenu" type="Control" parent="." unique_id=1079278953]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="ItemPurchaseMenu" unique_id=88866426]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_gyri2")
 
 [connection signal="pressed" from="HubWorldMenu/HubMapsButton" to="." method="_on_hub_maps_button_pressed"]
 [connection signal="pressed" from="HubWorldMenu/HubShopButton" to="." method="_on_hub_shop_button_pressed"]

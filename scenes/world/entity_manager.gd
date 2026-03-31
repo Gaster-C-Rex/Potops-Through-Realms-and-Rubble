@@ -423,6 +423,25 @@ func exit_combat() -> void:
 
 	Globals.send_to_game_log("Combat ended")
 
+## Determines if players can be teleported after combat ends.
+func _tile_teleports_party(tile: Vector2i, reserved_tiles: Array[Vector2i]) -> bool:
+	if not Globals.tile_in_bounds(tile):
+		return true
+
+	var teleporters: TileMapLayer = Globals.get_map_layer(Globals.active_map, "teleport")
+	if teleporters and teleporters.get_cell_source_id(tile) != -1:
+		return true
+
+	if tile in reserved_tiles:
+		return true
+
+	for ent in entities:
+		if ent in players:
+			continue
+
+		if Globals.get_tile_pos(ent.position) == tile:
+			return true
+
 ## Recalculates which enemies should be active in the current combat.
 func recalculate_active_enemies() -> void:
 	var active_players := get_living_players()

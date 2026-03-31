@@ -7,6 +7,7 @@ extends Control
 	"shop": %ShopMenu,
 	"map": %MapSelectMenu,
 	"char": %CharacterSelectMenu,
+	"item": %ItemPurchaseMenu
 }
 
 
@@ -54,4 +55,4 @@ func _on_shop_back_button_pressed() -> void:
 	AudioController.play_bg_music(Globals.get_audio(Globals.SONG_CONSTRUCT_SITE))
 	
 func _on_shop_items_button_pressed() -> void:
-	pass # Replace with function body.
+	switch_menu("item")

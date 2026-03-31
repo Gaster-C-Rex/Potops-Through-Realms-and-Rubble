@@ -1,7 +1,7 @@
 # player.gd
 extends entity
 
-@onready var potop_anim: AnimatedSprite2D = $PotopAnimated2D
+@onready var potop_anim: Sprite2D = $PotopAnimated2D
 
 const TILE_INDICATOR_SCENE := preload("res://scenes/UI/tile_indicator.tscn")
 

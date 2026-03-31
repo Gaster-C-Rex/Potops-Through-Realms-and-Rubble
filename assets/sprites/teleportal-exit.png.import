@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dg7bfwsa44o2l"
-path="res://.godot/imported/left_arrow.png-74b3513d691c2851730b969e511bde9b.ctex"
+uid="uid://cu1ertfur0m04"
+path="res://.godot/imported/teleportal-exit.png-5ca9cd468024d9bc80867176b7f5b74c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/players/left_arrow.png"
-dest_files=["res://.godot/imported/left_arrow.png-74b3513d691c2851730b969e511bde9b.ctex"]
+source_file="res://assets/sprites/teleportal-exit.png"
+dest_files=["res://.godot/imported/teleportal-exit.png-5ca9cd468024d9bc80867176b7f5b74c.ctex"]
 
 [params]
 
