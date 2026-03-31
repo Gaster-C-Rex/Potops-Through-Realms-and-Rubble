@@ -4,12 +4,12 @@ extends Node
 #region Data
 
 var entity_lookup = {
-	1: [preload("res://scenes/world/enemy.tscn"), ["pyroslug"], "pyroslug"],
-	2: [preload("res://scenes/world/enemy.tscn"), ["round_hoglet"], "round_hoglet"],
-	3: [preload("res://scenes/world/enemy.tscn"), ["glowcrush_sheller"], "glowcrush_sheller"],
-	4: [preload("res://scenes/world/enemy.tscn"), ["drafty_wizor"], "drafty_wizor"],
-	5: [preload("res://scenes/world/enemy.tscn"), ["pepperjelly"], "pepperjelly"],
-	6: [preload("res://scenes/world/enemy.tscn"), ["skuttershot"], "skuttershot"],
+	1: [preload("res://scenes/world/enemy.tscn"), ["pyroslug", "Pyroslug"], "pyroslug"],
+	2: [preload("res://scenes/world/enemy.tscn"), ["round_hoglet", "Round Hoglet"], "round_hoglet"],
+	3: [preload("res://scenes/world/enemy.tscn"), ["glowcrush_sheller", "Glowcrush Sheller"], "glowcrush_sheller"],
+	4: [preload("res://scenes/world/enemy.tscn"), ["drafty_wizor", "Drafty Wizor"], "drafty_wizor"],
+	5: [preload("res://scenes/world/enemy.tscn"), ["pepperjelly", "Pepperjelly"], "pepperjelly"],
+	6: [preload("res://scenes/world/enemy.tscn"), ["skuttershot", "Skuttershot"], "skuttershot"],
 	99: [preload("res://scenes/world/item.tscn"), ["item"], "item"], # If you implement these,
 	100: [preload("res://scenes/world/shop.tscn"), ["shop"], "shop"], # Change the numbers to be correct!!!
 }
@@ -87,6 +87,8 @@ func _spawn_player_party() -> void:
 		add_child(instance)
 		entities.append(instance)
 		players.append(instance)
+		
+		instance.initialize(i)
 
 	finalize_player_party_setup()
 
@@ -583,6 +585,15 @@ func set_combat_ui_visible(v: bool) -> void:
 
 ## Removes and frees the given entity, then checks if combat should end.
 func kill(ent: Node) -> void:
+	if "drops" in ent:
+		for key in ent.drops:
+			var count = Globals.inventory.get(key, 0)
+
+			if key in Globals.inventory:
+				Globals.inventory[key] += count
+			elif ent.drops[key] > 0:
+				Globals.inventory[key] = ent.drops[key]
+			Globals.send_to_game_log("Got " + key + " x" + str(ent.drops[key]))
 	entities.erase(ent)
 	enemies.erase(ent)
 	players.erase(ent)

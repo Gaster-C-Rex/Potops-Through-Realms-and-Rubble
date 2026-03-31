@@ -7,7 +7,6 @@ extends Control
 	"shop": %ShopMenu,
 	"map": %MapSelectMenu,
 	"char": %CharacterSelectMenu,
-	"item": %ItemPurchaseMenu
 }
 
 
@@ -25,6 +24,11 @@ func switch_menu(menu_name: String) -> void:
 		menues[menu].visible = (menu == menu_name)
 
 func _on_start_game_button_pressed() -> void:
+	var idx = 0
+	for child in %CharacterSelectHBox.get_children():
+		if child is PanelContainer:
+			child.add_to_party(idx)
+			idx += 1
 	Globals.start_game()
 
 func _on_character_back_button_pressed() -> void:
@@ -40,6 +44,7 @@ func _on_hub_maps_button_pressed() -> void:
 func _on_hub_shop_button_pressed() -> void:
 	switch_menu("shop")
 	AudioController.play_bg_music(Globals.get_audio(Globals.SONG_WORKSHOP))
+	%ShopMenu.update_trade_buttons()
 
 func _on_hub_guide_button_pressed() -> void:
 	switch_menu("guide")
@@ -55,4 +60,4 @@ func _on_shop_back_button_pressed() -> void:
 	AudioController.play_bg_music(Globals.get_audio(Globals.SONG_CONSTRUCT_SITE))
 	
 func _on_shop_items_button_pressed() -> void:
-	switch_menu("item")
+	%ShopPanelContainer.visible = !%ShopPanelContainer.visible

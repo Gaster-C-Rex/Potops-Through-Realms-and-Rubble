@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://i75ql5ait3me"]
 
 [ext_resource type="Texture2D" uid="uid://clqu8taeiktht" path="res://assets/sprites/players/potop_normal.webp" id="1_6vh04"]
+[ext_resource type="Script" uid="uid://d31850slkjrtg" path="res://scenes/UI/character_selector.gd" id="1_b1sc3"]
 [ext_resource type="Texture2D" uid="uid://cxebp2gl0o106" path="res://assets/UI/left_arrow.png" id="2_5nlvi"]
-[ext_resource type="Texture2D" uid="uid://dcrsg21ao58gg" path="res://assets/sprites/orange_gem.webp" id="2_7bqif"]
+[ext_resource type="Texture2D" uid="uid://dcrsg21ao58gg" path="res://assets/sprites/items/orange_gem.webp" id="2_7bqif"]
 [ext_resource type="Texture2D" uid="uid://b3r572tau1jdy" path="res://assets/UI/right_arrow.png" id="4_b1sc3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5nlvi"]
@@ -25,6 +26,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_b1sc3")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1518229500]
 layout_mode = 2
@@ -45,27 +47,31 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_vertical = 3
+alignment = 1
 
-[node name="LeftArrow" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1578839990]
+[node name="PlayerLeftArrow" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1578839990]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 64)
 layout_mode = 2
 size_flags_horizontal = 3
 texture_normal = SubResource("AtlasTexture_5nlvi")
-stretch_mode = 4
+stretch_mode = 5
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=252805446]
+[node name="PlayerTexture" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=252805446]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("1_6vh04")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="RightArrow" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=479942517]
+[node name="PlayeRightArrow" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=479942517]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 64)
 layout_mode = 2
 size_flags_horizontal = 3
 texture_normal = SubResource("AtlasTexture_b1sc3")
-stretch_mode = 4
+stretch_mode = 5
 
 [node name="EquipmentSelectLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=235135485]
 layout_mode = 2
@@ -75,8 +81,10 @@ horizontal_alignment = 1
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1776842683]
 layout_mode = 2
 size_flags_vertical = 3
+alignment = 1
 
-[node name="LeftArrow" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=252757563]
+[node name="EquipmentLeftArrow" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=252757563]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 64)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -91,9 +99,15 @@ texture = ExtResource("2_7bqif")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="RightArrow" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=307389226]
+[node name="EquipmentRightArrow" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=307389226]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 64)
 layout_mode = 2
 size_flags_horizontal = 3
 texture_normal = SubResource("AtlasTexture_ovtb3")
 stretch_mode = 5
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/PlayerLeftArrow" to="." method="_on_player_left_arrow_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/PlayeRightArrow" to="." method="_on_playe_right_arrow_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/EquipmentLeftArrow" to="." method="_on_equipment_left_arrow_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/EquipmentRightArrow" to="." method="_on_equipment_right_arrow_pressed"]

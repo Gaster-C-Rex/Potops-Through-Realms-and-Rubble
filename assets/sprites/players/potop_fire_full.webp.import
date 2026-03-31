@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dn0uygqqwbuhu"
-path="res://.godot/imported/stick.webp-f7f14fefc77330cfe0d9a97dcc43ba56.ctex"
+uid="uid://dklxhrtv6ot8x"
+path="res://.godot/imported/potop_fire_full.webp-987b6d892689fff745dd903fa8228c38.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/stick.webp"
-dest_files=["res://.godot/imported/stick.webp-f7f14fefc77330cfe0d9a97dcc43ba56.ctex"]
+source_file="res://assets/sprites/players/potop_fire_full.webp"
+dest_files=["res://.godot/imported/potop_fire_full.webp-987b6d892689fff745dd903fa8228c38.ctex"]
 
 [params]
 

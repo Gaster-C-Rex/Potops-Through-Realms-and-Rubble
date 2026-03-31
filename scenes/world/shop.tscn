@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://2os06rn23v6m"]
 
-[ext_resource type="Texture2D" uid="uid://dcrsg21ao58gg" path="res://assets/sprites/orange_gem.webp" id="1_cjlfn"]
+[ext_resource type="Texture2D" uid="uid://dcrsg21ao58gg" path="res://assets/sprites/items/orange_gem.webp" id="1_cjlfn"]
 
 [node name="Shop" type="Sprite2D" unique_id=1850352010]
 texture = ExtResource("1_cjlfn")

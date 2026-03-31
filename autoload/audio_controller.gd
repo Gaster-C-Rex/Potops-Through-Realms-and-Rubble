@@ -3,26 +3,17 @@ extends Node
 @onready var background_music: AudioStreamPlayer = $BackgroundMusic
 
 ##Loads data from file to be played
-func load_music_data(path: String):
-	var file = FileAccess.open(path, FileAccess.READ)
-
+func load_music_data(path: String) -> AudioStream: 
 	if path.to_lower().ends_with(".wav"):
-		background_music.pitch_scale = 2.0 #pitch correcting
-		var sound = AudioStreamWAV.new()
-		sound.format = AudioStreamWAV.FORMAT_16_BITS
-		sound.data = file.get_buffer(file.get_length())
-		return sound
+		var sound := AudioStreamWAV.load_from_file(path)
+		if sound == null:
+			push_error("Failed to load WAV: %s" % path)
+			return null
 
-	if path.to_lower().ends_with(".mp3"):
-		background_music.pitch_scale = 1.0
-		var sound = AudioStreamMP3.new()
-		sound.data = file.get_buffer(file.get_length())
-		return sound
-
-	if path.to_lower().ends_with(".ogg"):
-		background_music.pitch_scale = 1.0
-		var sound = AudioStreamOggVorbis.new()
-		sound.data = file.get_buffer(file.get_length())
+		sound.loop_mode = AudioStreamWAV.LOOP_FORWARD
+		sound.loop_begin = 0
+		# ugliest one-liner in the whole codebase, enjoy!
+		sound.loop_end = sound.data.size() / ((2 if sound.stereo else 1) * (2 if sound.format == AudioStreamWAV.FORMAT_16_BITS else 1))
 		return sound
 
 	return null
@@ -35,7 +26,3 @@ func play_bg_music(path: String):
 ##Stops background music
 func stop_bg_music() -> void:
 	background_music.stop()
-
-##Loops background music
-func _on_background_music_finished() -> void:
-	background_music.play()

@@ -1,7 +1,7 @@
 # player.gd
 extends entity
 
-@onready var potop_anim: Sprite2D = $PotopAnimated2D
+# @onready var potop_anim: AnimatedSprite2D = $PotopAnimated2D
 
 const TILE_INDICATOR_SCENE := preload("res://scenes/UI/tile_indicator.tscn")
 
@@ -14,7 +14,7 @@ enum MoveState {
 	IN_MENU
 }
 
-var player_type = "regular"
+var player_type = "Default"
 
 var movement_tile_sprites: Array[Sprite2D] = []
 var targeted_tiles: Array[Vector2i] = []
@@ -30,15 +30,25 @@ var move_state := MoveState.IDLE
 
 #region Lifecycle
 
-## Initializes the player state, archetype, and combat UI references.
+## Loads player data (from Globals.party[idx] right now, maybe from JSON later
+## Some logic for handling Special is still hardcoded in special_action!
+func initialize(idx: int):
+	var data = Globals.party[idx] as Dictionary
+	%Potop2D.texture = load(data["texture_path"])
+	if !data.has("properties"):
+		push_warning("Player didn't get assigned data, using Default!")
+		data = Globals.PLAYER_OPTIONS["Default"]
+	player_type = data["type"]
+	readable_name = data.get("readable_name", player_type.capitalize())
+	for stat in data["properties"]:
+		if stat in self:
+			set(stat, data["properties"][stat])
+		else:
+			push_warning("Invalid player stat \"" + stat + "\"")
+
+## Initializes the player state and combat UI references.
 func _ready() -> void:
 	target_position = position
-
-
-	load_ranged_archetype()
-	has_heal = true
-	has_defend = true
-	has_special = true
 
 	await get_tree().process_frame
 	update_health_bar()
@@ -436,7 +446,8 @@ func _update_combat_ui() -> void:
 	var ranged_color := "red"
 	if attacks_remaining > 0 and has_ranged:
 		ranged_color = "green"
-
+	
+	# TODO: This is really bad, find a better way to reference things!
 	Globals.melee_attack_count.text = _format_count(attacks_remaining, melee_color)
 	Globals.ranged_attack_count.text = _format_count(attacks_remaining, ranged_color)
 	Globals.move_count.text = _format_count(move_count, move_color)
@@ -449,7 +460,9 @@ func _update_combat_ui() -> void:
 			special_color = "green"
 
 		Globals.special_count.text = _format_count(get_special_remaining(), special_color)
-
+	
+	Globals.portrait.texture = %Potop2D.texture
+	
 	update_health_bar()
 
 #endregion
@@ -495,7 +508,13 @@ func heal_action() -> void:
 ## Executes the player's special behavior or begins special targeting.
 func special_action() -> void:
 	match player_type:
-		"regular":
+		"Default":
+			start_attack_targeting("special")
+		"Marble":
+			start_attack_targeting("special")
+		"Fire":
+			start_attack_targeting("special")
+		"Flying":
 			start_attack_targeting("special")
 		"_":
 			add_temp_bonus_action(2)

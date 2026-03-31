@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dradvlk2l0m8y"]
 
-[ext_resource type="Texture2D" uid="uid://dn0uygqqwbuhu" path="res://assets/sprites/stick.webp" id="1_87ch6"]
+[ext_resource type="Texture2D" uid="uid://dn0uygqqwbuhu" path="res://assets/sprites/items/stick.webp" id="1_87ch6"]
 
 [node name="Item" type="Sprite2D" unique_id=1559799741]
 texture = ExtResource("1_87ch6")

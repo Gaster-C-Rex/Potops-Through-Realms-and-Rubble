@@ -107,6 +107,30 @@ script = ExtResource("1_3iwug")
 unique_name_in_owner = true
 script = ExtResource("2_sarsd")
 
+[node name="LogPanel" type="PanelContainer" parent="UI" unique_id=238370643]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_right = 0.74600005
+offset_right = 0.11993408
+offset_bottom = 83.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/LogPanel" unique_id=1377168949]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Log" type="RichTextLabel" parent="UI/LogPanel/MarginContainer" unique_id=1262255118]
+unique_name_in_owner = true
+layout_mode = 2
+bbcode_enabled = true
+text = "Game Log (press / to close)"
+scroll_following = true
+
 [node name="DebugMenu" type="Control" parent="UI" unique_id=341288224]
 visible = false
 layout_mode = 3
@@ -233,24 +257,6 @@ max_value = 20.0
 value = 4.0
 rounded = true
 prefix = "Range:"
-
-[node name="LogPanel" type="PanelContainer" parent="UI/DebugMenu" unique_id=238370643]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.86700004
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -0.24005127
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="Log" type="RichTextLabel" parent="UI/DebugMenu/LogPanel" unique_id=1262255118]
-unique_name_in_owner = true
-layout_mode = 2
-bbcode_enabled = true
-text = "Debug Log (press / to close)"
-scroll_following = true
 
 [node name="PauseMenu" type="Control" parent="UI" unique_id=1630823583]
 unique_name_in_owner = true
