@@ -25,6 +25,7 @@ gradient = SubResource("Gradient_2ojsr")
 script = ExtResource("1_8e51o")
 
 [node name="Potop2D" type="Sprite2D" parent="." unique_id=91264459]
+unique_name_in_owner = true
 position = Vector2(0, -16)
 texture = SubResource("AtlasTexture_njc66")
 

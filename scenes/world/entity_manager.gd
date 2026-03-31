@@ -87,6 +87,8 @@ func _spawn_player_party() -> void:
 		add_child(instance)
 		entities.append(instance)
 		players.append(instance)
+		
+		instance.initialize(i)
 
 	finalize_player_party_setup()
 

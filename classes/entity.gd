@@ -44,6 +44,8 @@ var attacks_per_turn := 2
 var bonus_actions_per_turn := 0
 var speed := 4
 
+var has_heal := false
+var has_defend := false
 var has_special := false
 var specials_per_combat := 1
 
@@ -52,8 +54,7 @@ var specials_per_combat := 1
 
 #region Utility / AI
 
-var has_heal := false
-var has_defend := false
+
 var ai_type := "melee"
 var sight_range := 6
 

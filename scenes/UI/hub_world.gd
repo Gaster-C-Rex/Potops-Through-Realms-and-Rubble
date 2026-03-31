@@ -24,6 +24,11 @@ func switch_menu(menu_name: String) -> void:
 		menues[menu].visible = (menu == menu_name)
 
 func _on_start_game_button_pressed() -> void:
+	var idx = 0
+	for child in %CharacterSelectHBox.get_children():
+		if child is PanelContainer:
+			child.add_to_party(idx)
+			idx += 1
 	Globals.start_game()
 
 func _on_character_back_button_pressed() -> void:

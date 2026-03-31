@@ -13,10 +13,162 @@ const SONG_CONSTRUCT_SITE := "Construction-Site.wav"
 const SONG_EXPLORE := "Explorationv2 (Loop).wav"
 const SONG_WORKSHOP := "Work-Shopped.wav"
 
-enum Popup_Option {
-	MELEE_ATTACK,
-	RANGED_ATTACK
+enum AttackType { # HACK: this should only be declared in one place
+	TILE,         # and can easily create desyncs
+	LINE,
+	LINE_REVERSE,
+	BOOMERANG,
+	ARC_45,
+	ARC_90,
+	ARC_180,
+	CIRCLE,
+	SQUARE,
 }
+
+
+# In the future, load this from a JSON
+const PLAYER_OPTIONS = {
+	"Default": {
+		"properties": {
+			"max_health": 12, 
+			"health": 12,
+			"armor": 1,
+			"speed": 4,
+			"flying": false,
+			"attacks_per_turn": 2,
+			"bonus_actions_per_turn": 0,
+			"has_heal": true,
+			"has_defend": true,
+			"has_melee": true,
+			"has_ranged": true,
+			"has_special": true,
+			"specials_per_combat": 1,
+			"melee_range": 1,
+			"melee_hits_flying": true, # To avoid confusion for now
+			"melee_damage": Vector2i(2, 6),
+			"melee_attack_type": AttackType.TILE,
+			"melee_attack_pierce": 1,
+			"ranged_range": 5,
+			"ranged_hits_flying": true,
+			"ranged_damage": Vector2i(1, 5),
+			"ranged_attack_type": AttackType.LINE,
+			"ranged_attack_pierce": 1,
+			"special_range": 6,
+			"special_hits_flying": true,
+			"special_damage": Vector2i(4, 8),
+			"special_attack_type": AttackType.ARC_45,
+			"special_attack_pierce": 0, # unlimited
+		},
+		"texture_path": "res://assets/sprites/players/Potop-Idles.png",
+		"type": "Default"
+	},
+	"Marble": {
+		"properties": {
+			"max_health": 15, 
+			"health": 15,
+			"armor": 2,
+			"speed": 3,
+			"flying": false,
+			"attacks_per_turn": 1,
+			"bonus_actions_per_turn": 1,
+			"has_heal": false,
+			"has_defend": true,
+			"has_melee": true,
+			"has_ranged": false,
+			"has_special": true,
+			"specials_per_combat": 1,
+			"melee_range": 1,
+			"melee_hits_flying": true, # To avoid confusion for now
+			"melee_damage": Vector2i(1, 4),
+			"melee_attack_type": AttackType.TILE,
+			"melee_attack_pierce": 1,
+			"special_range": 3,
+			"special_hits_flying": true,
+			"special_damage": Vector2i(4, 8),
+			"special_attack_type": AttackType.CIRCLE,
+			"special_attack_pierce": 0, # unlimited
+		},
+		"texture_path": "res://assets/sprites/players/Marble-Idles.png",
+		"type": "Marble",
+	},
+	"Fire": {
+		"properties": {
+			"max_health": 10, 
+			"health": 10,
+			"armor": 0,
+			"speed": 4,
+			"flying": false,
+			"attacks_per_turn": 3,
+			"bonus_actions_per_turn": 0,
+			"has_heal": false,
+			"has_defend": false,
+			"has_melee": true,
+			"has_ranged": true,
+			"has_special": true,
+			"specials_per_combat": 1,
+			"melee_range": 2,
+			"melee_hits_flying": true, # To avoid confusion for now
+			"melee_damage": Vector2i(3, 9),
+			"melee_attack_type": AttackType.ARC_180,
+			"melee_attack_pierce": 2,
+			"ranged_range": 6,
+			"ranged_hits_flying": true,
+			"ranged_damage": Vector2i(2, 9),
+			"ranged_attack_type": AttackType.ARC_90,
+			"ranged_attack_pierce": 2,
+			"special_range": 8,
+			"special_hits_flying": true,
+			"special_damage": Vector2i(6, 12),
+			"special_attack_type": AttackType.BOOMERANG,
+			"special_attack_pierce": 0, # unlimited
+		},
+		"texture_path": "res://assets/sprites/players/Fiery-Idles.png",
+		"type": "Fire",
+	},
+	"Flying": {
+		"properties": {
+			"max_health": 10, 
+			"health": 10,
+			"armor": 1,
+			"speed": 6,
+			"flying": true, # shocker, I know
+			"attacks_per_turn": 2,
+			"bonus_actions_per_turn": 0,
+			"has_heal": true,
+			"has_defend": true,
+			"has_melee": false,
+			"has_ranged": true,
+			"has_special": true,
+			"specials_per_combat": 1,
+			"ranged_range": 5,
+			"ranged_hits_flying": true,
+			"ranged_damage": Vector2i(2, 5),
+			"ranged_attack_type": AttackType.TILE,
+			"ranged_attack_pierce": 1,
+			"special_range": 6,
+			"special_hits_flying": true,
+			"special_damage": Vector2i(4, 8),
+			"special_attack_type": AttackType.LINE_REVERSE,
+			"special_attack_pierce": 2, # unlimited
+		},
+		"texture_path": "res://assets/sprites/players/Flutter-Idles.png",
+		"type": "Flying",
+	},
+}
+
+# Add items to this dict as they become available
+var EQUIPMENT_OPTIONS = {
+	"None": {},
+}
+
+# List of exactly 3 player stat blocks
+var party = [{}, {}, {}]
+
+# unused as of new combat system
+#enum Popup_Option {
+	#MELEE_ATTACK,
+	#RANGED_ATTACK
+#}
 
 var active_map: Node2D
 var active_map_id: int
