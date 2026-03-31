@@ -34,7 +34,6 @@ var move_state := MoveState.IDLE
 func _ready() -> void:
 	target_position = position
 
-	potop_anim.play("default")
 
 	load_ranged_archetype()
 	has_heal = true
@@ -48,15 +47,6 @@ func _ready() -> void:
 	if Globals.combat_ui:
 		Globals.combat_ui.visible = false
 		
-func change_state(_s: MoveState):
-	if move_state == MoveState.IDLE:
-		potop_anim.play("default")
-	
-	if move_state == MoveState.KEYBOARD:
-		potop_anim.play("walks")
-		
-	if move_state == MoveState.CLICK_MOVING:
-		potop_anim.play("walks")
 ## Updates movement, input, attack preview, and combat trigger behavior each physics frame.
 func _physics_process(delta: float) -> void:
 	if Globals.in_combat:
@@ -86,15 +76,12 @@ func _physics_process(delta: float) -> void:
 	match move_state:
 		MoveState.IDLE:
 			process_keyboard_input()
-			change_state(0)
 		MoveState.KEYBOARD:
 			process_keyboard_input()
-			change_state(1)
 		MoveState.CLICK_TARGETING:
 			pass
 		MoveState.CLICK_MOVING:
 			_process_click_move_queue()
-			change_state(1)
 		MoveState.ATTACK_TARGETING:
 			update_attack_preview()
 		MoveState.IN_MENU:
@@ -293,25 +280,21 @@ func process_follow_movement() -> void:
 
 	if target_tile == my_tile:
 		follow_targets.pop_front()
-		change_state(1)
 		return
 
 	var path := pathfind_to_space(target_tile)
 
 	if path.is_empty():
 		follow_targets.pop_front()
-		change_state(1)
 		return
 
 	follow_targets.pop_front()
 	follow_path(path)
 	process_movement_queue()
-	change_state(1)
 	
 ## Clears all pending follower target tiles for this player.
 func clear_follow_targets() -> void:
 	follow_targets.clear()
-	change_state(0)
 
 ## Resets movement and targeting state when combat begins.
 func reset_movement_state_for_combat() -> void:

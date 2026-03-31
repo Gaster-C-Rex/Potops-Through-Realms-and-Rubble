@@ -41,10 +41,6 @@ region = Rect2(140, 0, 140, 143)
 atlas = ExtResource("6_shf2g")
 region = Rect2(0, 0, 136, 226)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1l1pl"]
-atlas = ExtResource("6_shf2g")
-region = Rect2(136, 0, 136, 226)
-
 [node name="Hubworld" type="Control" unique_id=705988047]
 layout_mode = 3
 anchors_preset = 15
@@ -121,7 +117,6 @@ offset_right = 0.63998413
 offset_bottom = 0.15997314
 grow_vertical = 2
 texture_normal = SubResource("AtlasTexture_g04e5")
-texture_hover = SubResource("AtlasTexture_1l1pl")
 stretch_mode = 4
 
 [node name="CharacterStatsMenu" type="Control" parent="." unique_id=201573528]

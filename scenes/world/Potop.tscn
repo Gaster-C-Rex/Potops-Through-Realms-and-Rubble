@@ -1,104 +1,10 @@
 [gd_scene format=3 uid="uid://b1queastcser2"]
 
 [ext_resource type="Script" uid="uid://cf3i8jut4l8n0" path="res://scenes/world/player.gd" id="1_8e51o"]
-[ext_resource type="Texture2D" uid="uid://b0085wfb84w5y" path="res://assets/sprites/players/Potop-Idles.png" id="2_njc66"]
+[ext_resource type="Texture2D" uid="uid://cr2xbs8yqblrs" path="res://assets/sprites/players/Potop-Idles.png" id="2_njc66"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_njc66"]
 atlas = ExtResource("2_njc66")
-region = Rect2(7, 0, 64, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_a7xm8"]
-atlas = ExtResource("2_njc66")
-region = Rect2(88, 0, 64, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6n77h"]
-atlas = ExtResource("2_njc66")
-region = Rect2(169, 0, 64, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2ojsr"]
-atlas = ExtResource("2_njc66")
-region = Rect2(250, 0, 64, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_c3g2m"]
-atlas = ExtResource("2_njc66")
-region = Rect2(5, 96, 75, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vk0r0"]
-atlas = ExtResource("2_njc66")
-region = Rect2(84, 96, 75, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vjvtk"]
-atlas = ExtResource("2_njc66")
-region = Rect2(163, 96, 75, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hsjve"]
-atlas = ExtResource("2_njc66")
-region = Rect2(242, 96, 75, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rgbky"]
-atlas = ExtResource("2_njc66")
-region = Rect2(321, 96, 75, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qjw4i"]
-atlas = ExtResource("2_njc66")
-region = Rect2(400, 96, 75, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dpp10"]
-atlas = ExtResource("2_njc66")
-region = Rect2(479, 96, 75, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wxg33"]
-atlas = ExtResource("2_njc66")
-region = Rect2(558, 96, 75, 96)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_rk5mn"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_njc66")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_a7xm8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6n77h")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2ojsr")
-}],
-"loop": true,
-"name": &"default",
-"speed": 2.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_c3g2m")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vk0r0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vjvtk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hsjve")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rgbky")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qjw4i")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dpp10")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wxg33")
-}],
-"loop": true,
-"name": &"walks",
-"speed": 5.0
-}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3li8b"]
 size = Vector2(64, 64)
@@ -118,9 +24,9 @@ gradient = SubResource("Gradient_2ojsr")
 [node name="Potop" type="Node2D" unique_id=2044595361]
 script = ExtResource("1_8e51o")
 
-[node name="PotopAnimated2D" type="AnimatedSprite2D" parent="." unique_id=1360237061]
+[node name="Potop2D" type="Sprite2D" parent="." unique_id=91264459]
 position = Vector2(0, -16)
-sprite_frames = SubResource("SpriteFrames_rk5mn")
+texture = SubResource("AtlasTexture_njc66")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1941742630]
 

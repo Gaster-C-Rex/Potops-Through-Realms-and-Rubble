@@ -11,7 +11,7 @@ const SONG_BATTLE := "Battle (Loop).wav"
 const SONG_CHAR_SELECT := "Character_Select(Loop).wav"
 const SONG_CONSTRUCT_SITE := "Construction-Site.wav"
 const SONG_EXPLORE := "Explorationv2 (Loop).wav"
-
+const SONG_WORKSHOP := "Work-Shopped.wav"
 
 enum Popup_Option {
 	MELEE_ATTACK,

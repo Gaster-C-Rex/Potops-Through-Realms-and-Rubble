@@ -1,7 +1,21 @@
 [gd_scene format=3 uid="uid://i75ql5ait3me"]
 
 [ext_resource type="Texture2D" uid="uid://clqu8taeiktht" path="res://assets/sprites/players/potop_normal.webp" id="1_6vh04"]
+[ext_resource type="Texture2D" uid="uid://cxebp2gl0o106" path="res://assets/UI/left_arrow.png" id="2_5nlvi"]
 [ext_resource type="Texture2D" uid="uid://dcrsg21ao58gg" path="res://assets/sprites/orange_gem.webp" id="2_7bqif"]
+[ext_resource type="Texture2D" uid="uid://b3r572tau1jdy" path="res://assets/UI/right_arrow.png" id="4_b1sc3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5nlvi"]
+atlas = ExtResource("2_5nlvi")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1sc3"]
+atlas = ExtResource("4_b1sc3")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0qpbn"]
+atlas = ExtResource("2_5nlvi")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ovtb3"]
+atlas = ExtResource("4_b1sc3")
 
 [node name="PanelContainer" type="PanelContainer" unique_id=460028910]
 anchors_preset = 15
@@ -36,6 +50,8 @@ size_flags_vertical = 3
 custom_minimum_size = Vector2(32, 64)
 layout_mode = 2
 size_flags_horizontal = 3
+texture_normal = SubResource("AtlasTexture_5nlvi")
+stretch_mode = 4
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=252805446]
 layout_mode = 2
@@ -48,6 +64,8 @@ stretch_mode = 5
 custom_minimum_size = Vector2(32, 64)
 layout_mode = 2
 size_flags_horizontal = 3
+texture_normal = SubResource("AtlasTexture_b1sc3")
+stretch_mode = 4
 
 [node name="EquipmentSelectLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=235135485]
 layout_mode = 2
@@ -62,6 +80,7 @@ size_flags_vertical = 3
 custom_minimum_size = Vector2(32, 64)
 layout_mode = 2
 size_flags_horizontal = 3
+texture_normal = SubResource("AtlasTexture_0qpbn")
 stretch_mode = 5
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=738323802]
@@ -76,4 +95,5 @@ stretch_mode = 5
 custom_minimum_size = Vector2(32, 64)
 layout_mode = 2
 size_flags_horizontal = 3
+texture_normal = SubResource("AtlasTexture_ovtb3")
 stretch_mode = 5

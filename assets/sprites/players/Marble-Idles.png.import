@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cr2xbs8yqblrs"
-path="res://.godot/imported/Potop-Idles.png-58f7207c10a921829f9b92bd0f7e1a7d.ctex"
+uid="uid://eio4odqiad60"
+path="res://.godot/imported/Marble-Idles.png-95ca248379cd6df2a2bab2cbd85864ee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/players/Potop-Idles.png"
-dest_files=["res://.godot/imported/Potop-Idles.png-58f7207c10a921829f9b92bd0f7e1a7d.ctex"]
+source_file="res://assets/sprites/players/Marble-Idles.png"
+dest_files=["res://.godot/imported/Marble-Idles.png-95ca248379cd6df2a2bab2cbd85864ee.ctex"]
 
 [params]
 
