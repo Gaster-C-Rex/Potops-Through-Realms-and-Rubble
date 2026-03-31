@@ -6,5 +6,3 @@
 script = ExtResource("1_i53g0")
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=875848114]
-
-[connection signal="finished" from="BackgroundMusic" to="." method="_on_background_music_finished"]
