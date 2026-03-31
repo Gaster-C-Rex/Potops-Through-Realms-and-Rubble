@@ -5,7 +5,7 @@ const TILE_SIZE = 64
 const USER_MAP_DIR = "user://maps"
 const RES_MAP_DIR = "res://assets/maps"
 const ENEMY_DIR = "user://enemies"
-const AUDIO_DIR = "user://audio"
+const AUDIO_DIR = "res://assets/audio"
 
 const SONG_BATTLE := "Battle (Loop).wav"
 const SONG_CHAR_SELECT := "Character_Select(Loop).wav"
@@ -175,6 +175,8 @@ func load_audio() -> bool:
 		file_name = dir.get_next()
 
 	dir.list_dir_end()
+	if audio.is_empty():
+		return false
 	return true
 
 ## Parses a JSON string and returns the decoded data or null on failure.

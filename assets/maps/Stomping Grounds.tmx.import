@@ -1,0 +1,23 @@
+[remap]
+
+importer="YATI"
+type="PackedScene"
+uid="uid://cenp2gu0l5l1x"
+path="res://.godot/imported/Stomping Grounds.tmx-a1a51fefeed52439c20a5ca00de484bb.tscn"
+
+[deps]
+
+source_file="res://assets/maps/Stomping Grounds.tmx"
+dest_files=["res://.godot/imported/Stomping Grounds.tmx-a1a51fefeed52439c20a5ca00de484bb.tscn"]
+
+[params]
+
+use_default_filter=false
+add_class_as_metadata=false
+add_id_as_metadata=false
+no_alternative_tiles=false
+map_wangset_to_terrain=false
+custom_data_prefix="data_"
+tiled_project_file=""
+post_processor=""
+save_tileset_to=""
