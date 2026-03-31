@@ -44,6 +44,7 @@ func _on_hub_maps_button_pressed() -> void:
 func _on_hub_shop_button_pressed() -> void:
 	switch_menu("shop")
 	AudioController.play_bg_music(Globals.get_audio(Globals.SONG_WORKSHOP))
+	%ShopMenu.update_trade_buttons()
 
 func _on_hub_guide_button_pressed() -> void:
 	switch_menu("guide")
@@ -59,4 +60,4 @@ func _on_shop_back_button_pressed() -> void:
 	AudioController.play_bg_music(Globals.get_audio(Globals.SONG_CONSTRUCT_SITE))
 	
 func _on_shop_items_button_pressed() -> void:
-	pass # Replace with function body.
+	%ShopPanelContainer.visible = !%ShopPanelContainer.visible

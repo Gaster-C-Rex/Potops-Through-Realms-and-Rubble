@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://clqu8taeiktht" path="res://assets/sprites/players/potop_normal.webp" id="1_6vh04"]
 [ext_resource type="Script" uid="uid://d31850slkjrtg" path="res://scenes/UI/character_selector.gd" id="1_b1sc3"]
 [ext_resource type="Texture2D" uid="uid://cxebp2gl0o106" path="res://assets/UI/left_arrow.png" id="2_5nlvi"]
-[ext_resource type="Texture2D" uid="uid://dcrsg21ao58gg" path="res://assets/sprites/orange_gem.webp" id="2_7bqif"]
+[ext_resource type="Texture2D" uid="uid://dcrsg21ao58gg" path="res://assets/sprites/items/orange_gem.webp" id="2_7bqif"]
 [ext_resource type="Texture2D" uid="uid://b3r572tau1jdy" path="res://assets/UI/right_arrow.png" id="4_b1sc3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5nlvi"]

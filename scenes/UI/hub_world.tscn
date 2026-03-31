@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://rwyftmeple1r" path="res://assets/UI/bullets-board.png" id="5_ts8j2"]
 [ext_resource type="Texture2D" uid="uid://dwyjl5ekwmwsx" path="res://assets/UI/stats-tent.png" id="6_shf2g"]
 [ext_resource type="Texture2D" uid="uid://6suwr2gi0y3p" path="res://assets/sprites/backgrounds/workshop.png" id="9_gyri2"]
+[ext_resource type="Script" uid="uid://ij26r7003c35" path="res://scenes/UI/shop_menu.gd" id="9_ts8j2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lql25"]
 atlas = ExtResource("3_kqx6o")
@@ -246,6 +247,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("9_ts8j2")
 
 [node name="TextureRect" type="TextureRect" parent="ShopMenu" unique_id=1461266462]
 layout_mode = 0
@@ -253,27 +255,112 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("9_gyri2")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ShopMenu" unique_id=906620827]
-custom_minimum_size = Vector2(100, 100)
+[node name="HBoxContainer" type="HBoxContainer" parent="ShopMenu" unique_id=522717781]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.721
-anchor_top = 0.45200002
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 27.119995
-offset_top = 174.56
-offset_right = -99.0
-offset_bottom = 344.0
-grow_horizontal = 0
+anchor_bottom = 1.0
+grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ShopBackButton" type="Button" parent="ShopMenu/VBoxContainer" unique_id=8414941]
+[node name="ShopMargins" type="MarginContainer" parent="ShopMenu/HBoxContainer" unique_id=872271281]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ShopPanelContainer" type="PanelContainer" parent="ShopMenu/HBoxContainer/ShopMargins" unique_id=1135222499]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ShopMenu/HBoxContainer/ShopMargins/ShopPanelContainer" unique_id=552511808]
+layout_mode = 2
+
+[node name="ScrollMargins" type="MarginContainer" parent="ShopMenu/HBoxContainer/ShopMargins/ShopPanelContainer/ScrollContainer" unique_id=703321040]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ShopVBox" type="VBoxContainer" parent="ShopMenu/HBoxContainer/ShopMargins/ShopPanelContainer/ScrollContainer/ScrollMargins" unique_id=1088243200]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="!TRADE_OFFER!" type="RichTextLabel" parent="ShopMenu/HBoxContainer/ShopMargins/ShopPanelContainer/ScrollContainer/ScrollMargins/ShopVBox" unique_id=2052385798]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "! TRADE OFFER !"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="TradesHBox" type="HBoxContainer" parent="ShopMenu/HBoxContainer/ShopMargins/ShopPanelContainer/ScrollContainer/ScrollMargins/ShopVBox" unique_id=1277895650]
+layout_mode = 2
+
+[node name="TradesVBox" type="VBoxContainer" parent="ShopMenu/HBoxContainer/ShopMargins/ShopPanelContainer/ScrollContainer/ScrollMargins/ShopVBox/TradesHBox" unique_id=1959070461]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LableMargins" type="MarginContainer" parent="ShopMenu/HBoxContainer/ShopMargins/ShopPanelContainer/ScrollContainer/ScrollMargins/ShopVBox/TradesHBox/TradesVBox" unique_id=1104293172]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="LabelHBox" type="HBoxContainer" parent="ShopMenu/HBoxContainer/ShopMargins/ShopPanelContainer/ScrollContainer/ScrollMargins/ShopVBox/TradesHBox/TradesVBox/LableMargins" unique_id=1049339853]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="ShopMenu/HBoxContainer/ShopMargins/ShopPanelContainer/ScrollContainer/ScrollMargins/ShopVBox/TradesHBox/TradesVBox/LableMargins/LabelHBox" unique_id=807663633]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 20
+text = "I Receive:"
+
+[node name="Label" type="Label" parent="ShopMenu/HBoxContainer/ShopMargins/ShopPanelContainer/ScrollContainer/ScrollMargins/ShopVBox/TradesHBox/TradesVBox/LableMargins/LabelHBox" unique_id=1809621085]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 20
+text = "You Receive:"
+
+[node name="ButtonsVBox" type="VBoxContainer" parent="ShopMenu/HBoxContainer/ShopMargins/ShopPanelContainer/ScrollContainer/ScrollMargins/ShopVBox/TradesHBox" unique_id=1618893133]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="ShopMenu/HBoxContainer/ShopMargins/ShopPanelContainer/ScrollContainer/ScrollMargins/ShopVBox/TradesHBox/ButtonsVBox" unique_id=1798830921]
+custom_minimum_size = Vector2(0, 47)
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="ShopMenu/HBoxContainer" unique_id=149156163]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ShopMenu/HBoxContainer/MarginContainer2" unique_id=906620827]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+alignment = 2
+
+[node name="ShopBackButton" type="Button" parent="ShopMenu/HBoxContainer/MarginContainer2/VBoxContainer" unique_id=8414941]
 custom_minimum_size = Vector2(50, 100)
 layout_mode = 2
 text = "Back to Hub"
 
-[node name="ShopItemsButton" type="Button" parent="ShopMenu/VBoxContainer" unique_id=2043086390]
+[node name="ShopItemsButton" type="Button" parent="ShopMenu/HBoxContainer/MarginContainer2/VBoxContainer" unique_id=2043086390]
 custom_minimum_size = Vector2(50, 100)
 layout_mode = 2
 text = "Look at Wares
@@ -462,8 +549,8 @@ text = "Back to Map Select"
 [connection signal="pressed" from="HubWorldMenu/HubGuideButton" to="." method="_on_hub_guide_button_pressed"]
 [connection signal="pressed" from="HubWorldMenu/HubStatsButton" to="." method="_on_hub_stats_button_pressed"]
 [connection signal="pressed" from="InfoGuideMenu/ControlGuideVBox/MarginContainer/PanelContainer/ControlGuideBackButton" to="." method="_on_control_guide_back_button_pressed"]
-[connection signal="pressed" from="ShopMenu/VBoxContainer/ShopBackButton" to="." method="_on_shop_back_button_pressed"]
-[connection signal="pressed" from="ShopMenu/VBoxContainer/ShopItemsButton" to="." method="_on_shop_items_button_pressed"]
+[connection signal="pressed" from="ShopMenu/HBoxContainer/MarginContainer2/VBoxContainer/ShopBackButton" to="." method="_on_shop_back_button_pressed"]
+[connection signal="pressed" from="ShopMenu/HBoxContainer/MarginContainer2/VBoxContainer/ShopItemsButton" to="." method="_on_shop_items_button_pressed"]
 [connection signal="pressed" from="MapSelectMenu/VBoxMargins/MapSelectMenuVBox/ButtonHBox/MapBackButton" to="." method="_on_map_back_button_pressed"]
 [connection signal="pressed" from="CharacterSelectMenu/MarginContainer/VBoxContainer/ButtonHBox/StartGameButton" to="." method="_on_start_game_button_pressed"]
 [connection signal="pressed" from="CharacterSelectMenu/MarginContainer/VBoxContainer/ButtonHBox/CharacterBackButton" to="." method="_on_character_back_button_pressed"]

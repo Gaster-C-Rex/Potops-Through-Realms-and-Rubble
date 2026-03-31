@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dayrdffv4kuiv"
-path="res://.godot/imported/clay.png-7767f48c1c5c276516b36ad5818bc1a2.ctex"
+uid="uid://dn0uygqqwbuhu"
+path="res://.godot/imported/stick.webp-0e579481f205189ffba6e1d14185c12f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/clay.png"
-dest_files=["res://.godot/imported/clay.png-7767f48c1c5c276516b36ad5818bc1a2.ctex"]
+source_file="res://assets/sprites/items/stick.webp"
+dest_files=["res://.godot/imported/stick.webp-0e579481f205189ffba6e1d14185c12f.ctex"]
 
 [params]
 

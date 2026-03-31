@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcrsg21ao58gg"
-path="res://.godot/imported/orange_gem.webp-9a912b548566aad7b7ab609d941b4172.ctex"
+uid="uid://dayrdffv4kuiv"
+path="res://.godot/imported/clay.png-e7a8d893e71b10392b2cb5e9f563677b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/orange_gem.webp"
-dest_files=["res://.godot/imported/orange_gem.webp-9a912b548566aad7b7ab609d941b4172.ctex"]
+source_file="res://assets/sprites/items/clay.png"
+dest_files=["res://.godot/imported/clay.png-e7a8d893e71b10392b2cb5e9f563677b.ctex"]
 
 [params]
 

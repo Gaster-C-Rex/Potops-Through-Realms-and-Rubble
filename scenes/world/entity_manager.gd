@@ -572,10 +572,9 @@ func kill(ent: Node) -> void:
 
 			if key in Globals.inventory:
 				Globals.inventory[key] += count
-			elif count > 0:
-				Globals.inventory[key] = count
+			elif ent.drops[key] > 0:
+				Globals.inventory[key] = ent.drops[key]
 			Globals.send_to_game_log("Got " + key + " x" + str(ent.drops[key]))
-	
 	entities.erase(ent)
 	enemies.erase(ent)
 	players.erase(ent)

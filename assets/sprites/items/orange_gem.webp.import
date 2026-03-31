@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dn0uygqqwbuhu"
-path="res://.godot/imported/stick.webp-f7f14fefc77330cfe0d9a97dcc43ba56.ctex"
+uid="uid://dcrsg21ao58gg"
+path="res://.godot/imported/orange_gem.webp-4f24627dd8a3c041a0c7781df9f4d37a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/stick.webp"
-dest_files=["res://.godot/imported/stick.webp-f7f14fefc77330cfe0d9a97dcc43ba56.ctex"]
+source_file="res://assets/sprites/items/orange_gem.webp"
+dest_files=["res://.godot/imported/orange_gem.webp-4f24627dd8a3c041a0c7781df9f4d37a.ctex"]
 
 [params]
 

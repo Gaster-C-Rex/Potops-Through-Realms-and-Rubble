@@ -159,9 +159,73 @@ const PLAYER_OPTIONS = {
 	},
 }
 
+var trades = [
+		{"result": "armor1",
+		"price": {
+			"stick": 10,
+			"clay": 10,
+		}},
+		{"result": "armor2",
+		"price": {
+			"stick": 10,
+			"clay": 10,
+			"orange gem": 3,
+		}},
+		{"result": "armor3",
+		"price": {
+			"stick": 10,
+			"clay": 10,
+			"purple gem": 3,
+		}},
+		{"result": "weapon1",
+		"price": {
+			"stick": 10,
+			"clay": 10,
+		}},
+		{"result": "weapon2",
+		"price": {
+			"stick": 10,
+			"clay": 10,
+			"red gem": 3,
+		}},
+		{"result": "weapon3",
+		"price": {
+			"stick": 10,
+			"clay": 10,
+			"green gem": 3,
+		}},
+		{"result": "trinket1",
+		"price": {
+			"stick": 10,
+			"clay": 10,
+		}},
+		{"result": "trinket2",
+		"price": {
+			"stick": 10,
+			"clay": 10,
+			"red gem": 3,
+		}},
+		{"result": "trinket3",
+		"price": {
+			"stick": 10,
+			"clay": 10,
+			"green gem": 3,
+		}},
+	]
+
+const item_textures = {
+	"stick": preload("uid://dn0uygqqwbuhu"),
+	"clay": preload("uid://dayrdffv4kuiv"),
+	"orange gem": preload("uid://dcrsg21ao58gg"),
+	"red gem": preload("uid://ys4yciugkf8l"), # TODO: PLACEHOLDER
+	"green gem": preload("uid://ys4yciugkf8l"), # TODO: PLACEHOLDER
+	"purple gem": preload("uid://ys4yciugkf8l"), # TODO: PLACEHOLDER
+}
+
 # Add items to this dict as they become available
 var EQUIPMENT_OPTIONS = {
-	"None": {},
+	"None": {}, # Dictionary is a player property block, 
+	# calculated and merged on select before passed to player
 }
 
 # List of exactly 3 player stat blocks
@@ -200,8 +264,18 @@ var potops := []
 var enemies := {}
 var audio := {}
 
-var inventory := {} # Simple "item": count
-var gems := ["orange gem", "red gem", "green gem"]
+# var inventory := {} # Simple "item": count
+
+var inventory := { # NOTE: For testing only! Comment out in release!
+	"stick": 50,
+	"clay": 50,
+	"orange gem": 6,
+	"red gem": 6,
+	"green gem": 6,
+	"purple gem": 6,
+}
+
+var gems := ["orange gem", "red gem", "green gem", "purple_gem"]
 
 ## Initializes user folders, loads enemy data, and sets the minimum window size.
 func _ready() -> void:
