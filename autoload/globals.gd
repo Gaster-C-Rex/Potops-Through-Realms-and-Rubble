@@ -187,6 +187,7 @@ var heal_count: RichTextLabel
 var special_count: RichTextLabel
 var player_health_bar: TextureProgressBar
 var tile_selector: Sprite2D
+var portrait: TextureRect
 
 var in_combat := false
 

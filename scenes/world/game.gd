@@ -7,6 +7,8 @@ const TILE_SIZE:int = 64
 var active_map_id:int # What index in the Globals.levels array it is
 
 func _ready() -> void:
+	# TODO: This is nasty, find a better way to reference these
+	# This can cause race conditions!!!
 	Globals.game_log = %Log
 	Globals.combat_ui = %CombatUI # This is so stupid, scenes should be able to
 	Globals.melee_attack_count = %MeleeAttackCount
@@ -18,6 +20,7 @@ func _ready() -> void:
 	Globals.player_health_bar = %UIHealthBar
 	Globals.active_camera = %PlayerCamera
 	Globals.tile_selector = %TileSelector
+	Globals.portrait = %SelectedCharacter
 	set_map(Globals.active_map_id)
 
 	AudioController.play_bg_music(Globals.get_audio(Globals.SONG_EXPLORE)) #when start playing game, play explore music

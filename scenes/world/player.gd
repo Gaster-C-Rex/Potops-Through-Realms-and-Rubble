@@ -445,7 +445,8 @@ func _update_combat_ui() -> void:
 	var ranged_color := "red"
 	if attacks_remaining > 0 and has_ranged:
 		ranged_color = "green"
-
+	
+	# TODO: This is really bad, find a better way to reference things!
 	Globals.melee_attack_count.text = _format_count(attacks_remaining, melee_color)
 	Globals.ranged_attack_count.text = _format_count(attacks_remaining, ranged_color)
 	Globals.move_count.text = _format_count(move_count, move_color)
@@ -458,7 +459,9 @@ func _update_combat_ui() -> void:
 			special_color = "green"
 
 		Globals.special_count.text = _format_count(get_special_remaining(), special_color)
-
+	
+	Globals.portrait.texture = %Potop2D.texture
+	
 	update_health_bar()
 
 #endregion
