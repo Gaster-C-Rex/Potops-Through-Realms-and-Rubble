@@ -210,17 +210,17 @@ var trades = [
 			"clay": 10,
 			"green gem": 2,
 		}},
-		{"result": "trinket1",
+		{"result": "spear",
 		"price": {
 			"red gem": 3,
 			"orange gem": 3,
 		}},
-		{"result": "trinket2",
+		{"result": "mace",
 		"price": {
 			"stick": 5,
 			"purple gem": 3,
 		}},
-		{"result": "trinket3",
+		{"result": "flail",
 		"price": {
 			"clay": 5,
 			"green gem": 3,
@@ -243,6 +243,9 @@ const item_textures = {
 	"wood bow": preload("uid://cku0ncuviroxs"),
 	"enhanced bow": preload("uid://dxwd0yhssekiq"),
 	"shotbow": preload("uid://c1p0jtvyd1fwm"),
+	"spear": preload("uid://u8rah26vla4c"),
+	"mace": preload("uid://bdg1mtvurmy6s"),
+	"flail": preload("uid://bxh0yih8p8xcf"),
 }
 
 # Add items to this dict as they become available
@@ -277,6 +280,18 @@ const EQUIPMENT_OPTIONS = {
 	"shotbow": {
 		"ranged_damage": Vector2i(1, 2),
 		"ranged_range": 1,
+	},
+	"spear": {
+		"special_range": 1,
+		"special_attack_pierce": 1,
+	},
+	"mace": {
+		"special_damage": Vector2i(1, 2),
+		"special_attack_pierce": 1,
+	},
+	"flail": {
+		"special_damage": Vector2i(2, 3),
+		"special_attack_pierce": 2,
 	},
 }
 

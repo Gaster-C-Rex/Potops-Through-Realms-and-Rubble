@@ -198,10 +198,29 @@ layout_mode = 2
 [node name="RichTextLabel1" type="RichTextLabel" parent="InfoGuideMenu/ControlGuideVBox/ControlGuideHBox/ControlGuideInfo1/ControlMarginContainer" unique_id=388052418]
 custom_minimum_size = Vector2(120, 25)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 theme_override_colors/default_color = Color(0.5176471, 0.49411765, 0.5294118, 1)
-text = "Tutorial Info 1"
+bbcode_enabled = true
+text = "[b][color=blue]Equipment Effects[/color][/b]
+
+[b]Armor[/b]
+basic armor – +1 Armor
+armored mask – +2 Armor
+cat armor – +1 Armor, +1 Speed
+
+[b]Melee Weapons[/b]
+wood sword – +1 to +1 Melee Damage
+iron dagger – +1 to +2 Melee Damage
+steel longsword – +1 to +3 Melee Damage
+
+[b]Ranged Weapons[/b]
+wood bow – +1 to +1 Ranged Damage
+enhanced bow – +1 to +1 Ranged Damage, +1 Range
+shotbow – +1 to +2 Ranged Damage, +1 Range
+
+[b]Special Weapons[/b]
+spear – +1 Special Range, +1 Pierce
+mace – +1 to +2 Special Damage, +1 Pierce
+flail – +2 to +3 Special Damage, +2 Pierce"
 
 [node name="ControlGuideInfo2" type="PanelContainer" parent="InfoGuideMenu/ControlGuideVBox/ControlGuideHBox" unique_id=17794698]
 custom_minimum_size = Vector2(200, 0)
@@ -211,14 +230,40 @@ theme_override_styles/panel = ExtResource("4_pbbkd")
 
 [node name="ControlMarginContainer2" type="MarginContainer" parent="InfoGuideMenu/ControlGuideVBox/ControlGuideHBox/ControlGuideInfo2" unique_id=1705009036]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="InfoGuideMenu/ControlGuideVBox/ControlGuideHBox/ControlGuideInfo2/ControlMarginContainer2" unique_id=329224425]
 custom_minimum_size = Vector2(120, 25)
 layout_mode = 2
 theme_override_colors/default_color = Color(0.5176471, 0.49411765, 0.5294118, 1)
-text = "Tutorial Info 2
+bbcode_enabled = true
+text = "[b][color=green]Player Types[/color][/b]
+
+[b]Default (Potop)[/b]
+• Balanced all-rounder
+• 2 Attacks per turn
+• Melee + Ranged + Special
+• Has Heal and Defend
+
+[b]Marble Potop[/b]
+• Tank / Support
+• High Health and Armor
+• 1 Attack, 1 Bonus Action
+• Melee + Special
+• Has Defend
+
+[b]Fiery Potop[/b]
+• Glass Cannon
+• High Damage output
+• 2 Attacks per turn
+• Melee + Ranged + Special
+• No Heal or Defend
+
+[b]Flutter Potop[/b]
+• Mobile / Utility
+• High Speed, Flying
+• 2 Attacks per turn
+• Ranged + Special
+• Has Heal and Defend
 "
 
 [node name="ControlGuideInfo3" type="PanelContainer" parent="InfoGuideMenu/ControlGuideVBox/ControlGuideHBox" unique_id=505601749]
@@ -229,14 +274,47 @@ theme_override_styles/panel = ExtResource("4_pbbkd")
 
 [node name="ControlMarginContainer2" type="MarginContainer" parent="InfoGuideMenu/ControlGuideVBox/ControlGuideHBox/ControlGuideInfo3" unique_id=298928422]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="InfoGuideMenu/ControlGuideVBox/ControlGuideHBox/ControlGuideInfo3/ControlMarginContainer2" unique_id=2145479257]
 custom_minimum_size = Vector2(120, 25)
 layout_mode = 2
 theme_override_colors/default_color = Color(0.5176471, 0.49411765, 0.5294118, 1)
-text = "Tutorial Info 3"
+bbcode_enabled = true
+text = "[b][color=red]Enemies[/color][/b]
+
+[b]Pyroslug[/b]
+• Melee Attacker
+• Low Health, no Armor
+• Drops rare gems
+
+[b]Round Hoglet[/b]
+• Basic Melee Enemy
+• Balanced stats
+• Drops sticks
+
+[b]Glowcrush Sheller[/b]
+• Tank / Defender
+• High Health and Armor
+• Slow
+• Drops clay + gems
+
+[b]Drafty Wizor[/b]
+• Ranged Attacker
+• Low Health, no Armor
+• Keeps distance
+• Drops basic materials
+
+[b]Pepperjelly[/b]
+• Healer
+• Supports allies
+• Moderate survivability
+• Drops materials + gems
+
+[b]Skuttershot[/b]
+• Fast Ranged Enemy
+• Low Health
+• High mobility
+• Drops clay"
 
 [node name="ShopMenu" type="Control" parent="." unique_id=967975062]
 unique_name_in_owner = true
