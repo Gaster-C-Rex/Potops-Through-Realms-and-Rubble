@@ -4,6 +4,7 @@ extends Control
 @onready var button_vbox = %ButtonsVBox as VBoxContainer
 
 var buttons = []
+var trade_offers = []
 
 func _ready() -> void:
 	for trade in Globals.trades:
@@ -12,8 +13,11 @@ func _ready() -> void:
 		button.pressed.connect(_on_button_pressed.bind(button))
 
 func add_shop_item(trade: Dictionary):
+	if Globals.inventory.has(trade["result"]):
+		return # Can only buy once!
 	var ware_hbox = HBoxContainer.new()
 	shop_vbox.add_child(ware_hbox)
+	trade_offers.append(ware_hbox)
 	for item in trade["price"]:
 		var needed = trade["price"][item]
 		if needed > 0:
@@ -26,7 +30,7 @@ func add_shop_item(trade: Dictionary):
 			cost_vbox.add_child(cost_texture)
 			
 			var cost_label = Label.new()
-			cost_label.text = item + " x" + str(needed)
+			cost_label.text = item.capitalize() + " x" + str(needed)
 			cost_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			cost_label.add_theme_font_size_override("font_size", 20)
 			cost_vbox.add_child(cost_label)
@@ -41,7 +45,7 @@ func add_shop_item(trade: Dictionary):
 	result_vbox.add_child(result_texture)
 	
 	var result_label = Label.new()
-	result_label.text = trade["result"] + " x1"
+	result_label.text = trade["result"].capitalize() + " x1"
 	result_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	result_label.add_theme_font_size_override("font_size", 20)
 	result_vbox.add_child(result_label)
@@ -85,10 +89,15 @@ func apply_trade(trade: Dictionary) -> void:
 		# Clean up zero entries
 		if Globals.inventory[item] <= 0:
 			Globals.inventory.erase(item)
-	print("Remaining inventory: \n", Globals.inventory)
+	
+	if Globals.inventory.has(trade["result"]):
+		Globals.inventory[trade["result"]] += 1
+	else:
+		Globals.inventory[trade["result"]] = 1
 
 func _on_button_pressed(button: Button) -> void:
-	var trade = Globals.trades[buttons.find(button)]
+	var trade_idx = buttons.find(button)
+	var trade = Globals.trades[trade_idx]
 	if can_afford_trade(trade):
 		apply_trade(trade)
 	else:

@@ -160,35 +160,35 @@ const PLAYER_OPTIONS = {
 }
 
 var trades = [
-		{"result": "armor1",
+		{"result": "basic armor",
 		"price": {
 			"stick": 10,
 			"clay": 10,
 		}},
-		{"result": "armor2",
+		{"result": "armored mask",
 		"price": {
 			"stick": 10,
 			"clay": 10,
 			"orange gem": 3,
 		}},
-		{"result": "armor3",
+		{"result": "cat armor",
 		"price": {
 			"stick": 10,
 			"clay": 10,
 			"purple gem": 3,
 		}},
-		{"result": "weapon1",
+		{"result": "wood sword",
 		"price": {
 			"stick": 10,
 			"clay": 10,
 		}},
-		{"result": "weapon2",
+		{"result": "iron dagger",
 		"price": {
 			"stick": 10,
 			"clay": 10,
 			"red gem": 3,
 		}},
-		{"result": "weapon3",
+		{"result": "steel longsword",
 		"price": {
 			"stick": 10,
 			"clay": 10,
@@ -196,19 +196,17 @@ var trades = [
 		}},
 		{"result": "trinket1",
 		"price": {
-			"stick": 10,
-			"clay": 10,
+			"red gem": 3,
+			"orange gem": 3,
 		}},
 		{"result": "trinket2",
 		"price": {
-			"stick": 10,
-			"clay": 10,
-			"red gem": 3,
+			"stick": 5,
+			"purple gem": 3,
 		}},
 		{"result": "trinket3",
 		"price": {
-			"stick": 10,
-			"clay": 10,
+			"clay": 5,
 			"green gem": 3,
 		}},
 	]
@@ -217,16 +215,43 @@ const item_textures = {
 	"stick": preload("uid://dn0uygqqwbuhu"),
 	"clay": preload("uid://dayrdffv4kuiv"),
 	"orange gem": preload("uid://dcrsg21ao58gg"),
-	"red gem": preload("uid://ys4yciugkf8l"), # TODO: PLACEHOLDER
-	"green gem": preload("uid://ys4yciugkf8l"), # TODO: PLACEHOLDER
-	"purple gem": preload("uid://ys4yciugkf8l"), # TODO: PLACEHOLDER
+	"red gem": preload("uid://ble8qvgwdat7d"),
+	"green gem": preload("uid://3kyd70o5lyxa"),
+	"purple gem": preload("uid://c0n6uxx30tw1p"),
+	"basic armor": preload("uid://cxkshl3ftxjam"),
+	"armored mask": preload("uid://bmsiwd5j1xlek"),
+	"cat armor": preload("uid://bxvk32xljwakf"),
+	"wood sword": preload("uid://blewm41axu87h"),
+	"iron dagger": preload("uid://c12bmkw7jfxi7"),
+	"steel longsword": preload("uid://bvpbxgb3s0mqe"),
 }
 
 # Add items to this dict as they become available
-var EQUIPMENT_OPTIONS = {
-	"None": {}, # Dictionary is a player property block, 
-	# calculated and merged on select before passed to player
+const EQUIPMENT_OPTIONS = {
+	"None": {},
+	"basic armor": {
+		"armor": 1,
+	},
+	"armored mask": {
+		"armor": 2,
+	},
+	"cat armor": {
+		"armor": 2,
+		"speed": 1,
+	},
+	"wood sword": {
+		"melee_damage": Vector2i(1, 1)
+	},
+	"iron dagger": {
+		"melee_damage": Vector2i(1, 3)
+	},
+	"steel longsword": {
+		"melee_damage": Vector2i(2, 5)
+	},
 }
+
+# List of exactly 3 equipment items
+var equipped = ["None", "None", "None"]
 
 # List of exactly 3 player stat blocks
 var party = [{}, {}, {}]
@@ -275,7 +300,8 @@ var inventory := { # NOTE: For testing only! Comment out in release!
 	"purple gem": 6,
 }
 
-var gems := ["orange gem", "red gem", "green gem", "purple_gem"]
+var common_gems := ["orange gem", "red gem"]
+var rare_gems := ["green gem", "purple gem"]
 
 ## Initializes user folders, loads enemy data, and sets the minimum window size.
 func _ready() -> void:

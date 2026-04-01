@@ -14,7 +14,7 @@ func initialize(enemy_name: String, human_readable_name: String) -> void:
 			$Sprite2D.texture = preload("uid://dxhe8u0y4j7hm")
 			load_melee_archetype()
 			sight_range = 6
-			drops = {Globals.gems.pick_random(): 1}
+			drops = {Globals.rare_gems.pick_random(): 1}
 
 		"round_hoglet":
 			$Sprite2D.texture = preload("uid://bx5tx0ea00eif")
@@ -26,22 +26,19 @@ func initialize(enemy_name: String, human_readable_name: String) -> void:
 			$Sprite2D.texture = preload("uid://326o7hqogisv")
 			load_defender_archetype()
 			sight_range = 6
-			drops = {"clay": randi_range(1, 2)}
-			drops = {Globals.gems.pick_random(): 1}
+			drops = {"clay": randi_range(1, 2), Globals.common_gems.pick_random(): 1}
 
 		"drafty_wizor":
 			$Sprite2D.texture = preload("uid://dvhldadmvlu6")
 			load_ranged_archetype()
 			sight_range = 6
-			drops = {"clay": randi_range(1, 2)}
-			drops = {"stick": randi_range(1, 2)}
+			drops = {"clay": randi_range(1, 2), "stick": randi_range(1, 2)}
 
 		"pepperjelly":
 			$Sprite2D.texture = preload("uid://bd7mhgqyerhy5")
 			load_healer_archetype()
 			sight_range = 6
-			drops = {"stick": randi_range(1, 2)}
-			drops = {Globals.gems.pick_random(): 1}
+			drops = {"stick": randi_range(1, 2), Globals.common_gems.pick_random(): 1}
 		
 		"skuttershot":
 			$Sprite2D.texture = preload("uid://cxs3p31w4gbd1")

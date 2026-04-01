@@ -91,7 +91,8 @@ size_flags_horizontal = 3
 texture_normal = SubResource("AtlasTexture_0qpbn")
 stretch_mode = 5
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=738323802]
+[node name="EquipmentTexture" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=738323802]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 3

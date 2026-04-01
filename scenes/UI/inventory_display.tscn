@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dicipgbxfulpe"]
+
+[ext_resource type="Script" uid="uid://bh26c5cxolu60" path="res://scenes/UI/inventory_display.gd" id="1_tyccr"]
+
+[node name="InventoryDisplay" type="PanelContainer" unique_id=83801042]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tyccr")
+
+[node name="InventoryVBox" type="VBoxContainer" parent="." unique_id=1044894102]
+unique_name_in_owner = true
+layout_mode = 2
