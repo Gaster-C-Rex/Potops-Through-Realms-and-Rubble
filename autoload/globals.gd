@@ -79,12 +79,12 @@ const PLAYER_OPTIONS = {
 			"specials_per_combat": 1,
 			"melee_range": 1,
 			"melee_hits_flying": true, # To avoid confusion for now
-			"melee_damage": Vector2i(1, 4),
+			"melee_damage": Vector2i(2, 5),
 			"melee_attack_type": AttackType.TILE,
 			"melee_attack_pierce": 1,
 			"special_range": 3,
 			"special_hits_flying": true,
-			"special_damage": Vector2i(4, 8),
+			"special_damage": Vector2i(5, 9),
 			"special_attack_type": AttackType.CIRCLE,
 			"special_attack_pierce": 0, # unlimited
 		},
@@ -99,7 +99,7 @@ const PLAYER_OPTIONS = {
 			"armor": 0,
 			"speed": 4,
 			"flying": false,
-			"attacks_per_turn": 3,
+			"attacks_per_turn": 2,
 			"bonus_actions_per_turn": 0,
 			"has_heal": false,
 			"has_defend": false,
@@ -109,17 +109,17 @@ const PLAYER_OPTIONS = {
 			"specials_per_combat": 1,
 			"melee_range": 2,
 			"melee_hits_flying": true, # To avoid confusion for now
-			"melee_damage": Vector2i(3, 9),
+			"melee_damage": Vector2i(3, 7),
 			"melee_attack_type": AttackType.ARC_180,
 			"melee_attack_pierce": 2,
 			"ranged_range": 6,
 			"ranged_hits_flying": true,
-			"ranged_damage": Vector2i(2, 9),
+			"ranged_damage": Vector2i(2, 7),
 			"ranged_attack_type": AttackType.ARC_90,
 			"ranged_attack_pierce": 2,
 			"special_range": 8,
 			"special_hits_flying": true,
-			"special_damage": Vector2i(6, 12),
+			"special_damage": Vector2i(5, 10),
 			"special_attack_type": AttackType.BOOMERANG,
 			"special_attack_pierce": 0, # unlimited
 		},
@@ -194,6 +194,22 @@ var trades = [
 			"clay": 10,
 			"green gem": 3,
 		}},
+		{"result": "wood bow",
+		"price": {
+			"stick": 15,
+		}},
+		{"result": "enhanced bow",
+		"price": {
+			"stick": 15,
+			"clay": 5,
+			"red gem": 2,
+		}},
+		{"result": "shotbow",
+		"price": {
+			"stick": 20,
+			"clay": 10,
+			"green gem": 2,
+		}},
 		{"result": "trinket1",
 		"price": {
 			"red gem": 3,
@@ -224,6 +240,9 @@ const item_textures = {
 	"wood sword": preload("uid://blewm41axu87h"),
 	"iron dagger": preload("uid://c12bmkw7jfxi7"),
 	"steel longsword": preload("uid://bvpbxgb3s0mqe"),
+	"wood bow": preload("uid://cku0ncuviroxs"),
+	"enhanced bow": preload("uid://dxwd0yhssekiq"),
+	"shotbow": preload("uid://c1p0jtvyd1fwm"),
 }
 
 # Add items to this dict as they become available
@@ -243,10 +262,21 @@ const EQUIPMENT_OPTIONS = {
 		"melee_damage": Vector2i(1, 1)
 	},
 	"iron dagger": {
-		"melee_damage": Vector2i(1, 3)
+		"melee_damage": Vector2i(1, 2)
 	},
 	"steel longsword": {
-		"melee_damage": Vector2i(2, 5)
+		"melee_damage": Vector2i(1, 3)
+	},
+	"wood bow": {
+		"ranged_damage": Vector2i(1, 1)
+	},
+	"enhanced bow": {
+		"ranged_damage": Vector2i(1, 1),
+		"ranged_range": 1,
+	},
+	"shotbow": {
+		"ranged_damage": Vector2i(1, 2),
+		"ranged_range": 1,
 	},
 }
 
