@@ -1,3 +1,5 @@
+### You're on the wrong branch! It's totally my fault, but now you have to fix it!
+
 ### Potops: Through Realms and Rubble
 
 Simple Asynchronous Turn Based Strategy involving flower pots of mass destruction
