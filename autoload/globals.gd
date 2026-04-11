@@ -13,6 +13,118 @@ const SONG_CONSTRUCT_SITE := "Construction-Site.wav"
 const SONG_EXPLORE := "Explorationv2 (Loop).wav"
 const SONG_WORKSHOP := "Work-Shopped.wav"
 
+const BUILTIN_MAPS := [
+	"res://assets/maps/Stomping Grounds.tmx",
+]
+
+const BUILTIN_AUDIO := {
+	SONG_BATTLE: preload("res://assets/audio/Battle (Loop).wav"),
+	SONG_CHAR_SELECT: preload("res://assets/audio/Character_Select(Loop).wav"),
+	SONG_CONSTRUCT_SITE: preload("res://assets/audio/Construction-Site.wav"),
+	SONG_EXPLORE: preload("res://assets/audio/Explorationv2 (Loop).wav"),
+	SONG_WORKSHOP: preload("res://assets/audio/Work-Shopped.wav"),
+}
+
+# HACK: Apparently you need to use Godot's resource loader instead of scanning res
+# Well, I don't have time for that now!
+const BUILTIN_MAP_TEXT_FILES := [
+	{
+		"from": "res://assets/maps/Stomping Grounds.tmx",
+		"to": "user://maps/Stomping Grounds.tmx",
+	},
+]
+
+const BUILTIN_MAP_TEXTURE_FILES := [
+	{
+		"from": "res://assets/maps/tiles/drafty_wizor.webp",
+		"to": "user://maps/tiles/drafty_wizor.webp",
+	},
+	{
+		"from": "res://assets/maps/tiles/glowcrush_sheller.webp",
+		"to": "user://maps/tiles/glowcrush_sheller.webp",
+	},
+	{
+		"from": "res://assets/maps/tiles/pepperjelly.webp",
+		"to": "user://maps/tiles/pepperjelly.webp",
+	},
+	{
+		"from": "res://assets/maps/tiles/pyroslug.webp",
+		"to": "user://maps/tiles/pyroslug.webp",
+	},
+	{
+		"from": "res://assets/maps/tiles/roundhoglet.webp",
+		"to": "user://maps/tiles/roundhoglet.webp",
+	},
+	{
+		"from": "res://assets/maps/tiles/skuttershot.webp",
+		"to": "user://maps/tiles/skuttershot.webp",
+	},
+	{
+		"from": "res://assets/maps/tiles/Universal-Tiles.png",
+		"to": "user://maps/tiles/Universal-Tiles.png",
+	},
+]
+
+## Copies built-in map files from res:// to user:// if they are missing
+## (They will be, because I didn't realize that res isn't stable on export)
+func copy_builtin_maps_to_user_dir(force_overwrite := false) -> void:
+	_copy_builtin_text_files(force_overwrite)
+	_copy_builtin_texture_files(force_overwrite)
+
+func _copy_builtin_text_files(force_overwrite := false) -> void:
+	for file_info in BUILTIN_MAP_TEXT_FILES:
+		var from_path: String = file_info["from"]
+		var to_path: String = file_info["to"]
+
+		if not FileAccess.file_exists(from_path):
+			push_warning("Built-in map text file missing from export: " + from_path)
+			continue
+
+		if not force_overwrite and FileAccess.file_exists(to_path):
+			continue
+
+		var data := FileAccess.get_file_as_bytes(from_path)
+		if data.is_empty():
+			push_warning("Failed to read built-in map text file: " + from_path)
+			continue
+
+		var out := FileAccess.open(to_path, FileAccess.WRITE)
+		if out == null:
+			push_warning("Failed to open user file for writing: " + to_path)
+			continue
+
+		out.store_buffer(data)
+
+func _copy_builtin_texture_files(force_overwrite := false) -> void:
+	for file_info in BUILTIN_MAP_TEXTURE_FILES:
+		var from_path: String = file_info["from"]
+		var to_path: String = file_info["to"]
+
+		if not force_overwrite and FileAccess.file_exists(to_path):
+			continue
+
+		var tex := load(from_path) as Texture2D
+		if tex == null:
+			push_warning("Built-in texture resource missing from export: " + from_path)
+			continue
+
+		var image := tex.get_image()
+		if image == null:
+			push_warning("Failed to get image from texture: " + from_path)
+			continue
+
+		var err := OK
+		if to_path.to_lower().ends_with(".png"):
+			err = image.save_png(to_path)
+		elif to_path.to_lower().ends_with(".webp"):
+			err = image.save_webp(to_path)
+		else:
+			push_warning("Unsupported texture output format: " + to_path)
+			continue
+
+		if err != OK:
+			push_warning("Failed saving texture to user dir: " + to_path)
+
 enum AttackType { # HACK: this should only be declared in one place
 	TILE,         # and can easily create desyncs
 	LINE,
@@ -351,6 +463,7 @@ var rare_gems := ["green gem", "purple gem"]
 ## Initializes user folders, loads enemy data, and sets the minimum window size.
 func _ready() -> void:
 	ensure_user_folders()
+	copy_builtin_maps_to_user_dir()
 	load_enemies()
 	print(enemies)
 	load_audio()
@@ -370,37 +483,32 @@ func ensure_user_folders() -> void:
 		if not DirAccess.dir_exists_absolute(folder):
 			DirAccess.make_dir_recursive_absolute(folder)
 
-## Loads map scenes from the given directory and stores them in levels.
-func load_maps(map_dir: String) -> bool:
-	print("Scanning for map files...")
+## Loads maps from user://maps
+func load_maps(map_dir: String = USER_MAP_DIR) -> bool:
+	print("Loading maps from user directory...")
+	levels.clear()
 
-	if not levels.is_empty():
-		var cleaned_levels := []
-
-		for map in levels:
-			if map != null:
-				cleaned_levels.append(map)
-
-		levels = cleaned_levels
-
+	var tilemap_creator = preload("res://addons/YATI/TilemapCreator.gd").new()
 	var dir := DirAccess.open(map_dir)
 
 	if dir == null:
-		print("Failed to open directory: ", map_dir)
-		print("No maps detected! Add .tmx map files to: ", OS.get_user_data_dir(), "/maps")
+		print("Failed to open user map directory: ", map_dir)
 		return false
 
 	dir.list_dir_begin()
 	var file_name := dir.get_next()
 
-	var tilemap_creator = preload("res://addons/YATI/TilemapCreator.gd").new()
-
 	while file_name != "":
 		if not dir.current_is_dir() and file_name.ends_with(".tmx"):
-			var full_path := map_dir + "/" + file_name
-			print("Found map file: ", full_path)
+			var full_path := map_dir.path_join(file_name)
+			print("Loading user map: ", full_path)
 
 			var map: Node2D = tilemap_creator.create(full_path)
+
+			if map == null:
+				push_warning("Failed to load map: " + full_path)
+				file_name = dir.get_next()
+				continue
 
 			if map.has_node("entities"):
 				map.get_node("entities").visible = false
@@ -412,7 +520,7 @@ func load_maps(map_dir: String) -> bool:
 	dir.list_dir_end()
 
 	if levels.is_empty():
-		print("No maps detected! Add .tmx map files to: ", OS.get_user_data_dir(), "/maps")
+		print("No maps loaded!")
 		return false
 
 	return true
@@ -457,31 +565,10 @@ func load_enemies() -> bool:
 	return true
 
 ## Loads audio files from the audio directory.
+## Loads built-in audio resources.
 func load_audio() -> bool:
-	print("Scanning for audio files...")
-
-	var dir := DirAccess.open(AUDIO_DIR)
-
-	if dir == null:
-		print("Failed to open directory: ", AUDIO_DIR)
-		print("No audio detected! Add audio files at: ", OS.get_user_data_dir(), "/audio")
-		return false
-
-	dir.list_dir_begin()
-	var file_name := dir.get_next()
-
-	while file_name != "":
-		if not dir.current_is_dir() and (file_name.to_lower().ends_with(".ogg")
-		or file_name.to_lower().ends_with(".mp3") or file_name.to_lower().ends_with(".wav")):
-				var full_path := AUDIO_DIR + "/" + file_name
-				audio[file_name] = full_path
-
-		file_name = dir.get_next()
-
-	dir.list_dir_end()
-	if audio.is_empty():
-		return false
-	return true
+	audio = BUILTIN_AUDIO.duplicate()
+	return not audio.is_empty()
 
 ## Parses a JSON string and returns the decoded data or null on failure.
 func parse_data(data: String):
