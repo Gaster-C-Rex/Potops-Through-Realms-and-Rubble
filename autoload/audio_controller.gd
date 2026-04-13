@@ -2,27 +2,24 @@ extends Node
 
 @onready var background_music: AudioStreamPlayer = $BackgroundMusic
 
-##Loads data from file to be played
-func load_music_data(path: String) -> AudioStream: 
-	if path.to_lower().ends_with(".wav"):
-		var sound := AudioStreamWAV.load_from_file(path)
-		if sound == null:
-			push_error("Failed to load WAV: %s" % path)
-			return null
+var current_music: AudioStream = null
 
-		sound.loop_mode = AudioStreamWAV.LOOP_FORWARD
-		sound.loop_begin = 0
-		# ugliest one-liner in the whole codebase, enjoy!
-		sound.loop_end = sound.data.size() / ((2 if sound.stereo else 1) * (2 if sound.format == AudioStreamWAV.FORMAT_16_BITS else 1))
-		return sound
+func play_bg_music(stream: AudioStream) -> void:
+	if stream == null:
+		push_error("play_bg_music got null stream")
+		return
 
-	return null
-
-##Plays background music
-func play_bg_music(path: String):
-	background_music.stream = load_music_data(path)
+	current_music = stream
+	background_music.stream = current_music
 	background_music.play()
 
-##Stops background music
 func stop_bg_music() -> void:
+	current_music = null
 	background_music.stop()
+
+func _on_background_music_finished() -> void:
+	if current_music == null:
+		return
+
+	background_music.stream = current_music
+	background_music.play()

@@ -13,6 +13,118 @@ const SONG_CONSTRUCT_SITE := "Construction-Site.wav"
 const SONG_EXPLORE := "Explorationv2 (Loop).wav"
 const SONG_WORKSHOP := "Work-Shopped.wav"
 
+const BUILTIN_MAPS := [
+	"res://assets/maps/Stomping Grounds.tmx",
+]
+
+const BUILTIN_AUDIO := {
+	SONG_BATTLE: preload("res://assets/audio/Battle (Loop).wav"),
+	SONG_CHAR_SELECT: preload("res://assets/audio/Character_Select(Loop).wav"),
+	SONG_CONSTRUCT_SITE: preload("res://assets/audio/Construction-Site.wav"),
+	SONG_EXPLORE: preload("res://assets/audio/Explorationv2 (Loop).wav"),
+	SONG_WORKSHOP: preload("res://assets/audio/Work-Shopped.wav"),
+}
+
+# HACK: Apparently you need to use Godot's resource loader instead of scanning res
+# Well, I don't have time for that now!
+const BUILTIN_MAP_TEXT_FILES := [
+	{
+		"from": "res://assets/maps/Stomping Grounds.tmx",
+		"to": "user://maps/Stomping Grounds.tmx",
+	},
+]
+
+const BUILTIN_MAP_TEXTURE_FILES := [
+	{
+		"from": "res://assets/maps/tiles/drafty_wizor.webp",
+		"to": "user://maps/tiles/drafty_wizor.webp",
+	},
+	{
+		"from": "res://assets/maps/tiles/glowcrush_sheller.webp",
+		"to": "user://maps/tiles/glowcrush_sheller.webp",
+	},
+	{
+		"from": "res://assets/maps/tiles/pepperjelly.webp",
+		"to": "user://maps/tiles/pepperjelly.webp",
+	},
+	{
+		"from": "res://assets/maps/tiles/pyroslug.webp",
+		"to": "user://maps/tiles/pyroslug.webp",
+	},
+	{
+		"from": "res://assets/maps/tiles/roundhoglet.webp",
+		"to": "user://maps/tiles/roundhoglet.webp",
+	},
+	{
+		"from": "res://assets/maps/tiles/skuttershot.webp",
+		"to": "user://maps/tiles/skuttershot.webp",
+	},
+	{
+		"from": "res://assets/maps/tiles/Universal-Tiles.png",
+		"to": "user://maps/tiles/Universal-Tiles.png",
+	},
+]
+
+## Copies built-in map files from res:// to user:// if they are missing
+## (They will be, because I didn't realize that res isn't stable on export)
+func copy_builtin_maps_to_user_dir(force_overwrite := false) -> void:
+	_copy_builtin_text_files(force_overwrite)
+	_copy_builtin_texture_files(force_overwrite)
+
+func _copy_builtin_text_files(force_overwrite := false) -> void:
+	for file_info in BUILTIN_MAP_TEXT_FILES:
+		var from_path: String = file_info["from"]
+		var to_path: String = file_info["to"]
+
+		if not FileAccess.file_exists(from_path):
+			push_warning("Built-in map text file missing from export: " + from_path)
+			continue
+
+		if not force_overwrite and FileAccess.file_exists(to_path):
+			continue
+
+		var data := FileAccess.get_file_as_bytes(from_path)
+		if data.is_empty():
+			push_warning("Failed to read built-in map text file: " + from_path)
+			continue
+
+		var out := FileAccess.open(to_path, FileAccess.WRITE)
+		if out == null:
+			push_warning("Failed to open user file for writing: " + to_path)
+			continue
+
+		out.store_buffer(data)
+
+func _copy_builtin_texture_files(force_overwrite := false) -> void:
+	for file_info in BUILTIN_MAP_TEXTURE_FILES:
+		var from_path: String = file_info["from"]
+		var to_path: String = file_info["to"]
+
+		if not force_overwrite and FileAccess.file_exists(to_path):
+			continue
+
+		var tex := load(from_path) as Texture2D
+		if tex == null:
+			push_warning("Built-in texture resource missing from export: " + from_path)
+			continue
+
+		var image := tex.get_image()
+		if image == null:
+			push_warning("Failed to get image from texture: " + from_path)
+			continue
+
+		var err := OK
+		if to_path.to_lower().ends_with(".png"):
+			err = image.save_png(to_path)
+		elif to_path.to_lower().ends_with(".webp"):
+			err = image.save_webp(to_path)
+		else:
+			push_warning("Unsupported texture output format: " + to_path)
+			continue
+
+		if err != OK:
+			push_warning("Failed saving texture to user dir: " + to_path)
+
 enum AttackType { # HACK: this should only be declared in one place
 	TILE,         # and can easily create desyncs
 	LINE,
@@ -79,12 +191,12 @@ const PLAYER_OPTIONS = {
 			"specials_per_combat": 1,
 			"melee_range": 1,
 			"melee_hits_flying": true, # To avoid confusion for now
-			"melee_damage": Vector2i(1, 4),
+			"melee_damage": Vector2i(2, 5),
 			"melee_attack_type": AttackType.TILE,
 			"melee_attack_pierce": 1,
 			"special_range": 3,
 			"special_hits_flying": true,
-			"special_damage": Vector2i(4, 8),
+			"special_damage": Vector2i(5, 9),
 			"special_attack_type": AttackType.CIRCLE,
 			"special_attack_pierce": 0, # unlimited
 		},
@@ -99,7 +211,7 @@ const PLAYER_OPTIONS = {
 			"armor": 0,
 			"speed": 4,
 			"flying": false,
-			"attacks_per_turn": 3,
+			"attacks_per_turn": 2,
 			"bonus_actions_per_turn": 0,
 			"has_heal": false,
 			"has_defend": false,
@@ -109,17 +221,17 @@ const PLAYER_OPTIONS = {
 			"specials_per_combat": 1,
 			"melee_range": 2,
 			"melee_hits_flying": true, # To avoid confusion for now
-			"melee_damage": Vector2i(3, 9),
+			"melee_damage": Vector2i(3, 7),
 			"melee_attack_type": AttackType.ARC_180,
 			"melee_attack_pierce": 2,
 			"ranged_range": 6,
 			"ranged_hits_flying": true,
-			"ranged_damage": Vector2i(2, 9),
+			"ranged_damage": Vector2i(2, 7),
 			"ranged_attack_type": AttackType.ARC_90,
 			"ranged_attack_pierce": 2,
 			"special_range": 8,
 			"special_hits_flying": true,
-			"special_damage": Vector2i(6, 12),
+			"special_damage": Vector2i(5, 10),
 			"special_attack_type": AttackType.BOOMERANG,
 			"special_attack_pierce": 0, # unlimited
 		},
@@ -160,55 +272,69 @@ const PLAYER_OPTIONS = {
 }
 
 var trades = [
-		{"result": "armor1",
+		{"result": "basic armor",
 		"price": {
 			"stick": 10,
 			"clay": 10,
 		}},
-		{"result": "armor2",
+		{"result": "armored mask",
 		"price": {
 			"stick": 10,
 			"clay": 10,
 			"orange gem": 3,
 		}},
-		{"result": "armor3",
+		{"result": "cat armor",
 		"price": {
 			"stick": 10,
 			"clay": 10,
 			"purple gem": 3,
 		}},
-		{"result": "weapon1",
+		{"result": "wood sword",
 		"price": {
 			"stick": 10,
 			"clay": 10,
 		}},
-		{"result": "weapon2",
+		{"result": "iron dagger",
 		"price": {
 			"stick": 10,
 			"clay": 10,
 			"red gem": 3,
 		}},
-		{"result": "weapon3",
+		{"result": "steel longsword",
 		"price": {
 			"stick": 10,
 			"clay": 10,
 			"green gem": 3,
 		}},
-		{"result": "trinket1",
+		{"result": "wood bow",
 		"price": {
-			"stick": 10,
-			"clay": 10,
+			"stick": 15,
 		}},
-		{"result": "trinket2",
+		{"result": "enhanced bow",
 		"price": {
-			"stick": 10,
+			"stick": 15,
+			"clay": 5,
+			"red gem": 2,
+		}},
+		{"result": "shotbow",
+		"price": {
+			"stick": 20,
 			"clay": 10,
+			"green gem": 2,
+		}},
+		{"result": "spear",
+		"price": {
 			"red gem": 3,
+			"orange gem": 3,
 		}},
-		{"result": "trinket3",
+		{"result": "mace",
 		"price": {
-			"stick": 10,
-			"clay": 10,
+			"stick": 5,
+			"purple gem": 3,
+		}},
+		{"result": "flail",
+		"price": {
+			"clay": 5,
 			"green gem": 3,
 		}},
 	]
@@ -217,16 +343,72 @@ const item_textures = {
 	"stick": preload("uid://dn0uygqqwbuhu"),
 	"clay": preload("uid://dayrdffv4kuiv"),
 	"orange gem": preload("uid://dcrsg21ao58gg"),
-	"red gem": preload("uid://ys4yciugkf8l"), # TODO: PLACEHOLDER
-	"green gem": preload("uid://ys4yciugkf8l"), # TODO: PLACEHOLDER
-	"purple gem": preload("uid://ys4yciugkf8l"), # TODO: PLACEHOLDER
+	"red gem": preload("uid://ble8qvgwdat7d"),
+	"green gem": preload("uid://3kyd70o5lyxa"),
+	"purple gem": preload("uid://c0n6uxx30tw1p"),
+	"basic armor": preload("uid://cxkshl3ftxjam"),
+	"armored mask": preload("uid://bmsiwd5j1xlek"),
+	"cat armor": preload("uid://bxvk32xljwakf"),
+	"wood sword": preload("uid://blewm41axu87h"),
+	"iron dagger": preload("uid://c12bmkw7jfxi7"),
+	"steel longsword": preload("uid://bvpbxgb3s0mqe"),
+	"wood bow": preload("uid://cku0ncuviroxs"),
+	"enhanced bow": preload("uid://dxwd0yhssekiq"),
+	"shotbow": preload("uid://c1p0jtvyd1fwm"),
+	"spear": preload("uid://u8rah26vla4c"),
+	"mace": preload("uid://bdg1mtvurmy6s"),
+	"flail": preload("uid://bxh0yih8p8xcf"),
 }
 
 # Add items to this dict as they become available
-var EQUIPMENT_OPTIONS = {
-	"None": {}, # Dictionary is a player property block, 
-	# calculated and merged on select before passed to player
+const EQUIPMENT_OPTIONS = {
+	"None": {},
+	"basic armor": {
+		"armor": 1,
+	},
+	"armored mask": {
+		"armor": 2,
+	},
+	"cat armor": {
+		"armor": 2,
+		"speed": 1,
+	},
+	"wood sword": {
+		"melee_damage": Vector2i(1, 1)
+	},
+	"iron dagger": {
+		"melee_damage": Vector2i(1, 2)
+	},
+	"steel longsword": {
+		"melee_damage": Vector2i(1, 3)
+	},
+	"wood bow": {
+		"ranged_damage": Vector2i(1, 1)
+	},
+	"enhanced bow": {
+		"ranged_damage": Vector2i(1, 1),
+		"ranged_range": 1,
+	},
+	"shotbow": {
+		"ranged_damage": Vector2i(1, 2),
+		"ranged_range": 1,
+	},
+	"spear": {
+		"special_range": 1,
+		"special_attack_pierce": 1,
+	},
+	"mace": {
+		"special_damage": Vector2i(1, 2),
+		"special_attack_pierce": 1,
+	},
+	"flail": {
+		"special_damage": Vector2i(2, 3),
+		"special_attack_pierce": 2,
+	},
 }
+
+# List of exactly 3 equipment items
+var equipped = ["None", "None", "None"]
 
 # List of exactly 3 player stat blocks
 var party = [{}, {}, {}]
@@ -275,11 +457,13 @@ var inventory := { # NOTE: For testing only! Comment out in release!
 	"purple gem": 6,
 }
 
-var gems := ["orange gem", "red gem", "green gem", "purple_gem"]
+var common_gems := ["orange gem", "red gem"]
+var rare_gems := ["green gem", "purple gem"]
 
 ## Initializes user folders, loads enemy data, and sets the minimum window size.
 func _ready() -> void:
 	ensure_user_folders()
+	copy_builtin_maps_to_user_dir()
 	load_enemies()
 	print(enemies)
 	load_audio()
@@ -299,37 +483,32 @@ func ensure_user_folders() -> void:
 		if not DirAccess.dir_exists_absolute(folder):
 			DirAccess.make_dir_recursive_absolute(folder)
 
-## Loads map scenes from the given directory and stores them in levels.
-func load_maps(map_dir: String) -> bool:
-	print("Scanning for map files...")
+## Loads maps from user://maps
+func load_maps(map_dir: String = USER_MAP_DIR) -> bool:
+	print("Loading maps from user directory...")
+	levels.clear()
 
-	if not levels.is_empty():
-		var cleaned_levels := []
-
-		for map in levels:
-			if map != null:
-				cleaned_levels.append(map)
-
-		levels = cleaned_levels
-
+	var tilemap_creator = preload("res://addons/YATI/TilemapCreator.gd").new()
 	var dir := DirAccess.open(map_dir)
 
 	if dir == null:
-		print("Failed to open directory: ", map_dir)
-		print("No maps detected! Add .tmx map files to: ", OS.get_user_data_dir(), "/maps")
+		print("Failed to open user map directory: ", map_dir)
 		return false
 
 	dir.list_dir_begin()
 	var file_name := dir.get_next()
 
-	var tilemap_creator = preload("res://addons/YATI/TilemapCreator.gd").new()
-
 	while file_name != "":
 		if not dir.current_is_dir() and file_name.ends_with(".tmx"):
-			var full_path := map_dir + "/" + file_name
-			print("Found map file: ", full_path)
+			var full_path := map_dir.path_join(file_name)
+			print("Loading user map: ", full_path)
 
 			var map: Node2D = tilemap_creator.create(full_path)
+
+			if map == null:
+				push_warning("Failed to load map: " + full_path)
+				file_name = dir.get_next()
+				continue
 
 			if map.has_node("entities"):
 				map.get_node("entities").visible = false
@@ -341,7 +520,7 @@ func load_maps(map_dir: String) -> bool:
 	dir.list_dir_end()
 
 	if levels.is_empty():
-		print("No maps detected! Add .tmx map files to: ", OS.get_user_data_dir(), "/maps")
+		print("No maps loaded!")
 		return false
 
 	return true
@@ -386,31 +565,10 @@ func load_enemies() -> bool:
 	return true
 
 ## Loads audio files from the audio directory.
+## Loads built-in audio resources.
 func load_audio() -> bool:
-	print("Scanning for audio files...")
-
-	var dir := DirAccess.open(AUDIO_DIR)
-
-	if dir == null:
-		print("Failed to open directory: ", AUDIO_DIR)
-		print("No audio detected! Add audio files at: ", OS.get_user_data_dir(), "/audio")
-		return false
-
-	dir.list_dir_begin()
-	var file_name := dir.get_next()
-
-	while file_name != "":
-		if not dir.current_is_dir() and (file_name.to_lower().ends_with(".ogg")
-		or file_name.to_lower().ends_with(".mp3") or file_name.to_lower().ends_with(".wav")):
-				var full_path := AUDIO_DIR + "/" + file_name
-				audio[file_name] = full_path
-
-		file_name = dir.get_next()
-
-	dir.list_dir_end()
-	if audio.is_empty():
-		return false
-	return true
+	audio = BUILTIN_AUDIO.duplicate()
+	return not audio.is_empty()
 
 ## Parses a JSON string and returns the decoded data or null on failure.
 func parse_data(data: String):
